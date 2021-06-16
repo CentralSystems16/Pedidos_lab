@@ -2,6 +2,7 @@ package com.laboratorio.pedidos_lab.back;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,7 @@ import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerProductos;
+import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
@@ -95,6 +98,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @SuppressLint("StaticFieldLeak")
     public static adapProdReport adaptador;
     public static List<DetReporte> listaProdReport;
+    public static List<Correos> listaCorreos;
     String NOMBRE_DOCUMENTO = "Examen.pdf";
     String correo;
     String password;
@@ -102,6 +106,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String nacimiento;
     int edad;
     String sexo;
+    String envCorreo;
 
     Date d = new Date();
     @SuppressLint("SimpleDateFormat")
@@ -109,7 +114,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String fechacComplString = fecc.format(d);
 
     @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat ho = new SimpleDateFormat("h:mm");
+    SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
 
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
@@ -135,6 +140,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         rvProductos.setLayoutManager(new LinearLayoutManager(this));
 
         listaProdReport = new ArrayList<>();
+        listaCorreos = new ArrayList<>();
 
         adaptador = new adapProdReport(TicketDatos.this, listaProdReport);
         rvProductos.setAdapter(adaptador);
@@ -153,7 +159,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         regresar.setOnClickListener(v -> {
             gTotal = 0.00;
             new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
-            Intent i = new Intent(getApplicationContext(), ObtenerProductos.class);
+            Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
             startActivity(i);
         });
 
@@ -164,6 +170,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         generarPedido();
         generarDetPedido();
         obtenerDetPedidoReport();
+        obtenerCorreos();
 
     }
     @Override
@@ -183,15 +190,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         JSONArray jsonArray = jsonObject.getJSONArray("Reporte");
-
-                        Date d = new Date();
-                        @SuppressLint("SimpleDateFormat")
-                        SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy");
-                        String fechacComplString = fecc.format(d);
-
-                        @SuppressLint("SimpleDateFormat")
-                        SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
-                        String horaString = ho.format(d);
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
@@ -434,7 +432,43 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    public void obtenerCorreos() {
+
+        final String URL_CORREOS = "http://pedidoslab.6te.net/consultas/obtenerCorreos.php";
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_CORREOS,
+
+                response -> {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("Correos");
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            //listaCorreos.add(
+                                    //new Correos(
+                                         envCorreo = jsonObject1.getString("direccion_correo");
+
+                        }
+                        System.out.println("La direccion de correo es: " + envCorreo);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, Throwable::printStackTrace
+        );
+
+        requestQueue.add(stringRequest);
+
+    }
+
     public void enviarPDF(){
+
+
 
         AsyncTask.execute(new Runnable() {
             @Override
@@ -460,8 +494,10 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                 message.setFrom(new InternetAddress(correo));
                 message.setSubject("Nuevo pedido");
 
-                //TODO: Correo al que quiero enviar el Email
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("centralsystemsmanage2@gmail.com"));
+               // for (int i = 0; i < listaCorreos.size(); i++) {
+                    //TODO: Correo al que quiero enviar el Email
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(envCorreo));
+               // }
 
                 BodyPart bodyPart1 = new MimeBodyPart();
                 bodyPart1.setText("Se ha adjuntado el pedido");

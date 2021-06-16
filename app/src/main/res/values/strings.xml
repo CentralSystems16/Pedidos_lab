@@ -76,6 +76,9 @@
     <string name="coicide">La contraseña coincide</string>
     <string name="edadError">Debe ser mayor de 18 años</string>
     <string name="nocoicide">La contraseña NO coincide</string>
+    <string name="n_mero">Número</string>
+    <string name="mostrar_contrase_a">Mostrar contraseña</string>
+    <string name="o_si_lo_prefieres_inicia_con">O si lo prefieres inicia con...</string>
 
 
 </resources>

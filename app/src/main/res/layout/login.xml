@@ -45,7 +45,7 @@
                 android:layout_marginEnd="32dp"
                 android:autofillHints="username"
                 android:background="@drawable/caja_texto_circular"
-                android:hint="Número"
+                android:hint="@string/n_mero"
                 android:inputType="number"
                 android:padding="12dp"
                 android:shadowColor="@color/white"
@@ -73,10 +73,10 @@
                 android:id="@+id/mostrarPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mostrar contraseña"
+                android:text="@string/mostrar_contrase_a"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:buttonTint="@color/black" />
+                app:buttonTint="@color/black" />
 
             <Button
                 android:id="@+id/btnEntrar"
@@ -124,7 +124,7 @@
                 android:visibility="invisible"
                 android:gravity="center"
                 android:layout_marginTop="20dp"
-                android:text="O si lo prefieres inicia con..."
+                android:text="@string/o_si_lo_prefieres_inicia_con"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -147,4 +147,6 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
     </ScrollView>
+
+
 </LinearLayout>

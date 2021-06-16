@@ -137,11 +137,11 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     boolean succes = jsonResponse.getBoolean("success");
                     if (succes){
                         guardarPreferencias();
+                        gusuario = jsonResponse.getInt("id_usuario");
                         nombre = jsonResponse.getString("nombre_usuario");
                         email = jsonResponse.getString("email_usuario");
                         sexo = jsonResponse.getString("sexo_usuario");
                         nacimiento = jsonResponse.getString("nacimiento_usuario");
-                        gusuario = jsonResponse.getInt("id_usuario");
                         cliente = jsonResponse.getInt("id_cliente");
                         edad = jsonResponse.getInt("edad_usuario");
                         dui = jsonResponse.getInt("dui_usuario");
@@ -149,13 +149,13 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
                         Intent intent = new Intent(getApplicationContext(), DatosPrincipales.class);
 
+                        intent.putExtra("id_usuario", gusuario);
                         intent.putExtra("nombre_usuario", nombre);
                         intent.putExtra("login_usuario", usuario);
                         intent.putExtra("password_usuarios", contra);
                         intent.putExtra("email_usuario", email);
                         intent.putExtra("sexo_usuario", sexo);
                         intent.putExtra("id_cliente", cliente);
-                        intent.putExtra("id_usuario", gusuario);
                         intent.putExtra("nacimiento_usuario", nacimiento);
                         intent.putExtra("edad_usuario", edad);
                         intent.putExtra("dui_usuario", dui);
