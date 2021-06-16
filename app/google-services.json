@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "643671785621",
+    "project_id": "pedidoslabauth",
+    "storage_bucket": "pedidoslabauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643671785621:android:b86330fc16e582776c9b9c",
+        "android_client_info": {
+          "package_name": "com.laboratorio.views.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643671785621-mtt3nksn832igknt5vienv1pe6fqib7j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.laboratorio.views.debug",
+            "certificate_hash": "12806be4f24482911c42741b99880fa03ec57eb0"
+          }
+        },
+        {
+          "client_id": "643671785621-osfdbpd4sb8rnki6jqfn25sv569f1siv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfbIjXsx9OT4jHNQvFP09vpmOauVbNJMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643671785621-osfdbpd4sb8rnki6jqfn25sv569f1siv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

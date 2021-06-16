@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">Laboratorio LCB</string>
+    <string name="imgSplash">imgSplash</string>
+    <string name="tvLab">Laboratorio Clínico LCB</string>
+
+    <string name="imgLogo">imgLogo</string>
+    <string name="tvUser">Usuario</string>
+    <string name="tvPass">Contraseña</string>
+    <string name="btnIngresar">INGRESAR</string>
+    <string name="btnRegistrar">REGISTRARSE</string>
+    <string name="btnTwiter">btnTwiter</string>
+    <string name="btnFacebook">btnFacebook</string>
+    <string name="btnGmail">btnGamil</string>
+    <string name="tvOlvidarPass"><u>¿Olvidaste tu contraseña?</u></string>
+
+    <string name="imgRegister">imgRegister</string>
+    <string name="tvUsuarioRegistro">Usuario</string>
+    <string name="tvNombreRegistro">Nombre completo</string>
+    <string name="tvDateRegistro">Fecha de nacimiento</string>
+    <string name="rbMaculino">Masculino</string>
+    <string name="rbFemenino">Femenino</string>
+    <string name="tvPasswordRegistro">Contraseña</string>
+    <string name="tvPasswordRepeatRegistro">Repetir contraseña</string>
+    <string name="tvEmailRegistro">Email (Opcional)</string>
+    <string name="btnRegistrarme">REGISTRARME</string>
+    <string name="btnCancelarRegistro">CANCELAR</string>
+
+    <string name="registroCompletado">Registro Completado, gracias!</string>
+
+    <string name="tvBienvenido">BIENVENIDO/A</string>
+    <string name="tvUsuarioId">Usuario</string>
+    <string name="tvParaQuien">¿Para quien desea hacer el exámen?</string>
+    <string name="btnParaMi">Para mí</string>
+    <string name="btnParaOtra">Para otra persona</string>
+
+    <string name="complete">Complete la información de la persona:</string>
+    <string name="nombreCompleto">Nombre completo:</string>
+    <string name="edad">Edad:</string>
+    <string name="meses">Meses</string>
+    <string name="years">Años</string>
+    <string name="rbMasculinoCliente">Masculino</string>
+    <string name="rbFemeninoCliente">Femenino</string>
+    <string name="EmailCliente">Email (Opcional)</string>
+    <string name="btnContinuarSegundo">CONTINUAR</string>
+    <string name="sexo">Sexo:</string>
+
+    <string name="politica"><u>Política de privacidad</u></string>
+    <string name="sobre"><u>Sobre la App</u></string>
+    <string name="error"><u>Reportar un fallo en la App</u></string>
+    <string name="nosotros"><u>Sobre nosotros...</u></string>
+    <string name="title_activity_floating_button">FloatingButton</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="biometric_failed">Huella dactilar no reconocida</string>
+
+    <string name="btn_authenticate">Acceso</string>
+    <string name="biometric_title">Acceso</string>
+    <string name="biometric_subtitle">Inicie sesión en su cuenta</string>
+    <string name="biometric_description">Coloque su dedo en el botón de inicio del dispositivo para verificar su identidad</string>
+    <string name="biometric_negative_button_text">CANCELAR</string>
+    <string name="biometric_error_sdk_not_supported">La versión SDK no es compatible</string>
+    <string name="biometric_error_hardware_not_supported">El dispositivo no admite la autenticación biométrica</string>
+    <string name="biometric_error_fingerprint_not_available">La huella dactilar no está registrada en el dispositivo</string>
+    <string name="biometric_error_permission_not_granted">No se ha otorgado el permiso</string>
+    <string name="biometric_failure">Ups! algo va mal…</string>
+    <string name="biometric_cancelled">Autenticación cancelada!</string>
+    <string name="biometric_success">Inicio de sesión exitoso</string>
+
+    <string name="coicide">La contraseña coincide</string>
+    <string name="edadError">Debe ser mayor de 18 años</string>
+    <string name="nocoicide">La contraseña NO coincide</string>
+
+
+</resources>

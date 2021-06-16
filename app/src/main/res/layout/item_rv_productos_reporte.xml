@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:backgroundTint="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="3dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvProducto"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#2B2828"
+        android:gravity="center"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio: $"
+        android:layout_marginTop="27dp"
+        android:layout_marginStart="120dp"
+        android:textColor="#6E6C6C"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/precioBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cant:"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="120dp"
+        android:textSize="13sp"
+        android:textColor="#6E6C6C"/>
+
+    <TextView
+        android:id="@+id/cantBase"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="46dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnMenos"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="120dp"
+        app:backgroundTint="#A5A5A5"
+        android:layout_width="40dp"
+        android:text="-"
+        android:textSize="12sp"
+        android:textScaleX="2"
+        android:textColor="#454242"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/btnMas"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="155dp"
+        android:layout_width="40dp"
+        android:text="+"
+        android:textSize="12sp"
+        android:textScaleX="1"
+        android:textColor="#454242"
+        app:backgroundTint="#A5A5A5"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SubTotal: $"
+        android:textSize="13sp"
+        android:layout_marginTop="100dp"
+        android:textColor="#454242"
+        android:layout_marginStart="120dp"/>
+
+    <TextView
+        android:id="@+id/totalItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="195dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="127dp"
+        android:background="#8C8C8C"/>
+
+    <ImageView
+        android:id="@+id/imgProducto"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/medicamentos"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="127dp"
+        android:background="#8C8C8C"/>
+
+    <Button
+        android:layout_width="170dp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:text="Mover a"
+        android:layout_marginTop="130dp" />
+
+    <Button
+        android:id="@+id/btnEliminar"
+        android:layout_width="180dp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="180dp"/>
+
+</androidx.cardview.widget.CardView>

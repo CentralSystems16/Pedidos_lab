@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rvLista"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/flecha2"
+                android:clickable="true"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="arrow.json"
+                app:lottie_imageAssetsFolder="assets"
+                app:lottie_loop="true"
+                android:focusable="true" />
+
+            <EditText
+                android:id="@+id/etBuscador"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="65dp"
+                android:background="@drawable/caja_texto_circular"
+                android:drawableStart="?android:attr/actionModeWebSearchDrawable"
+                android:iconifiedByDefault="true"
+                android:hint="Ingrese el nombre del exámen"
+                app:backgroundTint="#0097A7"
+                android:textSize="14sp"
+                android:padding="10dp"
+                tools:ignore="NewApi" />
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/carrito_compra"
+                    android:clickable="true"
+                    android:layout_marginTop="-20dp"
+                    android:layout_marginStart="-20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="otrocarro.json"
+                    app:lottie_imageAssetsFolder="assets"
+                    app:lottie_loop="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:id="@+id/tvCantProductos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:background="@drawable/caja_texto_circular"
+                    app:backgroundTint="@color/rojo"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="4dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="4dp"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlHardcoded,SmallSp" />
+            </FrameLayout>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp" />
+
+</RelativeLayout>

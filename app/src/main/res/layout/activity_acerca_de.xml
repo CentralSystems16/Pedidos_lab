@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="acerca de"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-black"
+            android:textSize="36dp"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/acercade"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/facebook"
+                android:clickable="true"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:src="@drawable/backend"
+                android:layout_marginLeft="5dp"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Siguenos es facebook"
+                android:textSize="15dp"
+                android:textColor="#d703082b"
+                android:textStyle="bold"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="40dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/gmail"
+                android:clickable="true"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:src="@drawable/frontend"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escrimenos a nuestro correo"
+                android:textSize="15dp"
+                android:textColor="#d703082b"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/politica"
+            android:clickable="true"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:background="@drawable/cv4"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="10dp"
+            android:focusable="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/politica"
+            android:layout_marginLeft="35dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Politica de privacidad"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#d703082b"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consulta nuestra politica de privacidad"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:textColor="#6003082b"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="50dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:id="@+id/error"
+            android:clickable="true"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:background="@drawable/cv4"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="18dp"
+            android:focusable="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bug"
+            android:layout_marginLeft="35dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reportar un fallo"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#d703082b"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reporta cuando algo no anda bien"
+            android:textSize="14dp"
+            android:layout_marginLeft="105dp"
+            android:textStyle="bold"
+            android:textColor="#6003082b"
+            android:layout_marginTop="40dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:id="@+id/sobre"
+            android:clickable="true"
+            android:layout_width="380dp"
+            android:layout_height="80dp"
+            android:background="@drawable/cv4"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="18dp"
+            android:focusable="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sobre"
+            android:layout_marginLeft="35dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sobre la APP"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#d703082b"
+            android:layout_marginLeft="105dp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recursos y otros enlaces externos"
+            android:textSize="14dp"
+            android:layout_marginLeft="105dp"
+            android:textStyle="bold"
+            android:textColor="#6003082b"
+            android:layout_marginTop="40dp"/>
+
+    </RelativeLayout>
+</LinearLayout>
+    </ScrollView>
+</LinearLayout>
+

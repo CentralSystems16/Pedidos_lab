@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/about"
+            android:clickable="true"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="profile.json"
+            app:lottie_imageAssetsFolder="assets"
+            app:lottie_loop="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/campoTelefono"
+                android:layout_width="match_parent"
+                android:autofillHints="UsuarioRegistro"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Número de teléfono"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/campoNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:autofillHints="NombreRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="@string/tvNombreRegistro"
+                android:inputType="textPersonName|textCapWords"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/campoDui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="60dp"
+                android:autofillHints="NombreRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="DUI"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/caja_texto_circular"
+                android:clickable="true"
+                android:focusable="false"
+                android:hint="Fecha de nacimiento"
+                android:inputType="date"
+                android:maxLines="1"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp"
+                tools:ignore="TextViewEdits" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <EditText
+                android:id="@+id/campoEdad"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Años"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/campoMeses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="8dp"
+                    android:autofillHints="EdadRegistro"
+                    android:background="@drawable/caja_texto_circular"
+                    android:hint="Meses"
+                    android:inputType="number"
+                    android:padding="12sp"
+                    android:textColor="@color/black"
+                    android:textColorHint="#9F807E7E"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/errorEdad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="55dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rgSexo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbMasculino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="80dp"
+                        android:text="@string/rbMaculino"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        app:buttonTint="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/rbFemenino"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/rbFemenino"
+                        android:textColor="@color/black"
+                        android:textColorHighlight="@color/black"
+                        app:buttonTint="@color/black" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/campoPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="12dp"
+                android:autofillHints="ContraseñaRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="@string/tvPasswordRegistro"
+                android:inputType="textPassword"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/campoPassRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="RepetirContraseña"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="@string/tvPasswordRepeatRegistro"
+                android:inputType="textPassword"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/errorPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="55dp"/>
+
+            <EditText
+                android:id="@+id/campoEmail"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="60dp"
+                android:autofillHints="EmailRegistro"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="@string/tvEmailRegistro"
+                android:inputType="textEmailAddress"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/btnRegistrarUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/boton_circular"
+                android:text="@string/btnRegistrarme"
+                android:textStyle="bold"
+                app:backgroundTint="#4CAF50" />
+
+            <Button
+                android:id="@+id/btnCancelarRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boton_circular"
+                android:text="@string/btnCancelarRegistro"
+                app:backgroundTint="#607D8B"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

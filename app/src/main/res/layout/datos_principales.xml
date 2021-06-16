@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvBienvenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/tvBienvenido"
+            android:textColor="@color/black"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/close"
+            android:clickable="true"
+            android:layout_width="55dp"
+            android:visibility="gone"
+            android:layout_height="55dp"
+            app:lottie_autoPlay="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
+            app:lottie_fileName="logout.json"
+            app:lottie_imageAssetsFolder="assets"
+            app:lottie_loop="true"
+            android:focusable="true" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvUsuarioId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvUsuarioId2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_marginTop="120dp"
+                android:hapticFeedbackEnabled="false"
+                app:auto_cycle="true"
+                app:period="3000" />
+
+            <TextView
+                android:id="@+id/tvParaQuien"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="center"
+                android:text="@string/tvParaQuien"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnParaMi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/boton_circular"
+                android:text="@string/btnParaMi"
+                app:backgroundTint="#4CAF50" />
+
+            <Button
+                android:id="@+id/btnParaOtraPersona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                app:backgroundTint="#607D8B"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/boton_circular"
+                android:text="@string/btnParaOtra" />
+
+            <Button
+                android:id="@+id/btnPedidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                app:backgroundTint="@color/rojo"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/boton_circular"
+                android:text="MIS ORDENES" />
+
+            <Button
+                android:id="@+id/btnResultados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:visibility="invisible"
+                app:backgroundTint="#448AFF"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/boton_circular"
+                android:text="MIS RESULTADOS" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

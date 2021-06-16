@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.laboratorio.pedidos_lab.main.ObtenerReportes">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/regresarDatos"
+        android:clickable="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="arrow.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="REPORTE DE PEDIDOS" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaReportes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+
+</LinearLayout>

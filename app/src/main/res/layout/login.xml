@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/about"
+        android:clickable="true"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="about.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/logoLabLogin"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/imgLogo"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:autofillHints="username"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Número"
+                android:inputType="number"
+                android:padding="12dp"
+                android:shadowColor="@color/white"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:autofillHints="password"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="@string/tvPass"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <CheckBox
+                android:id="@+id/mostrarPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mostrar contraseña"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black" />
+
+            <Button
+                android:id="@+id/btnEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/boton_circular"
+                android:padding="13sp"
+                android:text="@string/btnIngresar"
+                android:layout_marginEnd="32dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:backgroundTint="#4CAF50" />
+
+            <Button
+                android:id="@+id/btnRegistrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/boton_circular"
+                android:padding="13sp"
+                android:text="@string/btnRegistrar"
+                app:backgroundTint="#607D8B"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/recuperarPass"
+                android:clickable="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:gravity="end"
+                android:text="@string/tvOlvidarPass"
+                android:textColor="@color/black"
+                android:focusable="true" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="O si lo prefieres inicia con..."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/signInButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:text="Central Systems ©"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
