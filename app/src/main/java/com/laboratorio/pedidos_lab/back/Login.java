@@ -164,7 +164,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
                         startActivity(intent);
                     } else {
-                        Toast.makeText(Login.this, "Usuario o contraseña incorrectos, por favor intentalo nuevamente.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this, "Usuario y/o contraseña incorrectos o usuario inactivo y/o sin permisos, por favor intentalo nuevamente.", Toast.LENGTH_SHORT).show();
                         loading.dismiss();
                     }
 

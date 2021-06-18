@@ -100,7 +100,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
                 if (errorEdad.equals("0") || errorEdad.equals("1") || errorEdad.equals("2") || errorEdad.equals("3") || errorEdad.equals("4") || errorEdad.equals("5") || errorEdad.equals("6") || errorEdad.equals("7") || errorEdad.equals("8") || errorEdad.equals("9") || errorEdad.equals("10") || errorEdad.equals("11") || errorEdad.equals("12") || errorEdad.equals("13") || errorEdad.equals("14") || errorEdad.equals("15") || errorEdad.equals("16") || errorEdad.equals("17")){
                     errorEdad2.setText(R.string.edadError);
-                } else if (errorEdad.equals(".") || errorEdad.equals("-")){
+                } else if (errorEdad.equals(".") || errorEdad.equals("-") || errorEdad.equals(",")){
                     errorEdad2.setText("Carácteres inválidos");
                 } else {
                     errorEdad2.setText("");
