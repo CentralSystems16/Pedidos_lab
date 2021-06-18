@@ -56,7 +56,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (btnParaMi.isPressed()) {
             Login.gIdPedido = 0;
-            new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
             if(Login.gIdCliente == 0){
 
                 try {
@@ -79,7 +78,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         }
 
         if (btnParaOtra.isPressed()) {
-            Login.gIdPedido = 0;
             Intent in = new Intent(this, OtraPersona.class);
             startActivity(in);
 

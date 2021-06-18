@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.front.SegundoRegistro;
+import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratory.views.R;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,6 +59,7 @@ public class OtraPersona extends AppCompatActivity {
         final EditText ed = findViewById(R.id.etEdadClient);
         final EditText ema = findViewById(R.id.etEmail);
         final RadioGroup sexoClientes = findViewById(R.id.rgSexoClientes);
+        final EditText mes = findViewById(R.id.etMesesClient);
 
         regresar = findViewById(R.id.botonRegres);
         regresar.setOnClickListener(v -> {
@@ -101,6 +103,7 @@ public class OtraPersona extends AppCompatActivity {
             String edad = ed.getText().toString();
             String fechaNacimiento = mDisplayDate.getText().toString();
             String email = ema.getText().toString();
+            String meses = mes.getText().toString();
 
             int radiogroupSexo = sexoClientes.getCheckedRadioButtonId();
             String select = "";
@@ -121,6 +124,10 @@ public class OtraPersona extends AppCompatActivity {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             }
 
+            else if (meses.isEmpty()){
+                Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+
             else if (fechaNacimiento.isEmpty()){
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             } else if (select.isEmpty()){
@@ -129,9 +136,9 @@ public class OtraPersona extends AppCompatActivity {
 
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
-                Intent i = new Intent(OtraPersona.this, SegundoRegistro.class);
+                Intent i = new Intent(OtraPersona.this, ObtenerCategorias.class);
                 startActivity(i);
-                new DescargarImagen(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento);
+                new DescargarImagen(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
                 new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
 
             }
@@ -165,12 +172,14 @@ public class OtraPersona extends AppCompatActivity {
                 String select = params[2];
                 String email = params[3];
                 String fechaNac = params[4];
+                String meses = params[5];
 
                 String data = URLEncoder.encode("nombre_cliente", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8")
                         + "&" + URLEncoder.encode("edad_cliente", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(edad), "UTF-8")
                         + "&" + URLEncoder.encode("sexo_cliente", "UTF-8") + "=" + URLEncoder.encode(select, "UTF-8")
                         + "&" + URLEncoder.encode("email_cliente", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
-                        + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(fechaNac, "UTF-8");
+                        + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(fechaNac, "UTF-8")
+                        + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(meses, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

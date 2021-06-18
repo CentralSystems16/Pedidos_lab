@@ -257,7 +257,9 @@ public class RegistroUsuario extends AppCompatActivity {
 
     public void ejecutarServicio(String URL) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> Toast.makeText(getApplicationContext(),"COMPLETADO", Toast.LENGTH_SHORT).show(),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+
+        },
                 error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
             @Override
             protected Map<String, String> getParams() {
@@ -302,6 +304,11 @@ public class RegistroUsuario extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

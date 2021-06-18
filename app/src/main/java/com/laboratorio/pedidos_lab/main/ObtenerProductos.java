@@ -32,6 +32,8 @@ import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class ObtenerProductos extends AppCompatActivity {
     public static String gNombreProd;
     List<Productos> carroCompras = new ArrayList<>();
     public static TextView tvCantProductos;
-
+    DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +63,12 @@ public class ObtenerProductos extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         tvCantProductos = findViewById(R.id.tvCantProductos);
+        tvCantProductos.setText(String.valueOf(formatoDecimal.format(gCount)));
 
         botonRegresar = findViewById(R.id.flecha2);
         botonRegresar.setOnClickListener(v -> {
-
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
-            new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
         });
 
         requestQueue11 = Volley.newRequestQueue(this);
@@ -80,7 +81,6 @@ public class ObtenerProductos extends AppCompatActivity {
             } else {
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);
-                new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
             }
 
         });

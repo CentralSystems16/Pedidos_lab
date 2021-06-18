@@ -62,6 +62,10 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <EditText
             android:layout_gravity="center"
             android:id="@+id/etEdadClient"
@@ -72,10 +76,27 @@
             android:gravity="center"
             android:inputType="number"
             android:padding="5sp"
+            android:layout_marginStart="75dp"
+            android:hint="Años"
             android:textColor="@color/black"
             android:textColorHint="#9F807E7E"
             android:textSize="13sp" />
 
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/etMesesClient"
+            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+            android:layout_width="120dp"
+            android:layout_height="33dp"
+            android:background="@drawable/caja_texto_circular"
+            android:gravity="center"
+            android:inputType="number"
+            android:padding="5sp"
+            android:hint="Meses"
+            android:textColor="@color/black"
+            android:textColorHint="#9F807E7E"
+            android:textSize="13sp" />
+        </LinearLayout>
         <TextView
             android:id="@+id/tvSexo"
             android:layout_width="match_parent"

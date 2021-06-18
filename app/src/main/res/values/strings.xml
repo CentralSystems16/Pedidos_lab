@@ -62,7 +62,7 @@
 
     <string name="btn_authenticate">Acceso</string>
     <string name="biometric_title">Acceso</string>
-    <string name="biometric_subtitle">Inicie sesión en su cuenta</string>
+    <string name="biometric_subtitle">Verificar identidad</string>
     <string name="biometric_description">Coloque su dedo en el botón de inicio del dispositivo para verificar su identidad</string>
     <string name="biometric_negative_button_text">CANCELAR</string>
     <string name="biometric_error_sdk_not_supported">La versión SDK no es compatible</string>
@@ -71,7 +71,7 @@
     <string name="biometric_error_permission_not_granted">No se ha otorgado el permiso</string>
     <string name="biometric_failure">Ups! algo va mal…</string>
     <string name="biometric_cancelled">Autenticación cancelada!</string>
-    <string name="biometric_success">Inicio de sesión exitoso</string>
+    <string name="biometric_success">Se ha otorgado el acceso</string>
 
     <string name="coicide">La contraseña coincide</string>
     <string name="edadError">Debe ser mayor de 18 años</string>

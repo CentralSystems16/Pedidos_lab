@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="REPORTE DE PEDIDOS" />
+        android:text="REPORTE DE ORDENES" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaReportes"

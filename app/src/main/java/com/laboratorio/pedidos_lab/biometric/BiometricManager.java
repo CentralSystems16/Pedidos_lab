@@ -99,6 +99,7 @@ public class BiometricManager extends BiometricManagerV23 {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         biometricCallback.onAuthenticationCancelled();
+                        System.exit(0);
                     }
                 })
                 .build()

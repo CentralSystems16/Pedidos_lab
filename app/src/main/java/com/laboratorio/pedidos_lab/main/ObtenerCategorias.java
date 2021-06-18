@@ -26,8 +26,11 @@ import com.laboratorio.pedidos_lab.adapters.AdaptadorCategorias;
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
+import com.laboratorio.pedidos_lab.controler.ContadorProductos2;
 import com.laboratorio.pedidos_lab.model.Categorias;
 import com.laboratory.views.R;
+import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +52,7 @@ public class ObtenerCategorias extends AppCompatActivity {
     public static final String URL_CATEGORIAS = "http://pedidoslab.6te.net/consultas/obtenerCategorias.php"+"?estado_categoria=1";
     public static int gIdCategoria;
     public static TextView tvCantProd3;
+    DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +60,29 @@ public class ObtenerCategorias extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         tvCantProd3 = findViewById(R.id.tvCantProductos3);
+        tvCantProd3.setText(String.valueOf(formatoDecimal.format(gCount)));
 
         botonRegresar = findViewById(R.id.flecha);
         botonRegresar.setOnClickListener(v -> {
-            new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
-            Intent i = new Intent(this, DatosPrincipales.class);
-            startActivity(i);
+
+            new FancyGifDialog.Builder(this)
+                    .setTitle("Solo regresa si la orden la quieres realizar para otra persona, de lo contrario se borrara la que hayas hecho anteriormente")
+                    .setNegativeBtnText("Cancelar")
+                    .setPositiveBtnBackground(R.color.rosado)
+                    .setPositiveBtnText("Regresar")
+                    .setNegativeBtnBackground(R.color.rojo)
+                    .setGifResource(R.drawable.regresar)
+                    .isCancellable(false)
+                    .OnPositiveClicked(() -> {
+
+                        Intent i = new Intent(this, DatosPrincipales.class);
+                        startActivity(i);
+
+                    })
+                    .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
+                    .build();
+
+
         });
 
         botonContinuar = findViewById(R.id.carrito_compra3);
@@ -71,13 +92,11 @@ public class ObtenerCategorias extends AppCompatActivity {
             } else {
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);
-                new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
             }
         });
 
         etBuscador = findViewById(R.id.etBuscadorCategorias);
         etBuscador.setOnClickListener(v -> {
-            new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
             Intent i = new Intent(this, ObtenerAllProductos.class);
             startActivity(i);
 

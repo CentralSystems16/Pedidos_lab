@@ -33,6 +33,7 @@ import com.laboratorio.pedidos_lab.biometric.BiometricManager;
 import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
+import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
@@ -238,8 +239,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     @Override
     public void onAuthenticationSuccessful() {
         Toast.makeText(getApplicationContext(), getString(R.string.biometric_success), Toast.LENGTH_LONG).show();
-        Intent i = new Intent(getApplicationContext(), DatosPrincipales.class);
-        startActivity(i);
     }
 
     @Override
@@ -296,6 +295,24 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
     @Override
     public void onBackPressed(){
-        //TODO: Botón back desabilitado
+        new FancyGifDialog.Builder(this)
+                .setTitle("Cerrar aplicación?")
+                .setNegativeBtnText("Cancelar")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Cerrar")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.gif8)
+                .isCancellable(false)
+                .OnPositiveClicked(() -> {
+
+                    finishAffinity();
+                    finishActivity(0);
+                    System.exit(0);
+
+                })
+                .OnNegativeClicked(() -> Toast.makeText(this,"Cancelado",Toast.LENGTH_SHORT).show())
+                .build();
+
     }
+
 }

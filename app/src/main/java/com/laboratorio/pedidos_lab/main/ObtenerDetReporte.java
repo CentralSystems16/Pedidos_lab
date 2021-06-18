@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +35,6 @@ public class ObtenerDetReporte extends AppCompatActivity {
         flechaReturn.setOnClickListener(v -> {
             Intent i = new Intent(getApplicationContext(), ObtenerReportes.class);
             startActivity(i);
-            Login.gIdPedido = 0;
         });
 
         //check if Read External Storage permission was granded
@@ -80,7 +81,7 @@ public class ObtenerDetReporte extends AppCompatActivity {
     }
 
     private void readPdf(){
-        File path = new File(Environment.getExternalStorageDirectory().getPath() + "/Documents/" + Login.gIdPedido + " Examen.pdf");
+        File path = new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/" + Login.gIdPedido + " Examen.pdf")));
         PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromFile(path).load();
     }

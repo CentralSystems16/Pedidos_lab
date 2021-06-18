@@ -193,6 +193,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
                             jsonObject1.getString("fecha_creo");
                             nombreReporte.setText(jsonObject1.getString("nombre_cliente"));
                             nacimiento = jsonObject1.getString("nacimiento_cliente");
@@ -306,7 +307,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void createPDF() throws FileNotFoundException {
 
-        String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+        String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         File file = new File(pdfPath, Login.gIdPedido + " Examen.pdf");
 
         PdfWriter writer = new PdfWriter(file);
@@ -496,14 +497,14 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
                // for (int i = 0; i < listaCorreos.size(); i++) {
                     //TODO: Correo al que quiero enviar el Email
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(envCorreo));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("centralsystemsmanage2@gmail.com"));
                // }
 
                 BodyPart bodyPart1 = new MimeBodyPart();
                 bodyPart1.setText("Se ha adjuntado el pedido");
                 MimeBodyPart bodyPart2 = new MimeBodyPart();
 
-                String path = String.valueOf(new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/" + Login.gIdPedido + " Examen.pdf"))));
+                String path = String.valueOf(new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/" + Login.gIdPedido + " Examen.pdf"))));
 
                 FileDataSource source = new FileDataSource(path);
                 bodyPart2.setDataHandler(new DataHandler(source));

@@ -57,11 +57,10 @@ public class ObtenerAllProductos extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         tvCantidadAllProductos = findViewById(R.id.tvCantProductos2);
-        ObtenerAllProductos.tvCantidadAllProductos.setText(String.valueOf(formatoDecimal.format(gCount)));
+        tvCantidadAllProductos.setText(String.valueOf(formatoDecimal.format(gCount)));
 
         botonRegresar = findViewById(R.id.flecha3);
         botonRegresar.setOnClickListener(v -> {
-            new ContadorProductos2.GetDataFromServerIntoTextView(this).execute();
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
         });
@@ -75,9 +74,6 @@ public class ObtenerAllProductos extends AppCompatActivity {
             } else {
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);
-                new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
-                new ContadorProductos2.GetDataFromServerIntoTextView(this).execute();
-
             }
         });
 
