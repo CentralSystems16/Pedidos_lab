@@ -2,7 +2,6 @@ package com.laboratorio.pedidos_lab.back;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,8 +13,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +24,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.multidex.MultiDex;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,14 +42,13 @@ import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
 import com.laboratorio.pedidos_lab.adapters.adapProdReport;
 import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
+import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
-import com.laboratorio.pedidos_lab.main.ObtenerProductos;
 import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
 import com.laboratory.views.R;
@@ -86,34 +85,22 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     public static final String  url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura="+ Login.gIdPedido;
     public static String  url_det_pedido = "";
     public static final String  url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php"+"?id_prefactura="+ Login.gIdPedido;
-
-    Button regresar;
-    @SuppressLint("StaticFieldLeak")
-    public static Button btnConfirmarEnviar;
-    TextView nombreReporte, fechaReporte, totalItem, horaReporte;
-    @SuppressLint("StaticFieldLeak")
-    public static TextView subTotalReporte, totalFinal;
+    TextView fechaReporte, totalItem, horaReporte;
+    public static TextView subTotalReporte, totalFinal, nombreTicket;
     public static Double gTotal = 0.00;
-    public static RecyclerView rvProductos;
-    @SuppressLint("StaticFieldLeak")
-    public static adapProdReport adaptador;
-    public static List<DetReporte> listaProdReport;
-    public static List<Correos> listaCorreos;
+    RecyclerView rvProductos;
+    adapProdReport adaptador;
+    List<DetReporte> listaProdReport;
+    List<Correos> listaCorreos;
+    Button btnConfirmarEnviar;
     String NOMBRE_DOCUMENTO = "Examen.pdf";
-    String correo;
-    String password;
     javax.mail.Session session;
-    String nacimiento;
-    int edad;
-    String sexo;
-    String envCorreo;
-
+    int edad, meses;
+    String sexo, envCorreo, password, correo, nacimiento, nombreReporte;
+    LottieAnimationView rOfTicket;
     Date d = new Date();
-    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
-
-    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
 
@@ -124,7 +111,17 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.ticked_datos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        nombreReporte = findViewById(R.id.nombreReporte);
+        rOfTicket = findViewById(R.id.rOfTicket);
+        rOfTicket.setOnClickListener(v -> {
+            gTotal = 0.00;
+            new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
+            Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
+            startActivity(i);
+        });
+
+        nombreTicket = findViewById(R.id.nombreReporte);
+        nombreTicket.setText(DatosPrincipales.nombre);
+        nombreTicket.setText(OtraPersona.usuario);
         fechaReporte = findViewById(R.id.fechaReporte);
         subTotalReporte = findViewById(R.id.subTotalReporte);
         totalFinal = findViewById(R.id.TotalFinal);
@@ -153,15 +150,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,},
                     1000);
         }
-
-        regresar = findViewById(R.id.regresarProductos);
-
-        regresar.setOnClickListener(v -> {
-            gTotal = 0.00;
-            new ContadorProductos.GetDataFromServerIntoTextView(this).execute();
-            Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
-            startActivity(i);
-        });
 
         //TODO: Correo del que quiero enviar el Email
         correo = "centralsystemsmailing@gmail.com";
@@ -195,10 +183,12 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
                             jsonObject1.getString("fecha_creo");
-                            nombreReporte.setText(jsonObject1.getString("nombre_cliente"));
-                            nacimiento = jsonObject1.getString("nacimiento_cliente");
-                            edad = jsonObject1.getInt("edad_cliente");
-                            sexo = jsonObject1.getString("sexo_cliente");
+                            jsonObject1.getString("nombre_cliente");
+                            jsonObject1.getString("nacimiento_cliente");
+                            jsonObject1.getInt("edad_cliente");
+                            jsonObject1.getString("sexo_cliente");
+                            jsonObject1.getInt("meses_cliente");
+
 
                         }
 
@@ -359,15 +349,15 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph fecha = new Paragraph( "Fecha y hora de la orden: " + fechacComplString + " a las " + horaString);
 
-        Paragraph nombre = new Paragraph( "Paciente: " + DatosPrincipales.nombre);
+        Paragraph nombre = new Paragraph( "Paciente: " + OtraPersona.usuario + DatosPrincipales.nombre);
 
-        Paragraph dui = new Paragraph( "DUI: " + Login.dui);
+        Paragraph dui = new Paragraph( "Documento de identidad registrado: " + Login.dui);
 
-        Paragraph genero = new Paragraph( "Género: " + Login.sexo);
+        Paragraph genero = new Paragraph( "Género: " + OtraPersona.sexoCl + Login.sexo);
 
-        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + Login.nacimiento);
+        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + OtraPersona.nacCl + Login.nacimiento);
 
-        Paragraph edadCli = new Paragraph( "Edad: " + Login.edad + " Año(s) " + "con " + Login.meses + " Mes(es)");
+        Paragraph edadCli = new Paragraph( "Edad: " + OtraPersona.edadCl + Login.edad + " Año(s) " + "con " + OtraPersona.mesesCl + Login.meses + " Mes(es)");
 
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
@@ -469,8 +459,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
     public void enviarPDF(){
 
-
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -533,7 +521,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + Login.nombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
+                .setTitle("Hola " + OtraPersona.usuario + Login.nombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
                 .setNegativeBtnText("Cancelar")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Confirmar")

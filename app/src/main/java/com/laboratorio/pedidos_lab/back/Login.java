@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     String URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
     public static String nombre, email, sexo, nacimiento;
-    public static int edad, gusuario, cliente, dui, meses;
+    public static int edad, gusuario, cliente, dui, meses, verificacion;
     String usuario, contra;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -147,6 +147,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         edad = jsonResponse.getInt("edad_usuario");
                         dui = jsonResponse.getInt("dui_usuario");
                         meses = jsonResponse.getInt("meses_usuario");
+                        verificacion = jsonResponse.getInt("verificacion");
 
                         Intent intent = new Intent(getApplicationContext(), DatosPrincipales.class);
 
@@ -161,6 +162,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         intent.putExtra("edad_usuario", edad);
                         intent.putExtra("dui_usuario", dui);
                         intent.putExtra("meses_usuario", meses);
+                        intent.putExtra("verificacion", verificacion);
 
                         startActivity(intent);
                     } else {

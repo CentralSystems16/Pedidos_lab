@@ -51,12 +51,14 @@ public class MiPersona {
                 String select = Login.sexo;
                 String email = Login.email;
                 String nacimiento = Login.nacimiento;
+                int meses = Login.meses;
 
                 String data = URLEncoder.encode("nombre_cliente", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8")
                         + "&" + URLEncoder.encode("edad_cliente", "UTF-8") + "=" + URLEncoder.encode(edad, "UTF-8")
                         + "&" + URLEncoder.encode("sexo_cliente", "UTF-8") + "=" + URLEncoder.encode(select, "UTF-8")
                         + "&" + URLEncoder.encode("email_cliente", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
-                        + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(nacimiento, "UTF-8");
+                        + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(nacimiento, "UTF-8")
+                        + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(meses), "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

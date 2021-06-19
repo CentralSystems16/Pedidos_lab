@@ -1,6 +1,7 @@
 package com.laboratorio.pedidos_lab.back;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.front.SegundoRegistro;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
@@ -45,6 +49,8 @@ public class OtraPersona extends AppCompatActivity {
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     Button regresar;
+    public static int edadCl, mesesCl, idCl;
+    public static String sexoCl, nacCl, emailCl, usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,10 +142,50 @@ public class OtraPersona extends AppCompatActivity {
 
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
-                Intent i = new Intent(OtraPersona.this, ObtenerCategorias.class);
-                startActivity(i);
                 new DescargarImagen(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
-                new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
+                usuario = nom.getText().toString();
+
+                    Response.Listener<String> responseListener = response -> {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean succes = jsonResponse.getBoolean("success");
+                            if (succes){
+
+                                edadCl = jsonResponse.getInt("edad_cliente");
+                                sexoCl = jsonResponse.getString("sexo_cliente");
+                                emailCl = jsonResponse.getString("email_cliente");
+                                idCl = jsonResponse.getInt("id_cliente");
+                                nacCl = jsonResponse.getString("nacimiento_cliente");
+                                mesesCl = jsonResponse.getInt("meses_cliente");
+
+                                Intent intent = new Intent(this, ObtenerCategorias.class);
+
+                                new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
+
+                                intent.putExtra("nombre_cliente", usuario);
+                                intent.putExtra("edad_cliente", edadCl);
+                                intent.putExtra("sexo_cliente", sexoCl);
+                                intent.putExtra("email_cliente", emailCl);
+                                intent.putExtra("id_cliente", idCl);
+                                intent.putExtra("nacimiento_cliente", nacCl);
+                                intent.putExtra("usuario_cliente", mesesCl);
+
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(this, "Usuario y/o contraseña incorrectos o usuario inactivo y/o sin permisos, por favor intentalo nuevamente.", Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    };
+
+                    clientRequest clientRequest = new clientRequest(usuario, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(this);
+                    queue.add(clientRequest);
 
             }
         });
