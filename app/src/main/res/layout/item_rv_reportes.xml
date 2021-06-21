@@ -92,7 +92,28 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/abrirReporte"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:padding="15dp"
+                android:background="@color/rojo"
+                android:text="Abrir detalle de reporte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/reenviarCorreo"
+                android:layout_marginTop="10dp"
+                android:background="@color/rojo"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:text="Reenviar correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
+
 
         </LinearLayout>
 </androidx.cardview.widget.CardView>

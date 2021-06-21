@@ -53,7 +53,7 @@ public class RegistroUsuario extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
     String select;
-    public static int gusuarioR;
+    public static int gusuarioR, verificacion = 0;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui;
     RadioGroup rg;
@@ -297,6 +297,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 parametros.put("dui_usuario", id);
                 parametros.put("meses_usuario", me);
                 parametros.put("sexo_usuario", select);
+                parametros.put("verificacion", String.valueOf(verificacion));
 
                 return parametros;
             }

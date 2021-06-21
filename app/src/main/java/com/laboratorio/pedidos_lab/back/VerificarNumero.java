@@ -175,6 +175,7 @@ public class VerificarNumero extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), Login.class);
                     i.putExtra("phoneEnv", binding.phoneEt.getText().toString());
                     startActivity(i);
+                    RegistroUsuario.verificacion = 1;
 
                 })
                 .addOnFailureListener(e -> {

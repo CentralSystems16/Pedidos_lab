@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.controler.ActualizarDetPedido;
 import com.laboratorio.pedidos_lab.controler.ActualizarPedido;
@@ -218,7 +220,8 @@ public class adapProdReport extends RecyclerView.Adapter<adapProdReport.ProdRepo
     public static class ProdReportViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNombre, tvPrecio, tvCantidad, totalItem;
-        Button btnMas, btnMenos, btnEliminar;
+        Button btnMas, btnMenos;
+        LottieAnimationView btnEliminar;
 
         public ProdReportViewHolder(@NonNull View itemView) {
             super(itemView);
