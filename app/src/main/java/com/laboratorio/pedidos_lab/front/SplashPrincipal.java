@@ -4,19 +4,26 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.AppLaunchChecker;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.conections.preferenceUtils;
+import com.laboratorio.pedidos_lab.conections.updateAplication;
 import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +45,8 @@ public class SplashPrincipal extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_principal);
 
+
+
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
         }
@@ -58,6 +67,7 @@ public class SplashPrincipal extends AppCompatActivity {
         },7000); //TODO: Tiempo en que permanecera activo el splash.
 
         DatosEmpresa();
+
     }
 
     public void DatosEmpresa(){

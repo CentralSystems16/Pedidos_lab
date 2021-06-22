@@ -103,6 +103,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String fechacComplString = fecc.format(d);
     SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
+    String gNomCliente;
 
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
 
@@ -121,7 +122,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         nombreTicket = findViewById(R.id.nombreReporte);
         nombreTicket.setText(DatosPrincipales.nombre);
-        nombreTicket.setText(OtraPersona.usuario);
         fechaReporte = findViewById(R.id.fechaReporte);
         subTotalReporte = findViewById(R.id.subTotalReporte);
         totalFinal = findViewById(R.id.TotalFinal);
@@ -188,7 +188,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                             jsonObject1.getInt("edad_cliente");
                             jsonObject1.getString("sexo_cliente");
                             jsonObject1.getInt("meses_cliente");
-
 
                         }
 
@@ -349,15 +348,15 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph fecha = new Paragraph( "Fecha y hora de la orden: " + fechacComplString + " a las " + horaString);
 
-        Paragraph nombre = new Paragraph( "Paciente: " + OtraPersona.usuario + DatosPrincipales.nombre);
+        Paragraph nombre = new Paragraph( "Paciente: " + gNomCliente);
 
         Paragraph dui = new Paragraph( "Documento de identidad registrado: " + Login.dui);
 
-        Paragraph genero = new Paragraph( "Género: " + OtraPersona.sexoCl + Login.sexo);
+        Paragraph genero = new Paragraph( "Género: " + Login.sexo);
 
-        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + OtraPersona.nacCl + Login.nacimiento);
+        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + Login.nacimiento);
 
-        Paragraph edadCli = new Paragraph( "Edad: " + OtraPersona.edadCl + Login.edad + " Año(s) " + "con " + OtraPersona.mesesCl + Login.meses + " Mes(es)");
+        Paragraph edadCli = new Paragraph( "Edad: " + Login.edad + " Año(s) " + "con " + Login.meses + " Mes(es)");
 
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
@@ -521,7 +520,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + OtraPersona.usuario + Login.nombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
+                .setTitle("Hola " + DatosPrincipales.nombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
                 .setNegativeBtnText("Cancelar")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Confirmar")

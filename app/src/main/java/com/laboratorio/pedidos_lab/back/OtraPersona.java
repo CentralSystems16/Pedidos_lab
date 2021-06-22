@@ -142,60 +142,16 @@ public class OtraPersona extends AppCompatActivity {
 
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
-                new DescargarImagen(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
-                usuario = nom.getText().toString();
-
-                    Response.Listener<String> responseListener = response -> {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean succes = jsonResponse.getBoolean("success");
-                            if (succes){
-
-                                edadCl = jsonResponse.getInt("edad_cliente");
-                                sexoCl = jsonResponse.getString("sexo_cliente");
-                                emailCl = jsonResponse.getString("email_cliente");
-                                idCl = jsonResponse.getInt("id_cliente");
-                                nacCl = jsonResponse.getString("nacimiento_cliente");
-                                mesesCl = jsonResponse.getInt("meses_cliente");
-
-                                Intent intent = new Intent(this, ObtenerCategorias.class);
-
-                                new ContadorProductos.GetDataFromServerIntoTextView(getApplicationContext()).execute();
-
-                                intent.putExtra("nombre_cliente", usuario);
-                                intent.putExtra("edad_cliente", edadCl);
-                                intent.putExtra("sexo_cliente", sexoCl);
-                                intent.putExtra("email_cliente", emailCl);
-                                intent.putExtra("id_cliente", idCl);
-                                intent.putExtra("nacimiento_cliente", nacCl);
-                                intent.putExtra("usuario_cliente", mesesCl);
-
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(this, "Usuario y/o contraseña incorrectos o usuario inactivo y/o sin permisos, por favor intentalo nuevamente.", Toast.LENGTH_SHORT).show();
-
-                            }
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    };
-
-                    clientRequest clientRequest = new clientRequest(usuario, responseListener);
-                    RequestQueue queue = Volley.newRequestQueue(this);
-                    queue.add(clientRequest);
-
+                new InsertarCliente(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
             }
         });
     }
 
-    public static class DescargarImagen extends AsyncTask<String, Void, String> {
+    public static class InsertarCliente extends AsyncTask<String, Void, String> {
 
         private final WeakReference<Context> context;
 
-        public DescargarImagen(Context context) {
+        public InsertarCliente(Context context) {
             this.context = new WeakReference<>(context);
         }
 

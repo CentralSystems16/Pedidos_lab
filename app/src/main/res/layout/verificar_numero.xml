@@ -51,6 +51,13 @@
         android:gravity="center"
         android:textSize="15sp"/>
 
+            <EditText
+                android:visibility="gone"
+                android:id="@+id/code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+503"/>
+
     <LinearLayout
     android:id="@+id/phoneLl"
     android:orientation="vertical"
@@ -79,10 +86,10 @@
             android:layout_gravity="center"
             app:backgroundTint="@color/white"
             android:textColor="#4CAF50"
-
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_marginEnd="20dp"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:text="Reenviar Código" />
         </LinearLayout>
 
@@ -105,6 +112,14 @@
         android:hint="Ingresa el código"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp" />
+
+        <TextView
+            android:id="@+id/cuentaAtras"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/phoneContinueButton"

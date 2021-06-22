@@ -56,6 +56,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (btnParaMi.isPressed()) {
             Login.gIdPedido = 0;
+            ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
             if(Login.gIdCliente == 0){
 
                 try {

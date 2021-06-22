@@ -10,17 +10,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.WindowManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.AppLaunchChecker;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,10 +31,10 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.laboratorio.pedidos_lab.biometric.BiometricCallback;
 import com.laboratorio.pedidos_lab.biometric.BiometricManager;
-import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
-import com.laboratorio.pedidos_lab.front.EnviandoTicket;
+import com.laboratorio.pedidos_lab.conections.preferenceUtils;
+import com.laboratorio.pedidos_lab.conections.updateAplication;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
-import com.laboratorio.pedidos_lab.main.ObtenerReportes;
+import com.laboratorio.pedidos_lab.front.acercaDe;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
@@ -41,10 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.util.Hashtable;
-import java.util.Map;
 
 public class Login extends AppCompatActivity implements BiometricCallback, Serializable {
 
@@ -68,6 +66,9 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         setContentView(R.layout.login);
         //TODO: Bloquear orientación de pantalla.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        AppLaunchChecker.onActivityCreate(this);
+        alertAppUpdate();
 
         mostrarPass = findViewById(R.id.mostrarPass);
         mostrarPass.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -189,7 +190,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         }
 
 
-            mBiometricManager = new BiometricManager.BiometricBuilder(Login.this)
+          /*  mBiometricManager = new BiometricManager.BiometricBuilder(Login.this)
                     .setTitle(getString(R.string.biometric_title))
                     .setSubtitle(getString(R.string.biometric_subtitle))
                     .setDescription(getString(R.string.biometric_description))
@@ -197,8 +198,45 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     .build();
 
             //start authentication
-            mBiometricManager.authenticate(Login.this);
+            mBiometricManager.authenticate(Login.this); */
 
+    }
+
+    private void alertAppUpdate()
+    {
+
+        int remoteVersionCode= updateAplication.getRemoteVersionNumber(this);
+        preferenceUtils preferenceUtils=new preferenceUtils(this);
+        if(AppLaunchChecker.hasStartedFromLauncher(this))
+        {
+            preferenceUtils.createAppVersionCode(remoteVersionCode);
+            Log.i("First time","First time app is launched");
+        }
+        int existingVersionCode= preferenceUtils.getAppVersionCode();
+        if(remoteVersionCode>existingVersionCode)
+        {
+            /*
+             **
+             * app is updated, alert user to update app from playstore
+             * if app is updated then only save the version code in preferenceUtils
+             *
+             */
+
+
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setMessage("Hay una nueva actualizacion");
+            dialogBuilder.setCancelable(false);
+            dialogBuilder.setPositiveButton("Update Now", (dialogInterface, i) -> {
+                updateAplication.launchPlayStoreApp(this);
+                Log.i("app update service","app is needed to update");
+                preferenceUtils.createAppVersionCode(remoteVersionCode);
+            });
+            dialogBuilder.setNegativeButton("Later",(dialogInterface,i)->{
+
+            });
+
+            dialogBuilder.show();
+        }
     }
 
     @Override

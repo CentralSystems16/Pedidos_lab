@@ -2,6 +2,8 @@ package com.laboratorio.pedidos_lab.conections;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -12,109 +14,32 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-class updateApplication extends AsyncTask<Void, String, String> {
+public class updateAplication {
 
-    Context context;
+    public static final String ACTION_APP_VERSION_CHECK = "app-version-check";
 
-    @Override
-    protected String doInBackground(Void... voids) {
-        String newVersion = null;
-        try {
-            Document document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + context.getPackageName()  + "&hl=en")
-                    .timeout(30000)
-                    .referrer("http://www.google.com")
-                    .get();
-            if (document != null) {
-                Log.d("updateAndroid", "Document: " + document);
-                Elements element = document.getElementsContainingOwnText("Current Version");
-                for (Element ele : element) {
-                    if (ele.siblingElements() != null) {
-                        Elements sibElemets = ele.siblingElements();
-                        for (Element sibElemet : sibElemets) {
-                            newVersion = sibElemet.text();
-                        }
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return newVersion;
+    public static void launchPlayStoreApp(Context context) {
 
-    }
-
-    @Override
-    protected void onPostExecute(String onlineVersion) {
-
-        super.onPostExecute(onlineVersion);
-        Log.d("updateAndroid", "Current version: " + "1.3.0" + " PlayStore version: " + onlineVersion);
-        if (onlineVersion != null && !onlineVersion.isEmpty()) {
-            if(isUpdateRequired("1.3.0", onlineVersion)){
-                Log.d("updateAndroid", "Update is required!!! Current version: " + "1.3.0" + " PlayStore version: " + onlineVersion);
-                //openPlayStore(); //Open PlayStore
-            }else{
-                Log.d("updateAndroid", "Update is NOT required!");
-            }
-        }
-
-    }
-
-    private void openPlayStore(Context ctx){
-        final String appPackageName = ctx.getPackageName();
+        final String appPackageName = context.getPackageName(); // getPackageName() from Context or Activity object
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
         } catch (android.content.ActivityNotFoundException anfe) {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
         }
+
     }
 
-    public boolean isUpdateRequired(String versionActual, String versionNueva) {
-        boolean result = false;
-        int[] versiones = new int[6];
-        int i = 0, anterior = 0, orden = 0;
-        if(versionActual != null && versionNueva != null){
-            try{
-                for(i = 0; i < 6; i++){
-                    versiones[i] = 0;
-                }
-                i = 0;
-                do{
-                    i = versionActual.indexOf('.', anterior);
-                    if(i > 0){
-                        versiones[orden] = Integer.parseInt(versionActual.substring(anterior, i));
-                    }else{
-                        versiones[orden] = Integer.parseInt(versionActual.substring(anterior));
-                    }
-                    anterior = i + 1;
-                    orden++;
-                }while(i != -1);
-                anterior = 0;
-                orden = 3;
-                i = 0;
-                do{
-                    i = versionNueva.indexOf('.', anterior);
-                    if(i > 0){
-                        versiones[orden] = Integer.parseInt(versionNueva.substring(anterior, i));
-                    }else{
-                        versiones[orden] = Integer.parseInt(versionNueva.substring(anterior));
-                    }
-                    anterior = i + 1;
-                    orden++;
-                }while(i != -1 && orden < 6);
-                if(versiones[0] < versiones[3]){
-                    result = true;
-                }else if(versiones[1] < versiones[4] && versiones[0] == versiones[3]){
-                    result = true;
-                }else if(versiones[2] < versiones[5] && versiones[0] == versiones[3] && versiones[1] == versiones[4]){
-                    result = true;
-                }
-            }catch (NumberFormatException e){
-                Log.e("updateApp", "NFE " + e.getMessage() + " parsing versionAct " + versionActual + " and versionNew " + versionNueva);
-            }catch (Exception e){
-                Log.e("updateApp", "Ex " + e.getMessage() + " parsing versionAct " + versionActual + " and versionNew " + versionNueva);
-            }
+    public static int getRemoteVersionNumber(Context context) {
+        int versionCode = 0;
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            String version = pInfo.versionName;
+            versionCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
-        return result;
-    }
+        return versionCode;
 
+
+    }
 }

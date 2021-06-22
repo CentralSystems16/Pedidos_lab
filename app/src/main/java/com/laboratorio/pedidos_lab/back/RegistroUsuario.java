@@ -53,7 +53,7 @@ public class RegistroUsuario extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
     String select;
-    public static int gusuarioR, verificacion = 0;
+    public static int gusuarioR;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui;
     RadioGroup rg;
@@ -242,7 +242,7 @@ public class RegistroUsuario extends AppCompatActivity {
             else {
                 String phoneNo = regPhoneNo.getText().toString();
                 Intent i = new Intent(getApplicationContext(), VerificarNumero.class);
-                i.putExtra("phoneNo", "+503"+phoneNo);
+                i.putExtra("phoneNo", phoneNo);
                 startActivity(i);
                 ejecutarServicio("http://pedidoslab.6te.net/consultas/registro.php");
             }
@@ -297,7 +297,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 parametros.put("dui_usuario", id);
                 parametros.put("meses_usuario", me);
                 parametros.put("sexo_usuario", select);
-                parametros.put("verificacion", String.valueOf(verificacion));
 
                 return parametros;
             }

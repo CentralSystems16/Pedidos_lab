@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.laboratorio.pedidos_lab.controler.ActualizarUsuario;
 import com.laboratory.views.R;
 import com.laboratory.views.databinding.VerificarNumeroBinding;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +33,8 @@ public class VerificarNumero extends AppCompatActivity {
     public static final String TAG = "MAIN_TAG";
     private FirebaseAuth firebaseAuth;
     private ProgressDialog pg;
-    EditText phoneEnv;
+    EditText code;
+    TextView tvCuenta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,9 @@ public class VerificarNumero extends AppCompatActivity {
         setContentView(binding.getRoot());
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        phoneEnv = findViewById(R.id.phoneEt);
+        code = findViewById(R.id.code);
+        tvCuenta = findViewById(R.id.cuentaAtras);
+        iniciarCuentaAtras();
 
         String phoneNo = getIntent().getStringExtra("phoneNo");
         binding.phoneEt.setText(phoneNo);
@@ -104,6 +110,7 @@ public class VerificarNumero extends AppCompatActivity {
             }
             else {
                 resendVerificationCode(phone, forceResendingToken);
+                iniciarCuentaAtras();
             }
         });
 
@@ -115,8 +122,32 @@ public class VerificarNumero extends AppCompatActivity {
             }
             else {
                 verifyPhoneNumberWithCode(mVerificationId, code);
+                //new ActualizarUsuario(this).execute();
+
             }
         });
+
+    }
+
+    private void iniciarCuentaAtras() {
+
+        new CountDownTimer(2000*60, 1000) { // adjust the milli seconds here
+
+            public void onTick(long millisUntilFinished) {
+                tvCuenta.setText("El codigo caduca en: "+String.format("%d min, %d sec",
+                        TimeUnit.MILLISECONDS.toMinutes( millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                tvCuenta.setText("El código ha caducado");
+            }
+        }.start();
+
+        /*Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        v.vibrate(500);*/
 
     }
 
@@ -127,8 +158,8 @@ public class VerificarNumero extends AppCompatActivity {
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber(phone)
-                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setPhoneNumber("+503"+phone)
+                        .setTimeout(120L, TimeUnit.SECONDS)
                         .setActivity(this)
                         .setCallbacks(mCallBacks)
                         .build();
@@ -144,8 +175,8 @@ public class VerificarNumero extends AppCompatActivity {
 
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber(phone)
-                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setPhoneNumber("+503"+phone)
+                        .setTimeout(120L, TimeUnit.SECONDS)
                         .setActivity(this)
                         .setCallbacks(mCallBacks)
                         .setForceResendingToken(token)
@@ -175,7 +206,7 @@ public class VerificarNumero extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), Login.class);
                     i.putExtra("phoneEnv", binding.phoneEt.getText().toString());
                     startActivity(i);
-                    RegistroUsuario.verificacion = 1;
+
 
                 })
                 .addOnFailureListener(e -> {

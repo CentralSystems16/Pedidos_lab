@@ -23,10 +23,18 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class InsertarPedido extends AsyncTask<String, Void, String> {
+
+    Date d = new Date();
+    SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
+    String fechacComplString = fecc.format(d);
+    SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
+    String horaString = ho.format(d);
 
     private final WeakReference<Context> context;
 
@@ -40,6 +48,7 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
 
         String registrar_url = "http://pedidoslab.6te.net/consultas/insertarPedido.php"
                 +"?nombre_reporte=" + DatosPrincipales.nombre
+                +"&fecha_creo=" + fechacComplString + " a las " + horaString
                 +"&id_cliente=" + Login.gIdCliente
                 +"&monto=" + ObtenerProductos.gDetMonto
                 +"&monto_iva=" + ObtenerProductos.gDetMontoIva;
@@ -56,11 +65,13 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
             String nombreRep = DatosPrincipales.nombre;
+            String fechaCreo = fechacComplString + horaString;
             String idCliente = String.valueOf(Login.gIdCliente);
             String monto = String.valueOf(adapProdReport.lNewDetMonto);
             String montoIva = String.valueOf(adapProdReport.lDetMontoIva);
 
             String data = URLEncoder.encode("nombre_reporte", "UTF-8") + "=" + URLEncoder.encode(nombreRep, "UTF-8")
+                    + "&" + URLEncoder.encode("fecha_creo", "UTF-8") + "=" + URLEncoder.encode(fechaCreo, "UTF-8")
                     + "&" + URLEncoder.encode("id_cliente", "UTF-8") + "=" + URLEncoder.encode(idCliente, "UTF-8")
                     + "&" + URLEncoder.encode("monto", "UTF-8") + "=" + URLEncoder.encode((monto), "UTF-8")
                     + "&" + URLEncoder.encode("monto_iva", "UTF-8") + "=" + URLEncoder.encode((montoIva), "UTF-8");
