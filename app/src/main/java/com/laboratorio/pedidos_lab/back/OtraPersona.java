@@ -143,6 +143,8 @@ public class OtraPersona extends AppCompatActivity {
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
                 new InsertarCliente(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
+                Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
+                startActivity(i);
             }
         });
     }

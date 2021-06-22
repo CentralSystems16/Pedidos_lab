@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.laboratorio.pedidos_lab.controler.ActualizarUsuario;
 import com.laboratory.views.R;
 import com.laboratory.views.databinding.VerificarNumeroBinding;
 import org.jetbrains.annotations.NotNull;

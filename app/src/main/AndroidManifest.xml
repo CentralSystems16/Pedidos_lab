@@ -17,6 +17,8 @@
     <!-- Step 2: This permission is depreciated in Android P  -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
+
+
     <application
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
@@ -30,7 +32,6 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:ignore="AllowBackup"
         android:usesCleartextTraffic="true"
-
         tools:targetApi="n">
 
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerReportes" />

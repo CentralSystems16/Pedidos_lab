@@ -34,7 +34,7 @@ public class acercaDe extends AppCompatActivity {
         sobre.setOnClickListener(v -> {
 
             new FancyGifDialog.Builder(this)
-                    .setTitle("Recursos utilizados en la aplicación\n\nhttps://lottiefiles.com/\nhttps://www.flaticon.com/\nhttps://github.com/\n\n\n\nVersión: 1.3.4")
+                    .setTitle("Recursos utilizados en la aplicación\n\nhttps://lottiefiles.com/\nhttps://www.flaticon.com/\nhttps://github.com/\n\n\n\nVersión: 1.3.6")
                     .setNegativeBtnText("Regresar")
                     .setPositiveBtnBackground(R.color.rosado)
                     .setPositiveBtnText("Visitar")

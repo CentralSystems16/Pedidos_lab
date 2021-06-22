@@ -50,6 +50,7 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
                 +"?nombre_reporte=" + DatosPrincipales.nombre
                 +"&fecha_creo=" + fechacComplString + " a las " + horaString
                 +"&id_cliente=" + Login.gIdCliente
+                +"&id_usuario=" + Login.gIdUsuario
                 +"&monto=" + ObtenerProductos.gDetMonto
                 +"&monto_iva=" + ObtenerProductos.gDetMontoIva;
 
@@ -67,12 +68,14 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
             String nombreRep = DatosPrincipales.nombre;
             String fechaCreo = fechacComplString + horaString;
             String idCliente = String.valueOf(Login.gIdCliente);
+            String idUsuario = String.valueOf(Login.gIdUsuario);
             String monto = String.valueOf(adapProdReport.lNewDetMonto);
             String montoIva = String.valueOf(adapProdReport.lDetMontoIva);
 
             String data = URLEncoder.encode("nombre_reporte", "UTF-8") + "=" + URLEncoder.encode(nombreRep, "UTF-8")
                     + "&" + URLEncoder.encode("fecha_creo", "UTF-8") + "=" + URLEncoder.encode(fechaCreo, "UTF-8")
                     + "&" + URLEncoder.encode("id_cliente", "UTF-8") + "=" + URLEncoder.encode(idCliente, "UTF-8")
+                    + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(idUsuario, "UTF-8")
                     + "&" + URLEncoder.encode("monto", "UTF-8") + "=" + URLEncoder.encode((monto), "UTF-8")
                     + "&" + URLEncoder.encode("monto_iva", "UTF-8") + "=" + URLEncoder.encode((montoIva), "UTF-8");
 

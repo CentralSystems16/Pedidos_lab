@@ -49,7 +49,7 @@ public class VistaFinal extends AppCompatActivity implements View.OnClickListene
         salir.setOnClickListener(this);
 
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + Login.nombre + "\nGracias! su orden se ha enviado con éxito!!!\n\nPuede revisar el detalle de su orden desde 'Mis ordenes'" +
+                .setTitle("Hola " + TicketDatos.gNomCliente + "\nGracias! su orden se ha enviado con éxito!!!\n\nPuede revisar el detalle de su orden desde 'Mis ordenes'" +
                         "\n\nSi estableció un correo electronico en su registro también puede consultar su correo para ver su detalle de orden\n\n\nNOTA: Si aún no recibe dicho correo, revise su carpeta de spam. ")
                 .setNegativeBtnText("OK")
                 .setPositiveBtnBackground(R.color.rosado)

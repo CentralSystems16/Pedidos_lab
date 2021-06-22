@@ -79,9 +79,11 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         }
 
         if (btnParaOtra.isPressed()) {
-            Login.gIdPedido = 0;
-            Intent in = new Intent(this, OtraPersona.class);
-            startActivity(in);
+
+                Login.gIdPedido = 0;
+                Intent in = new Intent(this, OtraPersona.class);
+                startActivity(in);
+
 
         }
 

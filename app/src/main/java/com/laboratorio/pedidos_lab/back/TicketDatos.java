@@ -96,14 +96,14 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String NOMBRE_DOCUMENTO = "Examen.pdf";
     javax.mail.Session session;
     int edad, meses;
-    String sexo, envCorreo, password, correo, nacimiento, nombreReporte;
+    String sexo, envCorreo, password, correo, nacimiento;
     LottieAnimationView rOfTicket;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
     SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
-    String gNomCliente;
+    public static String gNomCliente, fechaReport;
 
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
 
@@ -121,7 +121,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         });
 
         nombreTicket = findViewById(R.id.nombreReporte);
-        nombreTicket.setText(DatosPrincipales.nombre);
         fechaReporte = findViewById(R.id.fechaReporte);
         subTotalReporte = findViewById(R.id.subTotalReporte);
         totalFinal = findViewById(R.id.TotalFinal);
@@ -161,6 +160,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         obtenerCorreos();
 
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -182,12 +182,13 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-                            jsonObject1.getString("fecha_creo");
-                            jsonObject1.getString("nombre_cliente");
-                            jsonObject1.getString("nacimiento_cliente");
-                            jsonObject1.getInt("edad_cliente");
-                            jsonObject1.getString("sexo_cliente");
-                            jsonObject1.getInt("meses_cliente");
+                          fechaReport = jsonObject1.getString("fecha_creo");
+                          gNomCliente = jsonObject1.getString("nombre_cliente");
+                          nombreTicket.setText(gNomCliente);
+                          nacimiento = jsonObject1.getString("nacimiento_cliente");
+                          edad = jsonObject1.getInt("edad_cliente");
+                          sexo = jsonObject1.getString("sexo_cliente");
+                          meses = jsonObject1.getInt("meses_cliente");
 
                         }
 
@@ -352,11 +353,11 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph dui = new Paragraph( "Documento de identidad registrado: " + Login.dui);
 
-        Paragraph genero = new Paragraph( "Género: " + Login.sexo);
+        Paragraph genero = new Paragraph( "Género: " + sexo);
 
-        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + Login.nacimiento);
+        Paragraph fechaNac = new Paragraph( "Fecha de nacimiento: " + nacimiento);
 
-        Paragraph edadCli = new Paragraph( "Edad: " + Login.edad + " Año(s) " + "con " + Login.meses + " Mes(es)");
+        Paragraph edadCli = new Paragraph( "Edad: " + edad + " Año(s) " + "con " + meses + " Mes(es)");
 
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
@@ -520,7 +521,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + DatosPrincipales.nombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
+                .setTitle("Hola " + gNomCliente + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
                 .setNegativeBtnText("Cancelar")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Confirmar")

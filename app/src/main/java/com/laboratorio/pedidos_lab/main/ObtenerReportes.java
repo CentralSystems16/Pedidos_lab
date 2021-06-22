@@ -20,6 +20,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorReportes;
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
+import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.model.Reportes;
 import com.laboratory.views.R;
 
@@ -66,7 +68,7 @@ public class ObtenerReportes extends AppCompatActivity {
         progressDialog.show();
         progressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
 
-        String URL_REPORTES = "http://pedidoslab.6te.net/consultas/obtenerReporteClientes.php" + "?id_estado_prefactura=2" + "&nombre_reporte=" + DatosPrincipales.nombre;
+        String URL_REPORTES = "http://pedidoslab.6te.net/consultas/obtenerReporteClientes.php" + "?id_estado_prefactura=2" + "&id_usuario=" + Login.gIdUsuario;
         System.out.println(URL_REPORTES);
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);

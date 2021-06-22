@@ -3,14 +3,18 @@ package com.laboratorio.pedidos_lab.back;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,10 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.AppLaunchChecker;
-
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,19 +30,30 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 import com.laboratorio.pedidos_lab.biometric.BiometricCallback;
 import com.laboratorio.pedidos_lab.biometric.BiometricManager;
-import com.laboratorio.pedidos_lab.conections.preferenceUtils;
-import com.laboratorio.pedidos_lab.conections.updateAplication;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.front.acercaDe;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Login extends AppCompatActivity implements BiometricCallback, Serializable {
@@ -54,10 +66,15 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
     String URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
-    public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
+    String URL_CLIENTES = "http://pedidoslab.6te.net/consultas/clientesRequest.php";
+    public static int gIdCliente, gIdUsuario, gIdPedido, gIdUsuarioClient, gIdClienteClient, gIdFacDetPedido;
     public static String nombre, email, sexo, nacimiento;
     public static int edad, gusuario, cliente, dui, meses, verificacion;
     String usuario, contra;
+
+    private static final int REQ_CODE_VERSION_UPDATE = 530;
+    private AppUpdateManager appUpdateManager;
+    private InstallStateUpdatedListener installStateUpdatedListener;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -67,8 +84,14 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         //TODO: Bloquear orientación de pantalla.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        AppLaunchChecker.onActivityCreate(this);
-        alertAppUpdate();
+        String currentVersion;
+        try {
+            currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        new GetVersionCode().execute();
 
         mostrarPass = findViewById(R.id.mostrarPass);
         mostrarPass.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -138,7 +161,9 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean succes = jsonResponse.getBoolean("success");
                     if (succes){
+
                         guardarPreferencias();
+
                         gusuario = jsonResponse.getInt("id_usuario");
                         nombre = jsonResponse.getString("nombre_usuario");
                         email = jsonResponse.getString("email_usuario");
@@ -200,43 +225,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
             //start authentication
             mBiometricManager.authenticate(Login.this); */
 
-    }
-
-    private void alertAppUpdate()
-    {
-
-        int remoteVersionCode= updateAplication.getRemoteVersionNumber(this);
-        preferenceUtils preferenceUtils=new preferenceUtils(this);
-        if(AppLaunchChecker.hasStartedFromLauncher(this))
-        {
-            preferenceUtils.createAppVersionCode(remoteVersionCode);
-            Log.i("First time","First time app is launched");
-        }
-        int existingVersionCode= preferenceUtils.getAppVersionCode();
-        if(remoteVersionCode>existingVersionCode)
-        {
-            /*
-             **
-             * app is updated, alert user to update app from playstore
-             * if app is updated then only save the version code in preferenceUtils
-             *
-             */
-
-
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-            dialogBuilder.setMessage("Hay una nueva actualizacion");
-            dialogBuilder.setCancelable(false);
-            dialogBuilder.setPositiveButton("Update Now", (dialogInterface, i) -> {
-                updateAplication.launchPlayStoreApp(this);
-                Log.i("app update service","app is needed to update");
-                preferenceUtils.createAppVersionCode(remoteVersionCode);
-            });
-            dialogBuilder.setNegativeButton("Later",(dialogInterface,i)->{
-
-            });
-
-            dialogBuilder.show();
-        }
     }
 
     @Override
@@ -333,6 +321,32 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         requestQueue2.add(request2);
     }
 
+    public void clientes(){
+        RequestQueue requestQueue2 = Volley.newRequestQueue(Login.this);
+        StringRequest request2 = new StringRequest(Request.Method.GET, URL_CLIENTES,
+
+                response -> {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("Usuarios");
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            gIdUsuarioClient = jsonObject1.getInt("id_usuario");
+                            gIdClienteClient = jsonObject1.getInt("id_cliente");
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {
+        };
+        requestQueue2.add(request2);
+    }
+
     @Override
     public void onBackPressed(){
         new FancyGifDialog.Builder(this)
@@ -354,5 +368,60 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                 .build();
 
     }
+
+    public class GetVersionCode extends AsyncTask<Void, String, String> {
+
+        @Override
+
+        protected String doInBackground(Void... voids) {
+
+            String newVersion = null;
+
+            try {
+                Document document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + Login.this.getPackageName()  + "&hl=en")
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get();
+                if (document != null) {
+                    Elements element = document.getElementsContainingOwnText("Current Version");
+                    for (Element ele : element) {
+                        if (ele.siblingElements() != null) {
+                            Elements sibElemets = ele.siblingElements();
+                            for (Element sibElemet : sibElemets) {
+                                newVersion = sibElemet.text();
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return newVersion;
+
+        }
+
+
+        @Override
+
+        protected void onPostExecute(String onlineVersion) {
+
+            //int currentVersion = Integer.parseInt("1.3.6");
+
+            super.onPostExecute(onlineVersion);
+
+            if (onlineVersion != null && !onlineVersion.isEmpty()) {
+
+              /*  if (Float.valueOf(currentVersion) < Float.valueOf(onlineVersion)) {
+                    //show anything
+                } */
+
+            }
+
+            //Log.d("update", "Current version " + currentVersion + "playstore version " + onlineVersion);
+
+        }
+    }
+
 
 }
