@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="#536DFE"
+    tools:targetApi="lollipop">
+
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="13sp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+       <ImageView
+            android:id="@+id/imgItem"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="left"
+            android:src="@drawable/man"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,RtlHardcoded" />
+
+            <TextView
+                android:text="Nombre: "
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/nombreClienteConsulta"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/seleccionarCliente"
+                android:background="@drawable/caja_texto_circular"
+                android:backgroundTint="#4CAF50"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:text="Seleccionar"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:padding="10dp"
+                android:focusable="true" />
+
+            <Button
+                android:id="@+id/editarCliente"
+                android:background="@drawable/caja_texto_circular"
+                android:backgroundTint="#4CAF50"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                android:clickable="true"
+                android:text="Editar información"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:padding="10dp"
+                android:focusable="true" />
+        </LinearLayout>
+        </LinearLayout>
+</androidx.cardview.widget.CardView>

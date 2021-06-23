@@ -13,6 +13,7 @@ import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
+import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratory.views.R;
 import java.util.ArrayList;
@@ -58,7 +59,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
             Login.gIdPedido = 0;
             ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
             if(Login.gIdCliente == 0){
-
                 try {
                     // Se agrega el método "get()" para obtener el resultado de la ejecución e impedir el proceso
                     // de la ejecución hasta obtener un resultado.
@@ -73,6 +73,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
 
                 }
             }
+            System.out.println("Id del cliente es: " + Login.gIdCliente);
 
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
@@ -81,7 +82,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         if (btnParaOtra.isPressed()) {
 
                 Login.gIdPedido = 0;
-                Intent in = new Intent(this, OtraPersona.class);
+                Intent in = new Intent(this, ObtenerClientes.class);
                 startActivity(in);
 
 

@@ -82,7 +82,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String  url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura="+ Login.gIdPedido;
+    public static String  url_pedido = "";
     public static String  url_det_pedido = "";
     public static final String  url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php"+"?id_prefactura="+ Login.gIdPedido;
     TextView fechaReporte, totalItem, horaReporte;
@@ -168,7 +168,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     }
 
     public void generarPedido() {
-
+        url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura="+ Login.gIdPedido;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         @SuppressLint("SetTextI18n")
@@ -184,12 +184,12 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
                           fechaReport = jsonObject1.getString("fecha_creo");
                           gNomCliente = jsonObject1.getString("nombre_cliente");
+                          Toast.makeText(this, "cliente: "+gNomCliente, Toast.LENGTH_SHORT).show();
                           nombreTicket.setText(gNomCliente);
                           nacimiento = jsonObject1.getString("nacimiento_cliente");
                           edad = jsonObject1.getInt("edad_cliente");
                           sexo = jsonObject1.getString("sexo_cliente");
                           meses = jsonObject1.getInt("meses_cliente");
-
                         }
 
                     } catch (JSONException e) {

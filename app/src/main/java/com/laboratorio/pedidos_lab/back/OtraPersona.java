@@ -110,6 +110,7 @@ public class OtraPersona extends AppCompatActivity {
             String fechaNacimiento = mDisplayDate.getText().toString();
             String email = ema.getText().toString();
             String meses = mes.getText().toString();
+            String usuario = String.valueOf(Login.gIdUsuario);
 
             int radiogroupSexo = sexoClientes.getCheckedRadioButtonId();
             String select = "";
@@ -142,7 +143,7 @@ public class OtraPersona extends AppCompatActivity {
 
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
-                new InsertarCliente(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses);
+                new InsertarCliente(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses, usuario);
                 Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
                 startActivity(i);
             }
@@ -177,13 +178,15 @@ public class OtraPersona extends AppCompatActivity {
                 String email = params[3];
                 String fechaNac = params[4];
                 String meses = params[5];
+                String usuario = params[6];
 
                 String data = URLEncoder.encode("nombre_cliente", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8")
                         + "&" + URLEncoder.encode("edad_cliente", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(edad), "UTF-8")
                         + "&" + URLEncoder.encode("sexo_cliente", "UTF-8") + "=" + URLEncoder.encode(select, "UTF-8")
                         + "&" + URLEncoder.encode("email_cliente", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
                         + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(fechaNac, "UTF-8")
-                        + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(meses, "UTF-8");
+                        + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(meses, "UTF-8")
+                        + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(usuario, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

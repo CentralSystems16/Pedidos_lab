@@ -7,11 +7,10 @@ public class Reportes {
     int pedido;
     Double total;
 
-    public Reportes(String nombre, String fecha, int pedido, Double total) {
+    public Reportes(String nombre, String fecha, int pedido) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.pedido = pedido;
-        this.total = total;
     }
 
     public String getNombre() {

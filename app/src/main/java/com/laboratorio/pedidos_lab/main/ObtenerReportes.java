@@ -87,10 +87,9 @@ public class ObtenerReportes extends AppCompatActivity {
                             reportes.add(
                                     new Reportes(
 
-                                            jsonObject1.getString("nombre_reporte"),
+                                            jsonObject1.getString("nombre_cliente"),
                                         fechaCreo = jsonObject1.getString("fecha_creo"),
-                                            jsonObject1.getInt("id_prefactura"),
-                                            jsonObject1.getDouble("monto")));
+                                            jsonObject1.getInt("id_prefactura")));
                         }
 
                         adaptador = new AdaptadorReportes(this, reportes);
