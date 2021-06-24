@@ -109,7 +109,7 @@ public class VistaFinal extends AppCompatActivity implements View.OnClickListene
 
         }
 
-        System.out.println("prueba de cambio");
+        System.out.println("cambio manuel");
     }
 
 
