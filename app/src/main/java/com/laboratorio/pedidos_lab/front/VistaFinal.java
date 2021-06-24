@@ -18,6 +18,8 @@ import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.conections.VerificarInternet;
 import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
+import com.laboratorio.pedidos_lab.controler.MiPersona;
+import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
@@ -49,7 +51,7 @@ public class VistaFinal extends AppCompatActivity implements View.OnClickListene
         salir.setOnClickListener(this);
 
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + TicketDatos.gNomCliente + "\nGracias! su orden se ha enviado con éxito!!!\n\nPuede revisar el detalle de su orden desde 'Mis ordenes'" +
+                .setTitle("Hola " + TicketDatos.gNombre + "\nGracias! su orden se ha enviado con éxito!!!\n\nPuede revisar el detalle de su orden desde 'Mis ordenes'" +
                         "\n\nSi estableció un correo electronico en su registro también puede consultar su correo para ver su detalle de orden\n\n\nNOTA: Si aún no recibe dicho correo, revise su carpeta de spam. ")
                 .setNegativeBtnText("OK")
                 .setPositiveBtnBackground(R.color.rosado)
@@ -106,7 +108,11 @@ public class VistaFinal extends AppCompatActivity implements View.OnClickListene
             gCount = 0.0;
 
         }
+
+        System.out.println("prueba de cambio");
     }
+
+
 
     @Override
     public void onBackPressed(){

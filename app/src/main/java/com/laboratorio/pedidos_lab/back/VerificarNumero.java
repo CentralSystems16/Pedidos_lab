@@ -200,17 +200,12 @@ public class VerificarNumero extends AppCompatActivity {
         firebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener(authResult -> {
                     pg.dismiss();
-                    String phone = firebaseAuth.getCurrentUser().getPhoneNumber();
-                    Toast.makeText(VerificarNumero.this, "Ingreso con"+phone, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(), Login.class);
-                    i.putExtra("phoneEnv", binding.phoneEt.getText().toString());
                     startActivity(i);
-
-
                 })
                 .addOnFailureListener(e -> {
                     pg.dismiss();
-                    Toast.makeText(VerificarNumero.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerificarNumero.this, "Ocurrió un error, verifica que el codigo sea correcto.", Toast.LENGTH_SHORT).show();
                 });
             }
 

@@ -1,12 +1,22 @@
 package com.laboratorio.pedidos_lab.back;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
@@ -16,15 +26,24 @@ import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratory.views.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
 
 public class DatosPrincipales extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvUsuario;
     Button btnParaMi, btnParaOtra, misPedidos;
     public static String nombre = Login.nombre;
+    public static String URL_USERS = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,22 +81,25 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                 try {
                     // Se agrega el método "get()" para obtener el resultado de la ejecución e impedir el proceso
                     // de la ejecución hasta obtener un resultado.
-                    new MiPersona.InsertarClienteMiPersona(DatosPrincipales.this).execute().get();
+                    new MiPersona.InsertarClienteMiPersona(this).execute().get();
 
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 if (MiPersona.exito) {
-                    new ActualizarCliente.Actualizar(DatosPrincipales.this).execute();
+                    new ActualizarCliente.Actualizar(this).execute();
 
                 }
             }
-            System.out.println("Id del cliente es: " + Login.gIdCliente);
+
 
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
         }
+
+        System.out.println("Id de cliente: " + Login.gIdCliente);
+        Toast.makeText(this, "Id de cliente: " + Login.gIdCliente, Toast.LENGTH_SHORT).show();
 
         if (btnParaOtra.isPressed()) {
 
@@ -89,9 +111,53 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         }
 
         if (misPedidos.isPressed()){
-            Intent i = new Intent(getApplicationContext(), ObtenerReportes.class);
+            Intent i = new Intent(this, ObtenerReportes.class);
             startActivity(i);
         }
+    }
+
+    public void obtenerUsuarioPrincipal() {
+
+        URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_usuario=" + Login.gIdUsuario;
+        Toast.makeText(this, URL_USERS, Toast.LENGTH_SHORT).show();
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_USERS,
+
+                response -> {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("Usuarios");
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+
+                                            jsonObject1.getString("nombre_usuario");
+                                            jsonObject1.getString("sexo_usuario");
+                                            jsonObject1.getString("nacimiento_usuario");
+                                            jsonObject1.getInt("edad_usuario");
+                                            jsonObject1.getInt("dui_usuario");
+                                            jsonObject1.getInt("meses_usuario");
+                                            jsonObject1.getString("email_usuario");
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, Throwable::printStackTrace
+        );
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                MY_DEFAULT_TIMEOUT,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(stringRequest);
+
     }
 
     @Override

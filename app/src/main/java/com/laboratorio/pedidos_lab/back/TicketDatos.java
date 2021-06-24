@@ -1,7 +1,7 @@
 package com.laboratorio.pedidos_lab.back;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -49,6 +49,7 @@ import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
+import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
 import com.laboratory.views.R;
@@ -103,8 +104,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String fechacComplString = fecc.format(d);
     SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
-    public static String gNomCliente, fechaReport;
-
+    public static String fechaReport, gNombre;
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +121,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         });
 
         nombreTicket = findViewById(R.id.nombreReporte);
+        nombreTicket.setText(MiPersona.nombre);
         fechaReporte = findViewById(R.id.fechaReporte);
         subTotalReporte = findViewById(R.id.subTotalReporte);
         totalFinal = findViewById(R.id.TotalFinal);
@@ -171,7 +172,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura="+ Login.gIdPedido;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-        @SuppressLint("SetTextI18n")
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url_pedido,
 
                 response -> {
@@ -182,10 +183,9 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
+                          gNombre = jsonObject1.getString("nombre_cliente");
+                          nombreTicket.setText(gNombre);
                           fechaReport = jsonObject1.getString("fecha_creo");
-                          gNomCliente = jsonObject1.getString("nombre_cliente");
-                          Toast.makeText(this, "cliente: "+gNomCliente, Toast.LENGTH_SHORT).show();
-                          nombreTicket.setText(gNomCliente);
                           nacimiento = jsonObject1.getString("nacimiento_cliente");
                           edad = jsonObject1.getInt("edad_cliente");
                           sexo = jsonObject1.getString("sexo_cliente");
@@ -212,7 +212,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-         @SuppressLint("SetTextI18n") StringRequest stringRequest = new StringRequest(Request.Method.GET,url_det_pedido,
+          StringRequest stringRequest = new StringRequest(Request.Method.GET,url_det_pedido,
                 response -> {
 
                     try {
@@ -349,7 +349,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph fecha = new Paragraph( "Fecha y hora de la orden: " + fechacComplString + " a las " + horaString);
 
-        Paragraph nombre = new Paragraph( "Paciente: " + gNomCliente);
+        Paragraph nombre = new Paragraph( "Paciente: " + gNombre);
 
         Paragraph dui = new Paragraph( "Documento de identidad registrado: " + Login.dui);
 
@@ -521,7 +521,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         new FancyGifDialog.Builder(this)
-                .setTitle("Hola " + gNomCliente + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
+                .setTitle("Hola " + gNombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
                 .setNegativeBtnText("Cancelar")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Confirmar")

@@ -47,7 +47,7 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
         Login.gIdPedido = 0;
 
         String registrar_url = "http://pedidoslab.6te.net/consultas/insertarPedido.php"
-                +"?nombre_reporte=" + DatosPrincipales.nombre
+                +"?nombre_cliente=" + MiPersona.nombre
                 +"&fecha_creo=" + fechacComplString + " a las " + horaString
                 +"&id_cliente=" + Login.gIdCliente
                 +"&id_usuario=" + Login.gIdUsuario
@@ -65,14 +65,14 @@ public class InsertarPedido extends AsyncTask<String, Void, String> {
             OutputStream outputStream = httpURLConnection.getOutputStream();
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
-            String nombreRep = DatosPrincipales.nombre;
+            String nombre = MiPersona.nombre;
             String fechaCreo = fechacComplString + horaString;
             String idCliente = String.valueOf(Login.gIdCliente);
             String idUsuario = String.valueOf(Login.gIdUsuario);
             String monto = String.valueOf(adapProdReport.lNewDetMonto);
             String montoIva = String.valueOf(adapProdReport.lDetMontoIva);
 
-            String data = URLEncoder.encode("nombre_reporte", "UTF-8") + "=" + URLEncoder.encode(nombreRep, "UTF-8")
+            String data = URLEncoder.encode("nombre_cliente", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8")
                     + "&" + URLEncoder.encode("fecha_creo", "UTF-8") + "=" + URLEncoder.encode(fechaCreo, "UTF-8")
                     + "&" + URLEncoder.encode("id_cliente", "UTF-8") + "=" + URLEncoder.encode(idCliente, "UTF-8")
                     + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(idUsuario, "UTF-8")

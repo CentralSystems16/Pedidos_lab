@@ -115,7 +115,8 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
         clientesViewHolder.seleccionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObtenerClientes.gIdClienteConsulta = Login.gIdCliente;
+
+
                 Intent i = new Intent(cContext, ObtenerCategorias.class);
                 cContext.startActivity(i);
             }

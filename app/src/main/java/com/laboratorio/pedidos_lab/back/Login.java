@@ -1,24 +1,16 @@
 package com.laboratorio.pedidos_lab.back;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -26,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
@@ -39,7 +30,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
@@ -50,24 +40,15 @@ import com.laboratorio.pedidos_lab.biometric.BiometricManager;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.front.acercaDe;
 import com.laboratory.views.R;
-import com.pushlink.android.PushLink;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import java.io.IOException;
 import java.io.Serializable;
-
-import static com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE;
 import static com.sun.activation.registries.LogSupport.log;
 
 public class Login extends AppCompatActivity implements BiometricCallback, Serializable {
 
-    private static final int MY_REQUEST_CODE = 520;
     Button btnEntrar, btnRegistrar;
     EditText user, password;
     CheckBox mostrarPass;
@@ -75,12 +56,13 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     LottieAnimationView about;
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
-    String URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
-    String URL_CLIENTES = "http://pedidoslab.6te.net/consultas/clientesRequest.php";
-    public static int gIdCliente, gIdUsuario, gIdPedido, gIdUsuarioClient, gIdClienteClient, gIdFacDetPedido;
+    String URL_USUARIOS = "";
+    public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
     public static String nombre, email, sexo, nacimiento;
-    public static int edad, gusuario, cliente, dui, meses, verificacion;
+    public static int edad, dui, meses, cliente;
     String usuario, contra;
+
+    //Variables a utilizar para la notificacion al usuario de actualización.
     private static final int REQ_CODE_VERSION_UPDATE = 530;
     private AppUpdateManager appUpdateManager;
     private InstallStateUpdatedListener installStateUpdatedListener;
@@ -159,40 +141,35 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
             contra = password.getText().toString();
 
             Response.Listener<String> responseListener = response -> {
+
                 try {
+
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean succes = jsonResponse.getBoolean("success");
+
                     if (succes){
 
                         guardarPreferencias();
-
-                        gusuario = jsonResponse.getInt("id_usuario");
                         nombre = jsonResponse.getString("nombre_usuario");
                         email = jsonResponse.getString("email_usuario");
                         sexo = jsonResponse.getString("sexo_usuario");
-                        nacimiento = jsonResponse.getString("nacimiento_usuario");
                         cliente = jsonResponse.getInt("id_cliente");
+                        nacimiento = jsonResponse.getString("nacimiento_usuario");
                         edad = jsonResponse.getInt("edad_usuario");
                         dui = jsonResponse.getInt("dui_usuario");
                         meses = jsonResponse.getInt("meses_usuario");
-                        verificacion = jsonResponse.getInt("verificacion");
 
                         Intent intent = new Intent(getApplicationContext(), DatosPrincipales.class);
-
-                        intent.putExtra("id_usuario", gusuario);
                         intent.putExtra("nombre_usuario", nombre);
-                        intent.putExtra("login_usuario", usuario);
-                        intent.putExtra("password_usuarios", contra);
-                        intent.putExtra("email_usuario", email);
-                        intent.putExtra("sexo_usuario", sexo);
-                        intent.putExtra("id_cliente", cliente);
-                        intent.putExtra("nacimiento_usuario", nacimiento);
-                        intent.putExtra("edad_usuario", edad);
-                        intent.putExtra("dui_usuario", dui);
-                        intent.putExtra("meses_usuario", meses);
-                        intent.putExtra("verificacion", verificacion);
-
+                        intent.putExtra("email_usuario",email);
+                        intent.putExtra("sexo_usuario",sexo);
+                        intent.putExtra("id_cliente",cliente);
+                        intent.putExtra("nacimiento_usuario",nacimiento);
+                        intent.putExtra("edad_usuario",edad);
+                        intent.putExtra("dui_usuario",dui);
+                        intent.putExtra("meses_usuario",meses);
                         startActivity(intent);
+
                     } else {
                         Toast.makeText(Login.this, "Usuario y/o contraseña incorrectos o usuario inactivo y/o sin permisos, por favor intentalo nuevamente.", Toast.LENGTH_SHORT).show();
                         loading.dismiss();
@@ -240,17 +217,13 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     public void onActivityResult(int requestCode, final int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
 
-        switch (requestCode) {
-
-            case REQ_CODE_VERSION_UPDATE:
-                if (resultCode != RESULT_OK) { //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
-                    log("Update flow failed! Result code: " + resultCode);
-                    // If the update is cancelled or fails,
-                    // you can request to start the update again.
-                    unregisterInstallStateUpdListener();
-                }
-
-                break;
+        if (requestCode == REQ_CODE_VERSION_UPDATE) {
+            if (resultCode != RESULT_OK) { //RESULT_OK / RESULT_CANCELED / RESULT_IN_APP_UPDATE_FAILED
+                log("Update flow failed! Result code: " + resultCode);
+                // If the update is cancelled or fails,
+                // you can request to start the update again.
+                unregisterInstallStateUpdListener();
+            }
         }
     }
 
@@ -269,15 +242,12 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         // Create a listener to track request state updates.
-        installStateUpdatedListener = new InstallStateUpdatedListener() {
-            @Override
-            public void onStateUpdate(InstallState installState) {
-                // Show module progress, log state, or install the update.
-                if (installState.installStatus() == InstallStatus.DOWNLOADED)
-                    // After the update is downloaded, show a notification
-                    // and request user confirmation to restart the app.
-                    popupSnackbarForCompleteUpdateAndUnregister();
-            }
+        installStateUpdatedListener = installState -> {
+            // Show module progress, log state, or install the update.
+            if (installState.installStatus() == InstallStatus.DOWNLOADED)
+                // After the update is downloaded, show a notification
+                // and request user confirmation to restart the app.
+                popupSnackbarForCompleteUpdateAndUnregister();
         };
 
         // Checks that the platform will allow the specified type of update.
@@ -336,13 +306,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
         Snackbar snackbar =
                 Snackbar.make(findViewById(R.id.light), getString(R.string.update_downloaded), Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction(R.string.restart, new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                appUpdateManager.completeUpdate();
-            }
-        });
+        snackbar.setAction(R.string.restart, view -> appUpdateManager.completeUpdate());
         snackbar.setActionTextColor(getResources().getColor(R.color.rosado));
         snackbar.show();
 
@@ -454,6 +418,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
 
     public void datos(){
+        URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
         RequestQueue requestQueue2 = Volley.newRequestQueue(Login.this);
         StringRequest request2 = new StringRequest(Request.Method.GET, URL_USUARIOS,
 
@@ -469,32 +434,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                             gIdCliente = jsonObject1.getInt("id_cliente");
 
                         }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {
-        };
-        requestQueue2.add(request2);
-    }
-
-    public void clientes(){
-        RequestQueue requestQueue2 = Volley.newRequestQueue(Login.this);
-        StringRequest request2 = new StringRequest(Request.Method.GET, URL_CLIENTES,
-
-                response -> {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        JSONArray jsonArray = jsonObject.getJSONArray("Usuarios");
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            gIdUsuarioClient = jsonObject1.getInt("id_usuario");
-                            gIdClienteClient = jsonObject1.getInt("id_cliente");
-
-                        }
+                        Toast.makeText(this, ""+gIdCliente, Toast.LENGTH_SHORT).show();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -526,60 +466,5 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                 .build();
 
     }
-
-    public class GetVersionCode extends AsyncTask<Void, String, String> {
-
-        @Override
-
-        protected String doInBackground(Void... voids) {
-
-            String newVersion = null;
-
-            try {
-                Document document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + Login.this.getPackageName()  + "&hl=en")
-                        .timeout(30000)
-                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-                        .referrer("http://www.google.com")
-                        .get();
-                if (document != null) {
-                    Elements element = document.getElementsContainingOwnText("Current Version");
-                    for (Element ele : element) {
-                        if (ele.siblingElements() != null) {
-                            Elements sibElemets = ele.siblingElements();
-                            for (Element sibElemet : sibElemets) {
-                                newVersion = sibElemet.text();
-                            }
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return newVersion;
-
-        }
-
-
-        @Override
-
-        protected void onPostExecute(String onlineVersion) {
-
-            //int currentVersion = Integer.parseInt("1.3.6");
-
-            super.onPostExecute(onlineVersion);
-
-            if (onlineVersion != null && !onlineVersion.isEmpty()) {
-
-              /*  if (Float.valueOf(currentVersion) < Float.valueOf(onlineVersion)) {
-                    //show anything
-                } */
-
-            }
-
-            //Log.d("update", "Current version " + currentVersion + "playstore version " + onlineVersion);
-
-        }
-    }
-
 
 }
