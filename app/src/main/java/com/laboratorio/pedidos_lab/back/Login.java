@@ -61,6 +61,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     public static String nombre, email, sexo, nacimiento;
     public static int edad, dui, meses, cliente;
     String usuario, contra;
+    int gEstadoUsuario = 1;
 
     //Variables a utilizar para la notificacion al usuario de actualización.
     private static final int REQ_CODE_VERSION_UPDATE = 530;
@@ -418,7 +419,9 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
 
     public void datos(){
-        URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
+        usuario = user.getText().toString();
+        contra = password.getText().toString();
+        URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php" + "login_usuario=" + usuario + "password_usuarios" + contra + "estado_usuario" + gEstadoUsuario;
         RequestQueue requestQueue2 = Volley.newRequestQueue(Login.this);
         StringRequest request2 = new StringRequest(Request.Method.GET, URL_USUARIOS,
 
