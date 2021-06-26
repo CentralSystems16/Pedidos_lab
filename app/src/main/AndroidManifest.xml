@@ -29,17 +29,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="n">
-        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <provider
-            android:name="com.pushlink.android.FileProvider"
-            android:authorities="com.laboratory.views"
-            android:exported="true" />
-
+        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerReportes" />
         <activity android:name="com.laboratorio.pedidos_lab.back.VerificarNumero" />
         <activity android:name="com.laboratorio.pedidos_lab.back.ActualizarNumero" />

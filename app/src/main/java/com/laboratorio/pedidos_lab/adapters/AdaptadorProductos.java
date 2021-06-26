@@ -1,7 +1,6 @@
 package com.laboratorio.pedidos_lab.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -17,27 +15,21 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.laboratorio.pedidos_lab.back.Login;
-import com.laboratorio.pedidos_lab.controler.ContadorDetPedidos;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.InsertarDetPedido;
 import com.laboratorio.pedidos_lab.controler.InsertarPedido;
 import com.laboratorio.pedidos_lab.main.ObtenerProductos;
 import com.laboratorio.pedidos_lab.model.Productos;
 import com.laboratory.views.R;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFromServerIntoTextView.gCount;
-
 public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.ProductosViewHolder> {
     Context context;
     public static List<Productos> listaProductos;
-    @SuppressLint("StaticFieldLeak")
     public static List<Productos> carroCompra;
-    DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     public AdaptadorProductos(Context context, List<Productos> listaUsuarios, List<Productos> carroCompra) {
         this.context = context;

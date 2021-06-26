@@ -28,30 +28,30 @@ public class ModificarCliente extends AppCompatActivity {
         setContentView(R.layout.modificar_usuario);
 
         editNombre = findViewById(R.id.etNomMod);
-        editUsuario.setText(UsuarioFragment.gLoginUusario);
+        //editUsuario.setText(UsuarioFragment.gLoginUusario);
 
         editEdad = findViewById(R.id.etEdMod);
-        editNombre.setText(UsuarioFragment.gNombreUsuario);
+        //editNombre.setText(UsuarioFragment.gNombreUsuario);
 
         editMes = findViewById(R.id.etMeMod);
-        editPass.setText(UsuarioFragment.gPasswordUsuario);
+        //editPass.setText(UsuarioFragment.gPasswordUsuario);
 
         rgSexo = findViewById(R.id.rgSeMod);
 
         editFecha = findViewById(R.id.tvFecMod);
-        editRepeatPass.setText(UsuarioFragment.gPasswordRepeatUsuario);
+        //editRepeatPass.setText(UsuarioFragment.gPasswordRepeatUsuario);
 
         editEmail = findViewById(R.id.etEmMod);
-        editEmail.setText(UsuarioFragment.gEmailUsuario);
+        //editEmail.setText(UsuarioFragment.gEmailUsuario);
 
         modificarCliente = findViewById(R.id.btnContMod);
-        modificarCliente.setOnClickListener(v -> ejecutar());
+        //modificarCliente.setOnClickListener(v -> ejecutar());
 
         regresarMod = findViewById(R.id.btnRegMod);
 
     }
 
-    private void ejecutar(){
+    /*private void ejecutar(){
 
         ejecutarServicio(
                 "http://pedidoslab.6te.net/consultas/ModificarCliente.php"
@@ -75,6 +75,6 @@ public class ModificarCliente extends AppCompatActivity {
                 error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
+    }*/
 
 }

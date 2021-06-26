@@ -82,6 +82,7 @@ public class VistaFinal extends AppCompatActivity implements View.OnClickListene
             Login.gIdPedido = 0;
 
             gCount = 0.0;
+            Login.gIdCliente = 0;
 
             Intent i = new Intent (this, DatosPrincipales.class);
             startActivity(i);

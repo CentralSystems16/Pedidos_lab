@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 
 public class MiPersona {
 
-    public static String nombre = DatosPrincipales.nombre;
     public static Boolean exito = false;
 
     public static class InsertarClienteMiPersona extends AsyncTask<String, Void, String> {
@@ -47,9 +46,15 @@ public class MiPersona {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
+                String nombre = Login.nombre;
+                System.out.println("Nombre del cliente insertado: " + nombre);
                 String edad = String.valueOf(Login.edad);
+                System.out.println("Edad del cliente insertado: " + edad);
                 String select = Login.sexo;
+                System.out.println("Sexo del cliente insertado: " + select);
                 String email = Login.email;
+                System.out.println("Email del cliente insertado: " + email);
+
                 String nacimiento = Login.nacimiento;
                 int meses = Login.meses;
                 int usuario = Login.gIdUsuario;

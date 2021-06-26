@@ -5,46 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.laboratorio.pedidos_lab.back.Login;
-import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
-import com.laboratorio.pedidos_lab.main.ObtenerDetReporte;
 import com.laboratorio.pedidos_lab.model.Clientes;
-import com.laboratorio.pedidos_lab.model.Reportes;
 import com.laboratory.views.R;
-
-import java.io.File;
 import java.util.List;
-import java.util.Properties;
-
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.Authenticator;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.ClientesViewHolder> {
 
@@ -116,6 +90,8 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
             @Override
             public void onClick(View v) {
 
+
+                ObtenerClientes.idCliente = listaClientes.get(posicion).getIdCliente();
 
                 Intent i = new Intent(cContext, ObtenerCategorias.class);
                 cContext.startActivity(i);

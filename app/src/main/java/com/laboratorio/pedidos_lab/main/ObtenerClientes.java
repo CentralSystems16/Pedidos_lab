@@ -41,6 +41,7 @@ public class ObtenerClientes extends AppCompatActivity {
     public static int gIdClienteConsulta;
     String URL_CLIENTES = "";
     public static String nombreCliente;
+    public static int idCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class ObtenerClientes extends AppCompatActivity {
         progressDialog.show();
         progressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
 
-        URL_CLIENTES = "http://pedidoslab.6te.net/consultas/obtenerClientes.php";
+        URL_CLIENTES = "http://pedidoslab.6te.net/consultas/obtenerClientes.php"+ "?id_usuario=" + Login.gIdUsuario;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -90,7 +91,8 @@ public class ObtenerClientes extends AppCompatActivity {
                             clientes.add(
                                     new Clientes(
 
-                                         nombreCliente = jsonObject1.getString("nombre_cliente")));
+                                         nombreCliente = jsonObject1.getString("nombre_cliente"),
+                                            idCliente = jsonObject1.getInt("id_cliente")));
 
                         }
 

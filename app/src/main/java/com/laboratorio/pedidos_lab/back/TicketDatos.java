@@ -121,7 +121,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         });
 
         nombreTicket = findViewById(R.id.nombreReporte);
-        nombreTicket.setText(MiPersona.nombre);
         fechaReporte = findViewById(R.id.fechaReporte);
         subTotalReporte = findViewById(R.id.subTotalReporte);
         totalFinal = findViewById(R.id.TotalFinal);
@@ -169,9 +168,8 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     }
 
     public void generarPedido() {
-        url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura="+ Login.gIdPedido;
+        url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura=" + Login.gIdPedido;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url_pedido,
 
@@ -185,12 +183,14 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
                           gNombre = jsonObject1.getString("nombre_cliente");
                           nombreTicket.setText(gNombre);
-                          fechaReport = jsonObject1.getString("fecha_creo");
+                          jsonObject1.getString("fecha_creo");
                           nacimiento = jsonObject1.getString("nacimiento_cliente");
                           edad = jsonObject1.getInt("edad_cliente");
                           sexo = jsonObject1.getString("sexo_cliente");
                           meses = jsonObject1.getInt("meses_cliente");
                         }
+
+                        System.out.println();
 
                     } catch (JSONException e) {
                         e.printStackTrace();

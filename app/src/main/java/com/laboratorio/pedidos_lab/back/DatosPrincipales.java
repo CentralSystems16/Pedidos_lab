@@ -91,8 +91,9 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                     new ActualizarCliente.Actualizar(this).execute();
 
                 }
+            } else {
+                obtenerUsuarioPrincipal();
             }
-
 
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
@@ -118,7 +119,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
 
     public void obtenerUsuarioPrincipal() {
 
-        URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_usuario=" + Login.gIdUsuario;
+        URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_cliente=" + Login.gIdCliente;
         Toast.makeText(this, URL_USERS, Toast.LENGTH_SHORT).show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -129,7 +130,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
 
                     try {
                         JSONObject jsonObject = new JSONObject(response);
-                        JSONArray jsonArray = jsonObject.getJSONArray("Usuarios");
+                        JSONArray jsonArray = jsonObject.getJSONArray("Users");
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);

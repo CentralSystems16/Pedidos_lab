@@ -49,8 +49,6 @@ public class OtraPersona extends AppCompatActivity {
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     Button regresar;
-    public static int edadCl, mesesCl, idCl;
-    public static String sexoCl, nacCl, emailCl, usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
