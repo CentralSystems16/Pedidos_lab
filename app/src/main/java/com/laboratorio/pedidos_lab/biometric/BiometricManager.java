@@ -2,7 +2,6 @@ package com.laboratorio.pedidos_lab.biometric;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.Build;
 import android.os.CancellationSignal;
@@ -95,12 +94,9 @@ public class BiometricManager extends BiometricManagerV23 {
                 .setTitle(title)
                 .setSubtitle(subtitle)
                 .setDescription(description)
-                .setNegativeButton(negativeButtonText, context.getMainExecutor(), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        biometricCallback.onAuthenticationCancelled();
-                        System.exit(0);
-                    }
+                .setNegativeButton(negativeButtonText, context.getMainExecutor(), (dialogInterface, i) -> {
+                    biometricCallback.onAuthenticationCancelled();
+                    System.exit(0);
                 })
                 .build()
                 .authenticate(mCancellationSignal, context.getMainExecutor(),
@@ -114,7 +110,7 @@ public class BiometricManager extends BiometricManagerV23 {
         private String description;
         private String negativeButtonText;
 
-        private Context context;
+        private final Context context;
         public BiometricBuilder(Context context) {
             this.context = context;
         }

@@ -4,16 +4,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
@@ -28,27 +21,28 @@ public class acercaDe extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         politica = findViewById(R.id.politica);
-        politica.setOnClickListener(v -> goToURL());
+        politica.setOnClickListener(v -> goToPolitica());
 
         sobre = findViewById(R.id.sobre);
-        sobre.setOnClickListener(v -> {
+        sobre.setOnClickListener(v ->
 
-            new FancyGifDialog.Builder(this)
-                    .setTitle("Recursos utilizados en la aplicación\n\nhttps://lottiefiles.com/\nhttps://www.flaticon.com/\nhttps://github.com/\n\n\n\nVersión: 1.3.9")
-                    .setNegativeBtnText("Regresar")
-                    .setPositiveBtnBackground(R.color.rosado)
-                    .setPositiveBtnText("Visitar")
-                    .setNegativeBtnBackground(R.color.rojo)
-                    .setGifResource(R.drawable.gif15)
-                    .isCancellable(false)
-                    .OnPositiveClicked(() -> {
+                new FancyGifDialog.Builder(this)
+                .setTitle("Recursos utilizados en la aplicación\n\nhttps://lottiefiles.com/\nhttps://www.flaticon.com/\nhttps://github.com/\n\n\n\nVersión: 1.3.9")
+                .setNegativeBtnText("Regresar")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Visitar")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.gif15)
+                .isCancellable(false)
+                .OnPositiveClicked(() -> {
 
+                    goToFlaticon();
+                    goToGitHub();
+                    goToLottie();
 
-                    })
-                    .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
-                    .build();
-
-        });
+                })
+                .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
+                .build());
 
         error = findViewById(R.id.error);
         error.setOnClickListener(v -> {
@@ -64,7 +58,7 @@ public class acercaDe extends AppCompatActivity {
         });
 
         facebook = findViewById(R.id.facebook);
-        facebook.setOnClickListener(v -> goToURL2(SplashPrincipal.gFacebookEmpresa));
+        facebook.setOnClickListener(v -> goToFacebook(SplashPrincipal.gFacebookEmpresa));
 
         gmail = findViewById(R.id.gmail);
         gmail.setOnClickListener(v -> {
@@ -79,15 +73,29 @@ public class acercaDe extends AppCompatActivity {
             startActivity(emailIntent);
 
         });
-
     }
 
-    private void goToURL() {
+    private void goToPolitica() {
         Uri uri = Uri.parse("https://sites.google.com/view/central-systems-manage/p%C3%A1gina-principal");
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
-    private void goToURL2(String s) {
+    private void goToGitHub() {
+        Uri uri = Uri.parse("https://github.com/");
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    private void goToLottie() {
+        Uri uri = Uri.parse("https://lottiefiles.com/");
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    private void goToFlaticon() {
+        Uri uri = Uri.parse("https://www.flaticon.com/");
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+    }
+
+    private void goToFacebook(String s) {
         Uri uri = Uri.parse(s);
         startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }

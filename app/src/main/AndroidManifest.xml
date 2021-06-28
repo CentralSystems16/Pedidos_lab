@@ -37,7 +37,6 @@
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerReportes" />
         <activity android:name="com.laboratorio.pedidos_lab.back.VerificarNumero" />
-        <activity android:name="com.laboratorio.pedidos_lab.back.ActualizarNumero" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerDetReporte" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerAllProductos" />
         <activity android:name="com.laboratorio.pedidos_lab.back.Login" />

@@ -1,10 +1,10 @@
 package com.laboratorio.pedidos_lab.back;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
@@ -15,34 +15,19 @@ import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import com.airbnb.lottie.LottieAnimationView;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.install.InstallStateUpdatedListener;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.InstallStatus;
-import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.laboratorio.pedidos_lab.biometric.BiometricCallback;
@@ -51,16 +36,11 @@ import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.front.acercaDe;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Objects;
-
-import static com.sun.activation.registries.LogSupport.log;
 
 public class Login extends AppCompatActivity implements BiometricCallback, Serializable {
 
@@ -71,15 +51,15 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     LottieAnimationView about;
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
-    String URL_USUARIOS = "";
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
     public static String nombre, email, sexo, nacimiento;
-    public static int edad, dui, meses, cliente;
+    public static int edad, dui, meses;
     String usuario, contra;
 
     private FirebaseRemoteConfig remoteConfig;
 
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,17 +80,14 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         remoteConfig.setConfigSettingsAsync(configSettings);
         remoteConfig.setDefaultsAsync(defaultsRate);
 
-        remoteConfig.fetchAndActivate().addOnCompleteListener(new OnCompleteListener<Boolean>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<Boolean> task) {
-                if (task.isSuccessful()){
+        remoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
 
-                    final String new_version_code_ = remoteConfig.getString("new_version_code");
-                    if (Integer.parseInt(new_version_code_)>getVersionCode()){
-                        showDialog(new_version_code_);
-                    }
-
+                final String new_version_code_ = remoteConfig.getString("new_version_code");
+                if (Integer.parseInt(new_version_code_)>getVersionCode()){
+                    showDialog();
                 }
+
             }
         });
 
@@ -231,7 +208,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
             finish();
         }
 
-
           /*  mBiometricManager = new BiometricManager.BiometricBuilder(Login.this)
                     .setTitle(getString(R.string.biometric_title))
                     .setSubtitle(getString(R.string.biometric_subtitle))
@@ -242,10 +218,9 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
             //start authentication
             mBiometricManager.authenticate(Login.this); */
 
-
     }
 
-    private void showDialog(String versionFromRemoteConfig) {
+    private void showDialog() {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Nueva versión disponible")
@@ -255,16 +230,13 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         dialog.setCancelable(false);
 
         Button positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        positiveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String appPackageName = getPackageName();
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.laboratorio.views.debug")));
-                } catch (android.content.ActivityNotFoundException anfe){
-                    startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=" + "com.laboratorio.views.debug")));
+        positiveButton.setOnClickListener(v -> {
 
-                }
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + "com.laboratorio.views.debug")));
+            } catch (android.content.ActivityNotFoundException anfe){
+                startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=" + "com.laboratorio.views.debug")));
+
             }
         });
     }
@@ -349,35 +321,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
         user.setText(preferences.getString("login_usuario", ""));
         password.setText(preferences.getString("password_usuarios", ""));
-    }
-
-
-    public void datos(){
-        URL_USUARIOS = "http://pedidoslab.6te.net/consultas/login.php";
-        RequestQueue requestQueue2 = Volley.newRequestQueue(Login.this);
-        StringRequest request2 = new StringRequest(Request.Method.GET, URL_USUARIOS,
-
-                response -> {
-
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        JSONArray jsonArray = jsonObject.getJSONArray("Usuarios");
-
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            gIdUsuario = jsonObject1.getInt("id_usuario");
-                            gIdCliente = jsonObject1.getInt("id_cliente");
-
-                        }
-                        Toast.makeText(this, ""+gIdCliente, Toast.LENGTH_SHORT).show();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {
-        };
-        requestQueue2.add(request2);
     }
 
     @Override

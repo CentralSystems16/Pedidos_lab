@@ -53,7 +53,6 @@ public class RegistroUsuario extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
     String select;
-    public static int gusuarioR;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui;
     RadioGroup rg;
@@ -287,7 +286,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 Map<String, String> parametros = new HashMap<>();
 
                 parametros.put("login_usuario", usuario);
-                parametros.put("id_usuario", String.valueOf(gusuarioR));
                 parametros.put("nombre_usuario", nombre);
                 parametros.put("password_usuarios", password);
                 parametros.put("password_repeat_usuario", passwordRepeat);
