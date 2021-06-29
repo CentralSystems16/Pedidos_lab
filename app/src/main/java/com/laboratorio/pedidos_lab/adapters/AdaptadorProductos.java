@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
@@ -51,11 +54,12 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
     public void onBindViewHolder(@NonNull ProductosViewHolder productosViewHolder, int i) {
 
 
-        //final Productos user = listaProductos.get(i);
+        final Productos user = listaProductos.get(i);
 
         //TODO: Obtiene el nombre y el precio del modelado (Getter y Setter) En este caso solo usamos el getter.
         productosViewHolder.tvNombre.setText(listaProductos.get(i).getNombreProducto());
         productosViewHolder.tvPrecio.setText(Double.toString(listaProductos.get(i).getPrecioProducto()));
+        Glide.with(context).load(user.getImgProducto()).into(productosViewHolder.imgItem);
 
         //TODO: Se le asigna un color al cardview cuando posteriormente sea seleccionado
         //productosViewHolder.view.setBackgroundTintList(ColorStateList.valueOf(user.isSelect() ? Color.GRAY : Color.rgb(0, 151, 167)));
@@ -132,6 +136,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
 
         TextView tvNombre, tvPrecio;
         public View view;
+        ImageView imgItem;
 
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,6 +145,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
 
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
+            imgItem = itemView.findViewById(R.id.imgItemProd);
         }
     }
 

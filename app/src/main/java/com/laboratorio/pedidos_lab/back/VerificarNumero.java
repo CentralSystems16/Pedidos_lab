@@ -174,7 +174,7 @@ public class VerificarNumero extends AppCompatActivity {
 
 
                                             idUsuario = jsonObject1.getInt("id_usuario");
-                                            verificacion = jsonObject1.getInt("verificacion");
+
 
                         }
 

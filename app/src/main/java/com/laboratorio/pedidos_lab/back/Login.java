@@ -223,8 +223,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     private void showDialog() {
 
         final AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Nueva versión disponible")
-                .setMessage("Por favor actualiza a la última versión para recibir nuevas y mejores funcionalidades así como también mejoras y solución de errores en la aplicación")
+                .setTitle("Nueva versión disponible!!!")
+                .setMessage("Por favor, actualiza a la última versión para recibir nuevas y mejores funcionalidades.")
                 .setPositiveButton("Actualizar", null)
                 .show();
         dialog.setCancelable(false);

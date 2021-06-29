@@ -139,7 +139,8 @@ public class ObtenerProductos extends AppCompatActivity {
                                             jsonObject1.getInt("id_producto"),
                                             jsonObject1.getString("nombre_producto"),
                                             jsonObject1.getDouble("precio_producto"),
-                                            jsonObject1.getInt("opciones")));
+                                            jsonObject1.getInt("opciones"),
+                                            jsonObject1.getString("img_producto")));
                         }
 
                         adaptador = new AdaptadorProductos(this, listaProductos, carroCompras);

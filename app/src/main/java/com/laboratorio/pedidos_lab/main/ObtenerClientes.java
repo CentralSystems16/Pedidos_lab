@@ -92,7 +92,7 @@ public class ObtenerClientes extends AppCompatActivity {
                                     new Clientes(
 
                                          nombreCliente = jsonObject1.getString("nombre_cliente"),
-                                            idCliente = jsonObject1.getInt("id_cliente")));
+                                            jsonObject1.getInt("id_cliente")));
 
                         }
 

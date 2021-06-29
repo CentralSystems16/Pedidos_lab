@@ -91,8 +91,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                     new ActualizarCliente.Actualizar(this).execute();
 
                 }
-            } else {
-                obtenerUsuarioPrincipal();
             }
 
             Intent i = new Intent(this, ObtenerCategorias.class);

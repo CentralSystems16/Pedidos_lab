@@ -9,12 +9,14 @@ public class Productos implements Serializable {
     Double precioProducto;
     boolean isSelect = false;
     int opciones;
+    String imgProducto;
 
-    public Productos(int idProducto, String nombreProducto, Double precioProducto,  int opciones) {
+    public Productos(int idProducto, String nombreProducto, Double precioProducto, int opciones, String imgProducto) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.precioProducto = precioProducto;
         this.opciones = opciones;
+        this.imgProducto = imgProducto;
 
     }
 
@@ -58,4 +60,7 @@ public class Productos implements Serializable {
         this.opciones = opciones;
     }
 
+    public String getImgProducto() {
+        return imgProducto;
+    }
 }
