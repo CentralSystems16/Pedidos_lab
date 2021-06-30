@@ -22,6 +22,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
+import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
@@ -93,7 +94,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                 }
             }
 
-            Intent i = new Intent(this, ObtenerCategorias.class);
+            Intent i = new Intent(this, Lugar.class);
             startActivity(i);
         }
 

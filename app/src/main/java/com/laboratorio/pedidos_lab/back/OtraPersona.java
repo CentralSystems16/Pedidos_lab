@@ -24,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
+import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.front.SegundoRegistro;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratory.views.R;
@@ -142,7 +143,7 @@ public class OtraPersona extends AppCompatActivity {
             //TODO: Si todo salió bien se inserta en la base de datos el cliente con sus datos.
             else {
                 new InsertarCliente(OtraPersona.this).execute(nombre, edad, select, email, fechaNacimiento, meses, usuario);
-                Intent i = new Intent(getApplicationContext(), ObtenerCategorias.class);
+                Intent i = new Intent(getApplicationContext(), Lugar.class);
                 startActivity(i);
             }
         });

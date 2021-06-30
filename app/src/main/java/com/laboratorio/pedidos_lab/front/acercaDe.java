@@ -53,7 +53,8 @@ public class acercaDe extends AppCompatActivity {
             emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"centralsystemsmanage@gmail.com"});
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto: quiero reportar un error en la app");
             emailIntent.putExtra(Intent.EXTRA_TEXT, "El error consiste en:");
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+            //Si el usuario quiere adjuntar un archivo
+            //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
             startActivity(emailIntent);
         });
 
@@ -69,7 +70,7 @@ public class acercaDe extends AppCompatActivity {
             emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{SplashPrincipal.gCorreoEmpresa});
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto: ");
             emailIntent.putExtra(Intent.EXTRA_TEXT, "Quiero comunicarme con el LABORATORIO LCB porque:");
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+            //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
             startActivity(emailIntent);
 
         });

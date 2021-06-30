@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
-    public static String nombre, email, sexo, nacimiento;
+    public static String nombre, email, sexo, nacimiento, direccion;
     public static int edad, dui, meses;
     String usuario, contra;
 
@@ -132,7 +132,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Recuperar mi contraseña");
                     emailIntent.putExtra(Intent.EXTRA_TEXT, "Solicito la recuperación de mi contraseña");
                     emailIntent.putExtra(Intent.EXTRA_TEXT, "Nombre según registro:\nCorreo de contacto:");
-                    emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+                    //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
                     startActivity(emailIntent);
 
                 })
@@ -172,6 +172,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         edad = jsonResponse.getInt("edad_usuario");
                         dui = jsonResponse.getInt("dui_usuario");
                         meses = jsonResponse.getInt("meses_usuario");
+                        direccion = jsonResponse.getString("direccion_usuario");
 
                         Intent intent = new Intent(getApplicationContext(), DatosPrincipales.class);
                         intent.putExtra("id_usuario", gIdUsuario);
@@ -183,6 +184,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         intent.putExtra("edad_usuario",edad);
                         intent.putExtra("dui_usuario",dui);
                         intent.putExtra("meses_usuario",meses);
+                        intent.putExtra("direccion_usuario",direccion);
                         startActivity(intent);
 
                     } else {

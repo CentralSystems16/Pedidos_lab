@@ -47,13 +47,11 @@ public class MiPersona {
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
                 String nombre = Login.nombre;
-                System.out.println("Nombre del cliente insertado: " + nombre);
                 String edad = String.valueOf(Login.edad);
-                System.out.println("Edad del cliente insertado: " + edad);
                 String select = Login.sexo;
-                System.out.println("Sexo del cliente insertado: " + select);
                 String email = Login.email;
-                System.out.println("Email del cliente insertado: " + email);
+                String direccion = Login.direccion;
+
 
                 String nacimiento = Login.nacimiento;
                 int meses = Login.meses;
@@ -65,7 +63,8 @@ public class MiPersona {
                         + "&" + URLEncoder.encode("email_cliente", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
                         + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(nacimiento, "UTF-8")
                         + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(meses), "UTF-8")
-                        + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(usuario), "UTF-8");
+                        + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(usuario), "UTF-8")
+                        + "&" + URLEncoder.encode("direccion_cliente", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

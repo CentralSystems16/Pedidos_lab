@@ -235,6 +235,22 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
+            <EditText
+                android:id="@+id/campoDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Dirección (Opcional)"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp"
+                android:layout_marginTop="5dp"
+                android:padding="12sp"
+                android:autofillHints=""
+                android:inputType="textMultiLine" />
+
             <Button
                 android:id="@+id/btnRegistrarUsuario"
                 android:layout_width="match_parent"

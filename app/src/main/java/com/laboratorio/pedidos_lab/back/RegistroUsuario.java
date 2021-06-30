@@ -1,5 +1,6 @@
 package com.laboratorio.pedidos_lab.back;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -54,8 +55,10 @@ public class RegistroUsuario extends AppCompatActivity {
     RequestQueue requestQueue;
     String select;
     public static EditText regPhoneNo;
-    EditText pas, nom, pr, em, ed, mes, dui;
+    EditText pas, nom, pr, em, ed, mes, dui, dir;
     RadioGroup rg;
+    int errorEdad;
+    int meses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +82,7 @@ public class RegistroUsuario extends AppCompatActivity {
         rg = findViewById(R.id.rgSexo);
         dui = findViewById(R.id.campoDui);
         mes = findViewById(R.id.campoMeses);
+        dir = findViewById(R.id.campoDireccion);
         mDisplayDate = findViewById(R.id.tvDate);
 
         ed.addTextChangedListener(new TextWatcher() {
@@ -95,14 +99,54 @@ public class RegistroUsuario extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String errorEdad = ed.getText().toString();
+                String edad = ed.getText().toString();
 
-                if (errorEdad.equals("0") || errorEdad.equals("1") || errorEdad.equals("2") || errorEdad.equals("3") || errorEdad.equals("4") || errorEdad.equals("5") || errorEdad.equals("6") || errorEdad.equals("7") || errorEdad.equals("8") || errorEdad.equals("9") || errorEdad.equals("10") || errorEdad.equals("11") || errorEdad.equals("12") || errorEdad.equals("13") || errorEdad.equals("14") || errorEdad.equals("15") || errorEdad.equals("16") || errorEdad.equals("17")){
-                    errorEdad2.setText(R.string.edadError);
-                } else if (errorEdad.equals(".") || errorEdad.equals("-") || errorEdad.equals(",")){
-                    errorEdad2.setText("Carácteres inválidos");
-                } else {
-                    errorEdad2.setText("");
+                try
+                {
+                    errorEdad = Integer.parseInt(edad);
+
+                    if (errorEdad < 18){
+                        errorEdad2.setText(R.string.edadError);
+                    } else if (errorEdad > 17){
+                        errorEdad2.setText("");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    // handle the exception
+                }
+            }
+        });
+
+        mes.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                String me = mes.getText().toString();
+
+                try
+                {
+                    meses = Integer.parseInt(me);
+
+                    if (meses < 1 || meses > 11){
+                        errorEdad2.setText("El rango de meses debe estar entre 1 y 11");
+                    } else if (meses > 0 || meses < 11){
+                        errorEdad2.setText("");
+                    }
+                }
+                catch (NumberFormatException e)
+                {
+                    // handle the exception
                 }
 
             }
@@ -126,7 +170,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 String passwordRepeat = pr.getText().toString();
 
                 if (password.equals(passwordRepeat)) {
-                    errorPass.setText(R.string.coicide);
+                    errorPass.setText("");
                 } else {
                     errorPass.setText(R.string.nocoicide);
                 }
@@ -135,10 +179,11 @@ public class RegistroUsuario extends AppCompatActivity {
         });
 
         mDisplayDate.setOnClickListener(v -> {
+            @SuppressLint("SimpleDateFormat")
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             Date date = null;
             try {
-                date = sdf.parse("2003/01/01");
+                date = sdf.parse("2003/07/01");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -238,6 +283,14 @@ public class RegistroUsuario extends AppCompatActivity {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             }
 
+            else if (errorEdad < 18){
+                Toast.makeText(this, "Debe ser mayor de 18 años", Toast.LENGTH_SHORT).show();
+            }
+
+            else if (meses < 1 || meses > 11){
+                Toast.makeText(this, "El rango de meses debe estar entre 1 y 11", Toast.LENGTH_SHORT).show();
+            }
+
             else {
                 String phoneNo = regPhoneNo.getText().toString();
                 Intent i = new Intent(getApplicationContext(), VerificarNumero.class);
@@ -272,6 +325,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 String edad = ed.getText().toString();
                 String id = dui.getText().toString();
                 String me = mes.getText().toString();
+                String di = dir.getText().toString();
 
                 int radiogroupSexo = rg.getCheckedRadioButtonId();
                 if (radiogroupSexo < 0){
@@ -295,6 +349,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 parametros.put("dui_usuario", id);
                 parametros.put("meses_usuario", me);
                 parametros.put("sexo_usuario", select);
+                parametros.put("direccion_usuario", di);
 
                 return parametros;
             }

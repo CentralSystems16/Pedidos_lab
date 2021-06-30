@@ -29,6 +29,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="n">
+        <activity android:name="com.laboratorio.pedidos_lab.front.AgregarDireccion"></activity>
+        <activity android:name="com.laboratorio.pedidos_lab.front.Lugar" />
 
         <uses-library
             android:name="org.apache.http.legacy"
