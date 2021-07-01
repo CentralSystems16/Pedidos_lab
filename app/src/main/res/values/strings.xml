@@ -81,6 +81,7 @@
     <string name="o_si_lo_prefieres_inicia_con">O si lo prefieres inicia con...</string>
     <string name="update_downloaded">Actualización</string>
     <string name="restart">Reiniciar</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

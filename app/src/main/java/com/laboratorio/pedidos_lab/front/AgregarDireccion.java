@@ -10,16 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.laboratorio.pedidos_lab.adapters.adapProdReport;
+import com.laboratorio.pedidos_lab.MapsActivity;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
+import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
 
 import java.io.BufferedReader;
@@ -35,17 +30,25 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AgregarDireccion extends AppCompatActivity {
 
     EditText direccion;
+    Button maps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agregar_direccion);
+
+        maps = findViewById(R.id.maps);
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+            }
+        });
 
         direccion = findViewById(R.id.etDirecNew);
         Button continuar = findViewById(R.id.contDireccion);
@@ -54,18 +57,18 @@ public class AgregarDireccion extends AppCompatActivity {
         continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ActualizarPedido(getApplicationContext()).execute();
+                new ActualizarDireccion(getApplicationContext()).execute();
                 startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
             }
         });
     }
 
-    public class ActualizarPedido extends AsyncTask<String, Void, String> {
+    public class ActualizarDireccion extends AsyncTask<String, Void, String> {
 
         String direct = direccion.getText().toString();
         private final WeakReference<Context> context;
 
-        public ActualizarPedido (Context context) {
+        public ActualizarDireccion (Context context) {
             this.context = new WeakReference<>(context);
         }
 
@@ -120,8 +123,4 @@ public class AgregarDireccion extends AppCompatActivity {
             return resultado;
         }
     }
-
-
-
-
 }

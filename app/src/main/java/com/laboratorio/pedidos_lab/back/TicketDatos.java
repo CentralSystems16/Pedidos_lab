@@ -97,7 +97,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String NOMBRE_DOCUMENTO = "Examen.pdf";
     javax.mail.Session session;
     int edad, meses;
-    String sexo, envCorreo, password, correo, nacimiento;
+    String sexo, envCorreo, password, correo, nacimiento, direccion;
     LottieAnimationView rOfTicket;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
@@ -188,6 +188,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                           edad = jsonObject1.getInt("edad_cliente");
                           sexo = jsonObject1.getString("sexo_cliente");
                           meses = jsonObject1.getInt("meses_cliente");
+                          direccion = jsonObject1.getString("direccion_cliente");
                         }
 
                         System.out.println();
@@ -359,6 +360,8 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph edadCli = new Paragraph( "Edad: " + edad + " Año(s) " + "con " + meses + " Mes(es)");
 
+        Paragraph direct = new Paragraph("Dirección: " + direccion);
+
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
         Border border1 = new GrooveBorder(2);
@@ -410,6 +413,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         document.add(dui);
         document.add(genero);
         document.add(edadCli);
+        document.add(direct);
         document.add(fechaNac);
         document.add(table.setFixedPosition(50,420,500));
         document.add(linea);
