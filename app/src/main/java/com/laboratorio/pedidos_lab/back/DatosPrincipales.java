@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
+import com.laboratorio.pedidos_lab.manage.ModificarUsuario;
 import com.laboratory.views.R;
 
 import org.json.JSONArray;
@@ -61,6 +63,9 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         btnParaMi.setOnClickListener(this);
         btnParaOtra.setOnClickListener(this);
         misPedidos.setOnClickListener(this);
+
+        ImageButton editUser = findViewById(R.id.editPerfUs);
+        editUser.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ModificarUsuario.class)));
 
         ImageSlider imageSlider = findViewById(R.id.slider);
 

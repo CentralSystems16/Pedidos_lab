@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
     public static String nombre, email, sexo, nacimiento, direccion;
     public static int edad, dui, meses;
-    String usuario, contra;
+    public static String usuario, contra;
 
     private FirebaseRemoteConfig remoteConfig;
 

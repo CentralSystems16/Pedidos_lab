@@ -24,19 +24,11 @@
             android:textSize="35sp"
             android:textStyle="bold" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/close"
-            android:clickable="true"
-            android:layout_width="55dp"
-            android:visibility="gone"
-            android:layout_height="55dp"
-            app:lottie_autoPlay="true"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="20dp"
-            app:lottie_fileName="logout.json"
-            app:lottie_imageAssetsFolder="assets"
-            app:lottie_loop="true"
-            android:focusable="true" />
+
+
+
+
+
 
     </LinearLayout>
 
@@ -49,12 +41,6 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
-    <TextView
-        android:id="@+id/tvUsuarioId2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -69,7 +55,7 @@
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="150dp"
                 android:hapticFeedbackEnabled="false"
                 app:auto_cycle="true"
                 app:period="3000" />
@@ -131,6 +117,15 @@
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/boton_circular"
                 android:text="MIS RESULTADOS" />
+
+            <ImageButton
+                android:id="@+id/editPerfUs"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/perfil"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/todo" />
 
         </LinearLayout>
     </ScrollView>

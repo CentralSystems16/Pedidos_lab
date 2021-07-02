@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/white"
+    tools:context="com.laboratorio.pedidos_lab.manage.ModificarUsuario">
 
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<TextView
+    android:text="EDITAR INFORMACIÓN"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:textSize="20sp"
+    android:layout_marginTop="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/about"
-            android:clickable="true"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="profile.json"
-            app:lottie_imageAssetsFolder="assets"
-            app:lottie_loop="true"
-            android:focusable="true" />
-
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -34,7 +29,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/campoTelefono"
+                android:id="@+id/EditNumero"
                 android:layout_width="match_parent"
                 android:autofillHints="UsuarioRegistro"
                 android:layout_height="wrap_content"
@@ -42,15 +37,15 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/caja_texto_circular"
-                android:hint="Número de teléfono"
-                android:inputType="number"
+                android:hint="Numero"
+                android:inputType="textPersonName"
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
             <EditText
-                android:id="@+id/campoNombre"
+                android:id="@+id/EditNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
@@ -59,30 +54,14 @@
                 android:autofillHints="NombreRegistro"
                 android:background="@drawable/caja_texto_circular"
                 android:hint="@string/tvNombreRegistro"
-                android:inputType="textPersonName|textCapWords"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="#9F807E7E"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/campoDui"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="60dp"
-                android:autofillHints="NombreRegistro"
-                android:background="@drawable/caja_texto_circular"
-                android:hint="DUI"
-                android:inputType="number"
+                android:inputType="textPersonName"
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/EditFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
@@ -97,53 +76,55 @@
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
-                android:textSize="13sp"
-                tools:ignore="TextViewEdits" />
+                android:textSize="13sp" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/EditEdad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/campoEdad"
-                    android:layout_width="135dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
-                    android:layout_marginTop="8dp"
-                    android:autofillHints="EdadRegistro"
-                    android:background="@drawable/caja_texto_circular"
-                    android:hint="Años"
-                    android:inputType="number"
-                    android:padding="12sp"
-                    android:textColor="@color/black"
-                    android:textColorHint="#9F807E7E"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:id="@+id/campoMeses"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="8dp"
-                    android:autofillHints="EdadRegistro"
-                    android:background="@drawable/caja_texto_circular"
-                    android:hint="Meses"
-                    android:inputType="number"
-                    android:padding="12sp"
-                    android:textColor="@color/black"
-                    android:textColorHint="#9F807E7E"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/errorEdad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
-                android:layout_marginEnd="55dp"/>
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Edad"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/EditMeses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Meses"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/EditDui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="DUI"
+                android:inputType="number"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,14 +132,14 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:id="@+id/rgSexo"
+                    android:id="@+id/EditSexo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rbMasculino"
+                        android:id="@+id/EditMasculino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="80dp"
@@ -168,7 +149,7 @@
                         app:buttonTint="@color/black" />
 
                     <RadioButton
-                        android:id="@+id/rbFemenino"
+                        android:id="@+id/EditFemenino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -181,47 +162,37 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/campoPass"
+                android:id="@+id/EditDireccion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
                 android:layout_marginEnd="60dp"
-                android:layout_marginTop="12dp"
-                android:autofillHints="ContraseñaRegistro"
-                android:background="@drawable/caja_texto_circular"
-                android:hint="@string/tvPasswordRegistro"
-                android:inputType="textPassword"
-                android:padding="12sp"
-                android:textColor="@color/black"
-                android:textColorHint="#9F807E7E"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/campoPassRepeat"
-                android:layout_width="match_parent"
+                android:autofillHints="EmailRegistro"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
-                android:autofillHints="RepetirContraseña"
                 android:background="@drawable/caja_texto_circular"
-                android:hint="@string/tvPasswordRepeatRegistro"
-                android:inputType="textPassword"
+                android:hint="Dirección exacta"
+                android:inputType="textMultiLine"
                 android:padding="12sp"
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
-            <TextView
-                android:id="@+id/errorPass"
+            <Button
+                android:id="@+id/EditDirectMaps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
-                android:layout_marginEnd="55dp"/>
+                android:layout_marginTop="10dp"
+                android:background="@drawable/caja_texto_circular"
+                android:text="EDITAR MI DIRECCIÓN DESDE MAPS"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:drawableEnd="@drawable/placeholder"
+                app:backgroundTint="@color/gris_azulado" />
 
             <EditText
-                android:id="@+id/campoEmail"
+                android:id="@+id/EditEmail"
                 android:layout_width="match_parent"
                 android:layout_marginEnd="60dp"
                 android:autofillHints="EmailRegistro"
@@ -236,45 +207,46 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/campoDireccion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="55dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/caja_texto_circular"
-                android:hint="Dirección (Opcional)"
-                android:textColor="@color/black"
-                android:textColorHint="#9F807E7E"
-                android:textSize="13sp"
-                android:layout_marginTop="5dp"
-                android:padding="12sp"
-                android:autofillHints=""
-                android:inputType="textMultiLine" />
-
             <Button
-                android:id="@+id/btnRegistrarUsuario"
+                android:id="@+id/completeEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/boton_circular"
-                android:text="@string/btnRegistrarme"
+                android:background="@drawable/caja_texto_circular"
+                android:text="COMPLETAR"
                 android:textStyle="bold"
-                app:backgroundTint="#4CAF50" />
+                app:backgroundTint="#348C37" />
 
             <Button
-                android:id="@+id/btnCancelarRegistro"
+                android:id="@+id/changePassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/boton_circular"
-                android:text="@string/btnCancelarRegistro"
-                app:backgroundTint="#607D8B"
-                android:textStyle="bold" />
+                android:layout_marginTop="10dp"
+                android:background="@drawable/caja_texto_circular"
+                android:text="CAMBIAR CONTRASEÑA"
+                android:textStyle="bold"
+                android:padding="5dp"
+                android:drawableEnd="@drawable/padlock"
+                app:backgroundTint="@color/bg_fingerprint" />
+
+            <Button
+                android:id="@+id/btnInactivoUsuario"
+                android:layout_width="match_parent"
+                android:layout_marginStart="55dp"
+                android:layout_marginEnd="55dp"
+                android:background="@drawable/caja_texto_circular"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/advertencia"
+                android:backgroundTint="#CB3234"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:text="Inactivar usuario" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
