@@ -362,6 +362,8 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph direct = new Paragraph("Dirección: " + direccion);
 
+        Paragraph orden = new Paragraph("Tipo de orden: ");
+
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
         Border border1 = new GrooveBorder(2);
@@ -414,6 +416,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         document.add(genero);
         document.add(edadCli);
         document.add(direct);
+        document.add(orden);
         document.add(fechaNac);
         document.add(table.setFixedPosition(50,420,500));
         document.add(linea);

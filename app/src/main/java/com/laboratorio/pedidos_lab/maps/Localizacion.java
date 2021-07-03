@@ -1,11 +1,14 @@
 package com.laboratorio.pedidos_lab.maps;
 
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,11 +50,23 @@ public class Localizacion extends FragmentActivity implements LocationListener {
         bundle.putDouble("lat", new Double(lat));
         bundle.putDouble("lon", new Double(lon));
         fragment.setArguments(bundle);
+        loadFragment(fragment);
 
-        FragmentManager fragmentManager = getMainActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment, fragment, null);
-        fragmentTransaction.commit();
+    }
+
+    public boolean loadFragment(Fragment fragment) {
+
+        //switching fragment
+        if (fragment != null) {
+            FragmentManager fm = getMainActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.fragment, fragment, null);
+
+            if (!fm.isDestroyed())
+                transaction.commit();
+            return true;
+        }
+        return false;
     }
 
     @Override

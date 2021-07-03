@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
-    public static String nombre, email, sexo, nacimiento, direccion;
+    public static String nombre, email, sexo, nacimiento, direccion, latitud, longitud;
     public static int edad, dui, meses;
     public static String usuario, contra;
 
@@ -173,6 +173,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         dui = jsonResponse.getInt("dui_usuario");
                         meses = jsonResponse.getInt("meses_usuario");
                         direccion = jsonResponse.getString("direccion_usuario");
+                        latitud = jsonResponse.getString("latitud");
+                        longitud = jsonResponse.getString("longitud");
 
                         Intent intent = new Intent(getApplicationContext(), DatosPrincipales.class);
                         intent.putExtra("id_usuario", gIdUsuario);
@@ -185,6 +187,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         intent.putExtra("dui_usuario",dui);
                         intent.putExtra("meses_usuario",meses);
                         intent.putExtra("direccion_usuario",direccion);
+                        intent.putExtra("latitud", latitud);
+                        intent.putExtra("longitud", longitud);
                         startActivity(intent);
 
                     } else {

@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.maps.Localizacion;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -50,12 +52,12 @@ public class MiPersona {
                 String edad = String.valueOf(Login.edad);
                 String select = Login.sexo;
                 String email = Login.email;
-                String direccion = Login.direccion;
-
-
                 String nacimiento = Login.nacimiento;
                 int meses = Login.meses;
                 int usuario = Login.gIdUsuario;
+                String direccion = Login.direccion;
+                String latitud = Login.latitud;
+                String longitud = Login.longitud;
 
                 String data = URLEncoder.encode("nombre_cliente", "UTF-8") + "=" + URLEncoder.encode(nombre, "UTF-8")
                         + "&" + URLEncoder.encode("edad_cliente", "UTF-8") + "=" + URLEncoder.encode(edad, "UTF-8")
@@ -64,7 +66,9 @@ public class MiPersona {
                         + "&" + URLEncoder.encode("nacimiento_cliente", "UTF-8") + "=" + URLEncoder.encode(nacimiento, "UTF-8")
                         + "&" + URLEncoder.encode("meses_cliente", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(meses), "UTF-8")
                         + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(usuario), "UTF-8")
-                        + "&" + URLEncoder.encode("direccion_cliente", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8");
+                        + "&" + URLEncoder.encode("direccion_cliente", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8")
+                        + "&" + URLEncoder.encode("latitud", "UTF-8") + "=" + URLEncoder.encode(latitud, "UTF-8")
+                        + "&" + URLEncoder.encode("longitud", "UTF-8") + "=" + URLEncoder.encode(longitud, "UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();

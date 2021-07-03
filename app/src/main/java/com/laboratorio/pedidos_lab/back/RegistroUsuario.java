@@ -27,6 +27,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.front.RegistroCompletado;
+import com.laboratorio.pedidos_lab.maps.Localizacion;
+import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -50,15 +52,15 @@ import java.util.Map;
 
 public class RegistroUsuario extends AppCompatActivity {
 
-    private TextView mDisplayDate, errorPass, errorEdad2;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    TextView mDisplayDate, errorPass, errorEdad2;
+    DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
     String select;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui, dir;
     RadioGroup rg;
-    int errorEdad;
-    int meses;
+    int errorEdad, meses;
+    Button maps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,14 @@ public class RegistroUsuario extends AppCompatActivity {
         mes = findViewById(R.id.campoMeses);
         dir = findViewById(R.id.campoDireccion);
         mDisplayDate = findViewById(R.id.tvDate);
+
+        maps = findViewById(R.id.DirectMaps);
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
         ed.addTextChangedListener(new TextWatcher() {
             @Override
@@ -227,6 +237,7 @@ public class RegistroUsuario extends AppCompatActivity {
             String passwordRepeat = pr.getText().toString();
             String id = dui.getText().toString();
             String me = mes.getText().toString();
+            String di = dir.getText().toString();
 
             int radiogroupSexo = rg.getCheckedRadioButtonId();
             if (radiogroupSexo < 0){
@@ -247,6 +258,10 @@ public class RegistroUsuario extends AppCompatActivity {
             }
 
             else if (me.equals("")){
+                Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+
+            else if (di.equals("")){
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             }
 
@@ -326,6 +341,8 @@ public class RegistroUsuario extends AppCompatActivity {
                 String id = dui.getText().toString();
                 String me = mes.getText().toString();
                 String di = dir.getText().toString();
+                String latitud = Localizacion.latitud1;
+                String longitud = Localizacion.longitud1;
 
                 int radiogroupSexo = rg.getCheckedRadioButtonId();
                 if (radiogroupSexo < 0){
@@ -350,6 +367,8 @@ public class RegistroUsuario extends AppCompatActivity {
                 parametros.put("meses_usuario", me);
                 parametros.put("sexo_usuario", select);
                 parametros.put("direccion_usuario", di);
+                parametros.put("latitud", latitud);
+                parametros.put("longitud", longitud);
 
                 return parametros;
             }

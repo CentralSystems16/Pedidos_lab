@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratory.views.R;
 
@@ -19,13 +20,13 @@ public class Lugar extends AppCompatActivity {
         Button laboratorio = findViewById(R.id.laboratorio);
 
         miDomicilio.setOnClickListener(v -> {
-            if (Login.direccion.equals("")){
-                startActivity(new Intent(getApplicationContext(), AgregarDireccion.class));
-            } else {
-                startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
-            }
+            ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
+            startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
         });
 
-        laboratorio.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class)));
+        laboratorio.setOnClickListener(v -> {
+            ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
+            startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
+        });
     }
 }

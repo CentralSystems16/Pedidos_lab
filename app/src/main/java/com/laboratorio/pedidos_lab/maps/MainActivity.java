@@ -1,6 +1,7 @@
 package com.laboratorio.pedidos_lab.maps;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.back.RegistroUsuario;
 import com.laboratorio.pedidos_lab.front.AgregarDireccion;
 import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratory.views.R;
@@ -45,7 +47,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     TextView latitud, longitud;
-    Button coordenadas;
 
     // Minimo tiempo para updates en Milisegundos
     private static final long MIN_TIME = 120000; // 10 segundos
@@ -57,15 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         latitud = findViewById(R.id.latitud);
         longitud = findViewById(R.id.longitud);
-
-        coordenadas = findViewById(R.id.coordenadas);
-        coordenadas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ActualizarCoordenadas(getApplicationContext()).execute();
-                startActivity(new Intent(getApplicationContext(), AgregarDireccion.class));
-            }
-        });
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         != PackageManager.PERMISSION_GRANTED
@@ -106,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1000) {
@@ -116,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class ActualizarCoordenadas extends AsyncTask<String, Void, String> {
+  /*  public class ActualizarCoordenadas extends AsyncTask<String, Void, String> {
 
 
         private final WeakReference<Context> context;
@@ -145,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String latitud = (Localizacion.latitud1);
                 String longitud = (Localizacion.longitud1);
-                String idCliente = String.valueOf(Login.gIdCliente);
+                String idCliente = String.valueOf(Login.gIdUsuario);
 
                 String data = URLEncoder.encode("latitud", "UTF-8") + "=" + URLEncoder.encode(latitud, "UTF-8")
                         + "&" + URLEncoder.encode("longitud", "UTF-8") + "=" + URLEncoder.encode(longitud, "UTF-8")
@@ -179,6 +172,6 @@ public class MainActivity extends AppCompatActivity {
 
             return resultado;
         }
-    }
+    } */
 
 }
