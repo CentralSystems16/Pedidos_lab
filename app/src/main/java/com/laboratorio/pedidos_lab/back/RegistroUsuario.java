@@ -2,12 +2,10 @@ package com.laboratorio.pedidos_lab.back;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,23 +24,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.laboratorio.pedidos_lab.front.RegistroCompletado;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.lang.ref.WeakReference;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -61,6 +47,7 @@ public class RegistroUsuario extends AppCompatActivity {
     RadioGroup rg;
     int errorEdad, meses;
     Button maps;
+    TextView latitud, longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +78,22 @@ public class RegistroUsuario extends AppCompatActivity {
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                new FancyGifDialog.Builder(RegistroUsuario.this)
+                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos")
+                        .setNegativeBtnText("No estoy en mi domicilio")
+                        .setPositiveBtnBackground(R.color.rosado)
+                        .setPositiveBtnText("Estoy en mi domicilio")
+                        .setNegativeBtnBackground(R.color.rojo)
+                        .setGifResource(R.drawable.mapgif)
+                        .isCancellable(false)
+                        .OnPositiveClicked(() -> {
+
+                            startActivity(new Intent(RegistroUsuario.this, MainActivity.class));
+
+                        })
+                        .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado, puede onmitir esta opción y agregarla cuando sea requerida",Toast.LENGTH_LONG).show())
+                        .build();
             }
         });
 

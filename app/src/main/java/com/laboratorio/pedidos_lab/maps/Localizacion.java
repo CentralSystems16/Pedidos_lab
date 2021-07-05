@@ -1,13 +1,11 @@
 package com.laboratorio.pedidos_lab.maps;
 
-import android.app.ProgressDialog;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -47,8 +45,8 @@ public class Localizacion extends FragmentActivity implements LocationListener {
         FragmentMaps fragment = new FragmentMaps();
 
         Bundle bundle = new Bundle();
-        bundle.putDouble("lat", new Double(lat));
-        bundle.putDouble("lon", new Double(lon));
+        bundle.putDouble("lat", lat);
+        bundle.putDouble("lon", lon);
         fragment.setArguments(bundle);
         loadFragment(fragment);
 

@@ -50,7 +50,7 @@
         android:id="@+id/maps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableEnd="@drawable/map"
+        android:drawableEnd="@drawable/mapgif"
         android:padding="5dp"
         android:background="@drawable/caja_texto_circular"
         android:backgroundTint="@color/rojo"
