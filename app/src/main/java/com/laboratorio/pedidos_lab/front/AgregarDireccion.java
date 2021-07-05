@@ -11,10 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.laboratorio.pedidos_lab.MapsActivity;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
-import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
 
 import java.io.BufferedReader;
@@ -45,7 +43,7 @@ public class AgregarDireccion extends AppCompatActivity {
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //startActivity(new Intent(getApplicationContext(), MapsActivity.class));
 
             }
         });

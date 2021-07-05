@@ -6,65 +6,28 @@ import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import com.laboratory.views.R;
 
-public class Localizacion extends FragmentActivity implements LocationListener {
+public class Localizacion implements LocationListener {
 
     MainActivity mainActivity;
-    TextView latitud, longitud;
+    TextView tvLatitud, tvLongitud;
     public static String latitud1, longitud1;
 
-    public MainActivity getMainActivity() {
-        return mainActivity;
-    }
-
-    public void setMainActivity(MainActivity mainActivity, TextView latitud, TextView longitud) {
+    public void setMainActivity(MainActivity mainActivity, TextView tvLatitud, TextView tvLongitud) {
         this.mainActivity = mainActivity;
-        this.latitud = latitud;
-        this.longitud = longitud;
+        this.tvLatitud = tvLatitud;
+        this.tvLongitud = tvLongitud;
     }
 
     @Override
     public void onLocationChanged(Location location) {
-        // Este metodo se ejecuta cuando el GPS recibe nuevas coordenadas
-         latitud1 = String.valueOf(location.getLatitude());
-         longitud1 = String.valueOf(location.getLongitude());
+        // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
+        latitud1 = String.valueOf(location.getLatitude());
+        longitud1 = String.valueOf(location.getLongitude());
 
-        latitud.setText(latitud1);
-        longitud.setText(longitud1);
+        tvLatitud.setText(latitud1);
+        tvLongitud.setText(longitud1);
 
-        mapa(location.getLatitude(), location.getLongitude());
-    }
-
-    public void mapa(double lat, double lon) {
-        // Fragment del Mapa
-        FragmentMaps fragment = new FragmentMaps();
-
-        Bundle bundle = new Bundle();
-        bundle.putDouble("lat", lat);
-        bundle.putDouble("lon", lon);
-        fragment.setArguments(bundle);
-        loadFragment(fragment);
-
-    }
-
-    public boolean loadFragment(Fragment fragment) {
-
-        //switching fragment
-        if (fragment != null) {
-            FragmentManager fm = getMainActivity().getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.replace(R.id.fragment, fragment, null);
-
-            if (!fm.isDestroyed())
-                transaction.commit();
-            return true;
-        }
-        return false;
     }
 
     @Override

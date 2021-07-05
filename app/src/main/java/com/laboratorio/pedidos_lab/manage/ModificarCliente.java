@@ -63,7 +63,7 @@ public class ModificarCliente extends AppCompatActivity {
                         + "&estado_usuario=" + gEstadoUs
                         + "&id_usuario=" + UsuarioFragment.gIdUsuario);
 
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, MapsActivity.class);
         startActivity(i);
 
     }

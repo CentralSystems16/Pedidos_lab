@@ -4,9 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
-import com.laboratorio.pedidos_lab.maps.Localizacion;
 
 import org.json.JSONException;
 import org.json.JSONObject;

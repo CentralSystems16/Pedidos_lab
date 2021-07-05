@@ -47,7 +47,6 @@ public class RegistroUsuario extends AppCompatActivity {
     RadioGroup rg;
     int errorEdad, meses;
     Button maps;
-    TextView latitud, longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +79,7 @@ public class RegistroUsuario extends AppCompatActivity {
             public void onClick(View v) {
 
                 new FancyGifDialog.Builder(RegistroUsuario.this)
-                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos")
+                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nTambién asegurate de activar tu GPS para obtener tu ubicación exacta.")
                         .setNegativeBtnText("No estoy en mi domicilio")
                         .setPositiveBtnBackground(R.color.rosado)
                         .setPositiveBtnText("Estoy en mi domicilio")

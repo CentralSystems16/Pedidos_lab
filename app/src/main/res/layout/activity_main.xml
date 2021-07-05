@@ -10,33 +10,28 @@
     tools:context="com.laboratorio.pedidos_lab.maps.MainActivity">
 
     <TextView
-        android:id="@+id/latitud"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
+        android:id="@+id/latitud"
         android:visibility="gone"
-        android:layout_marginRight="8dp"/>
+        android:textColor="@color/black"
+        android:text="latitud" />
 
     <TextView
-        android:id="@+id/longitud"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/longitud"
         android:visibility="gone"
-        android:layout_marginRight="8dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:text="longitud" />
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.laboratorio.pedidos_lab.maps.FragmentMaps"
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"/>
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="map.json"
+        app:lottie_imageAssetsFolder="assets"
+        app:lottie_loop="true" />
 
 </LinearLayout>
