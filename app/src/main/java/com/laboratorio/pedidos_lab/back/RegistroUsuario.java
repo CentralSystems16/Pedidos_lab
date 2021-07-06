@@ -19,7 +19,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -28,7 +27,6 @@ import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,14 +36,14 @@ import java.util.Map;
 
 public class RegistroUsuario extends AppCompatActivity {
 
-    TextView mDisplayDate, errorPass, errorEdad2;
+    TextView mDisplayDate, errorPass, errorEdad2, errorNumber;
     DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
     String select;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui, dir;
     RadioGroup rg;
-    int errorEdad, meses;
+    int errorEdad, meses, number;
     Button maps;
 
     @Override
@@ -60,6 +58,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
         errorPass = findViewById(R.id.errorPass);
         errorEdad2 = findViewById(R.id.errorEdad);
+        errorNumber = findViewById(R.id.errorNumber);
 
         regPhoneNo = findViewById(R.id.campoTelefono);
         pas = findViewById(R.id.campoPass);
@@ -74,37 +73,54 @@ public class RegistroUsuario extends AppCompatActivity {
         mDisplayDate = findViewById(R.id.tvDate);
 
         maps = findViewById(R.id.DirectMaps);
-        maps.setOnClickListener(new View.OnClickListener() {
+        maps.setOnClickListener(v -> new FancyGifDialog.Builder(RegistroUsuario.this)
+                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nTambién asegurate de activar tu GPS para obtener tu ubicación exacta.")
+                .setNegativeBtnText("No estoy en mi domicilio")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Estoy en mi domicilio")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.mapgif)
+                .isCancellable(false)
+                .OnPositiveClicked(() -> startActivity(new Intent(RegistroUsuario.this, MainActivity.class)))
+                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado, puede onmitir esta opción y agregarla cuando sea requerida",Toast.LENGTH_LONG).show())
+                .build());
+
+        regPhoneNo.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
-                new FancyGifDialog.Builder(RegistroUsuario.this)
-                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nTambién asegurate de activar tu GPS para obtener tu ubicación exacta.")
-                        .setNegativeBtnText("No estoy en mi domicilio")
-                        .setPositiveBtnBackground(R.color.rosado)
-                        .setPositiveBtnText("Estoy en mi domicilio")
-                        .setNegativeBtnBackground(R.color.rojo)
-                        .setGifResource(R.drawable.mapgif)
-                        .isCancellable(false)
-                        .OnPositiveClicked(() -> {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-                            startActivity(new Intent(RegistroUsuario.this, MainActivity.class));
+            @Override
+            public void afterTextChanged(Editable s) {
 
-                        })
-                        .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado, puede onmitir esta opción y agregarla cuando sea requerida",Toast.LENGTH_LONG).show())
-                        .build();
+                String number1 = regPhoneNo.getText().toString();
+
+                try {
+                    number = Integer.parseInt(number1);
+
+                    if (regPhoneNo.length()<8 || regPhoneNo.length()>8){
+                        errorNumber.setText("El numero no es correcto");
+                    } else if (regPhoneNo.length() == 8){
+                        errorNumber.setText("");
+                    }
+                }catch (NumberFormatException e)
+                {
+                    // handle the exception
+                }
             }
         });
 
         ed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
 
             @Override
@@ -305,6 +321,9 @@ public class RegistroUsuario extends AppCompatActivity {
 
             else if (meses < 1 || meses > 11){
                 Toast.makeText(this, "El rango de meses debe estar entre 1 y 11", Toast.LENGTH_SHORT).show();
+
+            } else if (regPhoneNo.length()<8 || regPhoneNo.length()>8){
+                Toast.makeText(this, "Parece que el numero no es correcto.", Toast.LENGTH_SHORT).show();
             }
 
             else {

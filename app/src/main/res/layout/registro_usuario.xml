@@ -44,6 +44,13 @@
             android:textColorHint="#9F807E7E"
             android:textSize="13sp" />
 
+            <TextView
+                android:layout_marginStart="55dp"
+                android:id="@+id/errorNumber"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         <EditText
             android:id="@+id/campoNombre"
             android:layout_width="match_parent"

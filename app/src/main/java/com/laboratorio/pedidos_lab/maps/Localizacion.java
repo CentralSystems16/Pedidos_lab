@@ -11,7 +11,7 @@ public class Localizacion implements LocationListener {
 
     MainActivity mainActivity;
     TextView tvLatitud, tvLongitud;
-    public static String latitud1, longitud1;
+    public static String latitud1 = "0", longitud1 = "0";
 
     public void setMainActivity(MainActivity mainActivity, TextView tvLatitud, TextView tvLongitud) {
         this.mainActivity = mainActivity;

@@ -433,6 +433,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
     public void obtenerCorreos() {
 
+        System.out.println("Si estro al metodo");
         final String URL_CORREOS = "http://pedidoslab.6te.net/consultas/obtenerCorreos.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -447,12 +448,12 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            //listaCorreos.add(
-                                    //new Correos(
+
+
                                          envCorreo = jsonObject1.getString("direccion_correo");
 
                         }
-                        System.out.println("La direccion de correo es: " + envCorreo);
+                        System.out.println(envCorreo);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -491,10 +492,10 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                 message.setFrom(new InternetAddress(correo));
                 message.setSubject("Nuevo pedido");
 
-               // for (int i = 0; i < listaCorreos.size(); i++) {
+                for (int i = 0; i < listaCorreos.size(); i++) {
                     //TODO: Correo al que quiero enviar el Email
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("centralsystemsmanage2@gmail.com"));
-               // }
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(envCorreo));
+                }
 
                 BodyPart bodyPart1 = new MimeBodyPart();
                 bodyPart1.setText("Se ha adjuntado el pedido");

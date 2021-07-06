@@ -22,7 +22,7 @@ import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 public class ModificarUsuario extends AppCompatActivity {
 
     EditText numero, nombre, email, edad, meses, dui, direccion;
-    Button changePassword, inactivo, direccionMaps, completeEdit;
+    Button changePassword, completeEdit;
     TextView nacimiento;
     RadioGroup sexo;
     int gEstadoUs;
@@ -60,24 +60,20 @@ public class ModificarUsuario extends AppCompatActivity {
         changePassword.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), changePass.class)));
 
         completeEdit = findViewById(R.id.completeEdit);
-        completeEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "http://pedidoslab.6te.net/consultas/ModificarUsuario.php"
-                        + "?login_usuario=" + numero.getText().toString()
-                        + "&nombre_usuario=" + nombre.getText().toString()
-                        + "&email_usuario=" + email.getText().toString()
-                        + "&nacimiento_usuario=" + nacimiento.getText().toString()
-                        + "&edad_usuario=" + edad.getText().toString()
-                        + "&estado_usuario=" + gEstadoUs
-                        + "&dui_usuario=" + dui.getText().toString()
-                        + "&meses_usuario=" +  meses.getText().toString()
-                        + "&direccion_cliente=" + direccion.getText().toString()
-                        + "&id_usuario=" + Login.gIdUsuario;
-                ejecutarServicio(url);
-                System.out.println("La URL es: " + url);
-
-            }
+        completeEdit.setOnClickListener(v -> {
+            String url = "http://pedidoslab.6te.net/consultas/ModificarUsuario.php"
+                    + "?login_usuario=" + numero.getText().toString()
+                    + "&nombre_usuario=" + nombre.getText().toString()
+                    + "&email_usuario=" + email.getText().toString()
+                    + "&nacimiento_usuario=" + nacimiento.getText().toString()
+                    + "&edad_usuario=" + edad.getText().toString()
+                    + "&estado_usuario=" + gEstadoUs
+                    + "&dui_usuario=" + dui.getText().toString()
+                    + "&meses_usuario=" +  meses.getText().toString()
+                    + "&direccion_cliente=" + direccion.getText().toString()
+                    + "&id_usuario=" + Login.gIdUsuario;
+            ejecutarServicio(url);
+            System.out.println("La URL es: " + url);
 
         });
 
