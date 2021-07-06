@@ -26,6 +26,7 @@
         android:id="@+id/currentPass"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:inputType="textPassword"
         android:background="@drawable/caja_texto_circular"
         android:layout_width="match_parent"
         android:padding="5dp"
@@ -40,34 +41,40 @@
         android:gravity="center"
         android:text="Nueva contraseña" />
 
-    <EditText
-        android:id="@+id/newPass"
-        android:layout_width="match_parent"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/caja_texto_circular"
-        android:padding="5dp"
-        android:layout_height="40dp" />
+        <EditText
+            android:id="@+id/newPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="12dp"
+            android:autofillHints="ContraseñaRegistro"
+            android:background="@drawable/caja_texto_circular"
+            android:hint="@string/tvPasswordRegistro"
+            android:inputType="textPassword"
+            android:padding="12sp"
+            android:textColor="@color/black"
+            android:textColorHint="#9F807E7E"
+            android:textSize="13sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Repetir contraseña" />
-
-    <EditText
-        android:id="@+id/newRepeatPass"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/caja_texto_circular"
-        android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_height="40dp" />
+        <EditText
+            android:id="@+id/newRepeatPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="8dp"
+            android:autofillHints="RepetirContraseña"
+            android:background="@drawable/caja_texto_circular"
+            android:hint="@string/tvPasswordRepeatRegistro"
+            android:inputType="textPassword"
+            android:padding="12sp"
+            android:textColor="@color/black"
+            android:textColorHint="#9F807E7E"
+            android:textSize="13sp" />
 
         <Button
+            android:id="@+id/confrmCambio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="CONFIRMAR"

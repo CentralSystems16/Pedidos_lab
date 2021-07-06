@@ -48,6 +48,7 @@ import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
+import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Correos;
@@ -362,7 +363,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph direct = new Paragraph("Dirección: " + direccion);
 
-        Paragraph orden = new Paragraph("Tipo de orden: ");
+        Paragraph orden = new Paragraph("Tipo de orden: " + Lugar.tipoPedido);
 
         float[] medidaCeldas = {0.78f, 2.40f, 1.40f, 0.63f};
         Table table = new Table(medidaCeldas);
@@ -404,7 +405,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph barcode = new Paragraph(codigo + Login.gIdPedido);
         barcode.setMarginLeft(420);
-        barcode.setMarginTop(-10);
+        barcode.setMarginTop(-20);
 
 
         document.add(image.setFixedPosition(400,700));
@@ -415,9 +416,9 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         document.add(dui);
         document.add(genero);
         document.add(edadCli);
+        document.add(fechaNac);
         document.add(direct);
         document.add(orden);
-        document.add(fechaNac);
         document.add(table.setFixedPosition(50,420,500));
         document.add(linea);
         document.add(direcion);

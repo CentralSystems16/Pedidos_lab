@@ -44,8 +44,6 @@ public class ModificarUsuario extends AppCompatActivity {
         nacimiento = findViewById(R.id.EditFecha);
         nacimiento.setText(Login.nacimiento);
 
-        sexo = findViewById(R.id.EditSexo);
-
         edad = findViewById(R.id.EditEdad);
         edad.setText(String.valueOf(Login.edad));
 
@@ -60,17 +58,6 @@ public class ModificarUsuario extends AppCompatActivity {
 
         changePassword = findViewById(R.id.changePassword);
         changePassword.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), changePass.class)));
-
-        inactivo =findViewById(R.id.btnInactivoUsuario);
-        inactivo.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), confimarDesactivacion.class)));
-
-        direccionMaps = findViewById(R.id.EditDirectMaps);
-        direccionMaps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         completeEdit = findViewById(R.id.completeEdit);
         completeEdit.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +86,7 @@ public class ModificarUsuario extends AppCompatActivity {
     public void ejecutarServicio (String URL){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-                response -> Toast.makeText(getApplicationContext(), "USUARIO ACTUALIZADO CON ÉXITO", Toast.LENGTH_LONG).show(),
+                response -> Toast.makeText(getApplicationContext(), "INFORMACIÓN ACTUALIZADA CON ÉXITO", Toast.LENGTH_LONG).show(),
                 error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show());
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);

@@ -58,7 +58,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
     private FirebaseRemoteConfig remoteConfig;
 
-
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

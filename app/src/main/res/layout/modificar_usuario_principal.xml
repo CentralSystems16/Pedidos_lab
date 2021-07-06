@@ -44,6 +44,11 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
+            <TextView
+                android:id="@+id/erroNumero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <EditText
                 android:id="@+id/EditNombre"
                 android:layout_width="match_parent"
@@ -78,11 +83,14 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/EditEdad"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
+                android:orientation="horizontal">
+            <EditText
+                android:id="@+id/EditEdad"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
                 android:autofillHints="EdadRegistro"
@@ -99,7 +107,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
-                android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
                 android:autofillHints="EdadRegistro"
                 android:background="@drawable/caja_texto_circular"
@@ -109,6 +116,12 @@
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/errorEdadEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/EditDui"
@@ -126,41 +139,6 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:id="@+id/EditSexo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/EditMasculino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="80dp"
-                        android:text="@string/rbMaculino"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
-                        app:buttonTint="@color/black" />
-
-                    <RadioButton
-                        android:id="@+id/EditFemenino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="@string/rbFemenino"
-                        android:textColor="@color/black"
-                        android:textColorHighlight="@color/black"
-                        app:buttonTint="@color/black" />
-
-                </RadioGroup>
-            </LinearLayout>
-
             <EditText
                 android:id="@+id/EditDireccion"
                 android:layout_width="match_parent"
@@ -176,20 +154,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/EditDirectMaps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/caja_texto_circular"
-                android:text="EDITAR MI DIRECCIÓN DESDE MAPS"
-                android:textStyle="bold"
-                android:padding="5dp"
-                android:drawableEnd="@drawable/placeholder"
-                app:backgroundTint="@color/gris_azulado" />
 
             <EditText
                 android:id="@+id/EditEmail"
@@ -232,19 +196,6 @@
                 android:padding="5dp"
                 android:drawableEnd="@drawable/padlock"
                 app:backgroundTint="@color/bg_fingerprint" />
-
-            <Button
-                android:id="@+id/btnInactivoUsuario"
-                android:layout_width="match_parent"
-                android:layout_marginStart="55dp"
-                android:layout_marginEnd="55dp"
-                android:background="@drawable/caja_texto_circular"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/advertencia"
-                android:backgroundTint="#CB3234"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                android:text="Inactivar usuario" />
 
         </LinearLayout>
     </ScrollView>

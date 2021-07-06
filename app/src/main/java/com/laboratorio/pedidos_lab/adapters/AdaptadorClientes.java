@@ -16,6 +16,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Clientes;
@@ -95,7 +96,7 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
 
                 Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
 
-                Intent i = new Intent(cContext, ObtenerCategorias.class);
+                Intent i = new Intent(cContext, Lugar.class);
                 cContext.startActivity(i);
             }
         });
