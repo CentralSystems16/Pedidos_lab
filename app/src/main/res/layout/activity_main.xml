@@ -9,22 +9,6 @@
     android:background="@color/white"
     tools:context="com.laboratorio.pedidos_lab.maps.MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/latitud"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:text="latitud" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/longitud"
-        android:visibility="gone"
-        android:textColor="@color/black"
-        android:text="longitud" />
-
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

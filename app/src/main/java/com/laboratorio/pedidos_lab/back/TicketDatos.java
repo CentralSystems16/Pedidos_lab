@@ -43,6 +43,7 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
+import com.laboratorio.pedidos_lab.adapters.AdaptadorCorreos;
 import com.laboratorio.pedidos_lab.adapters.adapProdReport;
 import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
@@ -84,7 +85,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
-    public static String  url_pedido = "";
+    public static String  url_pedido = "", envCorreo;
     public static String  url_det_pedido = "";
     public static final String  url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php"+"?id_prefactura="+ Login.gIdPedido;
     TextView fechaReporte, totalItem, horaReporte;
@@ -94,11 +95,12 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     adapProdReport adaptador;
     List<DetReporte> listaProdReport;
     List<Correos> listaCorreos;
+    AdaptadorCorreos adaptadorCorreos;
     Button btnConfirmarEnviar;
     String NOMBRE_DOCUMENTO = "Examen.pdf";
     javax.mail.Session session;
     int edad, meses;
-    String sexo, envCorreo, password, correo, nacimiento, direccion;
+    String sexo, password, correo, nacimiento, direccion;
     LottieAnimationView rOfTicket;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
@@ -137,7 +139,9 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         rvProductos.setLayoutManager(new LinearLayoutManager(this));
 
         listaProdReport = new ArrayList<>();
+
         listaCorreos = new ArrayList<>();
+        adaptadorCorreos = new AdaptadorCorreos(TicketDatos.this, listaCorreos);
 
         adaptador = new adapProdReport(TicketDatos.this, listaProdReport);
         rvProductos.setAdapter(adaptador);
@@ -449,8 +453,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
-
-                                         envCorreo = jsonObject1.getString("direccion_correo");
+                            new Correos( envCorreo = jsonObject1.getString("direccion_correo"));
 
                         }
                         System.out.println(envCorreo);
@@ -492,10 +495,10 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                 message.setFrom(new InternetAddress(correo));
                 message.setSubject("Nuevo pedido");
 
-                for (int i = 0; i < listaCorreos.size(); i++) {
-                    //TODO: Correo al que quiero enviar el Email
-                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(envCorreo));
-                }
+
+                message.addRecipients(Message.RecipientType.TO,  InternetAddress.parse("centralsystemsmanage2@gmail.com"));
+                message.addRecipients(Message.RecipientType.TO,  InternetAddress.parse("adielmoranoficial@gmail.com"));
+                message.addRecipients(Message.RecipientType.TO,  InternetAddress.parse("irvisadele999@gmail.com"));
 
                 BodyPart bodyPart1 = new MimeBodyPart();
                 bodyPart1.setText("Se ha adjuntado el pedido");

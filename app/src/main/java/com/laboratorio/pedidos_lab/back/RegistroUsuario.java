@@ -1,12 +1,17 @@
 package com.laboratorio.pedidos_lab.back;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,12 +24,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
-import com.laboratorio.pedidos_lab.maps.MainActivity;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import java.text.ParseException;
@@ -45,6 +50,8 @@ public class RegistroUsuario extends AppCompatActivity {
     RadioGroup rg;
     int errorEdad, meses, number;
     Button maps;
+    String usuario;
+    TextView tvLatitud, tvLongitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +60,23 @@ public class RegistroUsuario extends AppCompatActivity {
         //TODO: Bloquear orientación de pantalla.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        tvLatitud = findViewById(R.id.latitud);
+        tvLongitud = findViewById(R.id.longitud);
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+
+
+        } else {
+            iniciarLocalizacion();
+        }
+
         final Button botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
+        botonRegistrar.setEnabled(false);
         final Button botonCancelar = findViewById(R.id.btnCancelarRegistro);
 
         errorPass = findViewById(R.id.errorPass);
@@ -74,15 +97,20 @@ public class RegistroUsuario extends AppCompatActivity {
 
         maps = findViewById(R.id.DirectMaps);
         maps.setOnClickListener(v -> new FancyGifDialog.Builder(RegistroUsuario.this)
-                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nTambién asegurate de activar tu GPS para obtener tu ubicación exacta.")
+                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi ubicación' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
                 .setNegativeBtnText("No estoy en mi domicilio")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Estoy en mi domicilio")
                 .setNegativeBtnBackground(R.color.rojo)
                 .setGifResource(R.drawable.mapgif)
                 .isCancellable(false)
-                .OnPositiveClicked(() -> startActivity(new Intent(RegistroUsuario.this, MainActivity.class)))
-                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado, puede onmitir esta opción y agregarla cuando sea requerida",Toast.LENGTH_LONG).show())
+                .OnPositiveClicked(() -> {
+                    Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
+                    maps.setEnabled(false);
+                    botonRegistrar.setEnabled(true);
+
+                })
+                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado",Toast.LENGTH_LONG).show())
                 .build());
 
         regPhoneNo.addTextChangedListener(new TextWatcher() {
@@ -249,7 +277,7 @@ public class RegistroUsuario extends AppCompatActivity {
             String nombre = nom.getText().toString();
             String edad = ed.getText().toString();
             String fechaNacimiento = mDisplayDate.getText().toString();
-            String usuario = regPhoneNo.getText().toString();
+            usuario = regPhoneNo.getText().toString();
             String password = pas.getText().toString();
             String passwordRepeat = pr.getText().toString();
             String id = dui.getText().toString();
@@ -340,6 +368,8 @@ public class RegistroUsuario extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);
         });
+
+
     }
 
     public void ejecutarServicio(String URL) {
@@ -396,6 +426,44 @@ public class RegistroUsuario extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+
+    }
+
+
+    private void iniciarLocalizacion() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        Localizacion localizacion = new Localizacion();
+        localizacion.setMainActivity(this, tvLatitud, tvLongitud);
+
+        final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if(!gpsEnabled) {
+            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(settingsIntent);
+        }
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, localizacion);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, localizacion);
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1000) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                iniciarLocalizacion();
+                return;
+            }
+        }
 
     }
 

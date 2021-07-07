@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.laboratorio.pedidos_lab.manage.Main2Activity">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter PDF Name"
+        android:background="@color/purpura"
+        android:ems="10"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/editText" />
+
+    <Button
+        android:text="Upload pdf on online server"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="54dp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/editText"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Select PDF TO Upload"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_above="@+id/editText"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="62dp" />
+
+</LinearLayout>

@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.laboratorio.pedidos_lab.back.RegistroUsuario;
+
 public class Localizacion implements LocationListener {
 
-    MainActivity mainActivity;
+    RegistroUsuario mainActivity;
     TextView tvLatitud, tvLongitud;
     public static String latitud1 = "0", longitud1 = "0";
 
-    public void setMainActivity(MainActivity mainActivity, TextView tvLatitud, TextView tvLongitud) {
+    public void setMainActivity(RegistroUsuario mainActivity, TextView tvLatitud, TextView tvLongitud) {
         this.mainActivity = mainActivity;
         this.tvLatitud = tvLatitud;
         this.tvLongitud = tvLongitud;

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.laboratorio.pedidos_lab.back.RegistroUsuario;
 import com.laboratory.views.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvLatitud = findViewById(R.id.latitud);
-        tvLongitud = findViewById(R.id.longitud);
+        //tvLatitud = findViewById(R.id.latitud);
+        //tvLongitud = findViewById(R.id.longitud);
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         Localizacion localizacion = new Localizacion();
-        localizacion.setMainActivity(this, tvLatitud, tvLongitud);
+        //localizacion.setMainActivity(this, tvLatitud, tvLongitud);
 
         final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
