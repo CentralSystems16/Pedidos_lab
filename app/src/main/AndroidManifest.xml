@@ -51,14 +51,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="com.laboratorio.pedidos_lab.front.AgregarDireccion" />
-        <activity android:name="com.laboratorio.pedidos_lab.front.Lugar" />
+
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.laboratorio.pedidos_lab.maps.MainActivity" />
+        <activity android:name="com.laboratorio.pedidos_lab.front.AgregarDireccion" />
+        <activity android:name="com.laboratorio.pedidos_lab.front.Lugar" />
+        <activity android:name="com.laboratorio.pedidos_lab.maps.mapsActivity" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerReportes" />
         <activity android:name="com.laboratorio.pedidos_lab.back.VerificarNumero" />
@@ -75,22 +76,19 @@
         <activity android:name="com.laboratorio.pedidos_lab.front.VistaFinal" />
         <activity android:name="com.laboratorio.pedidos_lab.front.NoHayInternet" />
         <activity android:name="com.laboratorio.pedidos_lab.front.EnviandoTicket" />
-        <activity android:name="com.laboratorio.pedidos_lab.front.SplashPrincipal" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerProductos" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerOpciones" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerCategorias" />
-        <activity android:name="com.laboratorio.pedidos_lab.conections.VerificarInternet"/>
+        <activity android:name="com.laboratorio.pedidos_lab.pdf.MainActivity"/>
+        <activity android:name="com.laboratorio.pedidos_lab.front.SplashPrincipal"/>
 
-        <activity
-            android:name="com.laboratorio.pedidos_lab.pdf.MainActivity"
-            android:label="YourAppName"
-            android:theme="@style/NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name="com.laboratorio.pedidos_lab.conections.VerificarInternet" >
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+    </intent-filter>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    </activity>
 
         <uses-library
             android:name="org.apache.http.legacy"

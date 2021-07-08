@@ -1,6 +1,5 @@
 package com.laboratorio.pedidos_lab.back;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -18,12 +17,12 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
@@ -48,18 +47,13 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     EditText user, password;
     CheckBox mostrarPass;
     TextView recuperarPass;
-    LottieAnimationView about;
+    ImageButton about;
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
-    public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido;
-    public static String nombre, email, sexo, nacimiento, direccion, latitud, longitud;
-    public static int edad, dui, meses;
-    public static String usuario, contra;
-
+    public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido, edad, dui, meses;
+    public static String nombre, email, sexo, nacimiento, direccion, latitud, longitud, usuario, contra;
     private FirebaseRemoteConfig remoteConfig;
 
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +61,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         //TODO: Bloquear orientación de pantalla.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        TextView currentVersion = findViewById(R.id.tv);
-        currentVersion.setText("Versión actual: " + getVersionCode());
         HashMap<String, Object> defaultsRate = new HashMap<>();
         defaultsRate.put("Nueva version disponible",String.valueOf(getVersionCode()));
 
@@ -160,7 +152,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     boolean succes = jsonResponse.getBoolean("success");
 
                     if (succes){
-
                         guardarPreferencias();
                         gIdUsuario = jsonResponse.getInt("id_usuario");
                         nombre = jsonResponse.getString("nombre_usuario");
@@ -345,9 +336,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                     System.exit(0);
 
                 })
-                .OnNegativeClicked(() -> Toast.makeText(this,"Cancelado",Toast.LENGTH_SHORT).show())
+                .OnNegativeClicked(() -> Toast.makeText(this,"Cancelado",Toast.LENGTH_SHORT))
                 .build();
 
     }
-
 }

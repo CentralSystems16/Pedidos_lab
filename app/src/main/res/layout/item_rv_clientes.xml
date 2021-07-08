@@ -8,8 +8,8 @@
     app:cardElevation="10dp"
     app:cardCornerRadius="10dp"
     android:layout_margin="10dp"
-    android:backgroundTint="#536DFE"
-    tools:targetApi="lollipop">
+    android:background="@drawable/boton_borde"
+    android:backgroundTint="@color/white">
 
     <TextView
         android:id="@+id/tvFecha"
@@ -71,8 +71,8 @@
             <Button
                 android:id="@+id/seleccionarCliente"
                 android:background="@drawable/caja_texto_circular"
-                android:backgroundTint="#4CAF50"
-                android:textSize="12sp"
+                app:backgroundTint="#607D8B"
+                android:textSize="10sp"
                 android:clickable="true"
                 android:text="Seleccionar"
                 android:layout_width="150dp"
@@ -83,8 +83,8 @@
             <Button
                 android:id="@+id/editarCliente"
                 android:background="@drawable/caja_texto_circular"
-                android:backgroundTint="#4CAF50"
-                android:textSize="12sp"
+                app:backgroundTint="#607D8B"
+                android:textSize="10sp"
                 android:layout_marginStart="10dp"
                 android:clickable="true"
                 android:text="Editar información"

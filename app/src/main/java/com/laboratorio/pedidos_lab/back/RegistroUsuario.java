@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,17 +42,16 @@ import java.util.Map;
 
 public class RegistroUsuario extends AppCompatActivity {
 
-    TextView mDisplayDate, errorPass, errorEdad2, errorNumber;
+    TextView mDisplayDate, errorPass, errorEdad2, errorNumber, tvLatitud, tvLongitud;
     DatePickerDialog.OnDateSetListener mDateSetListener;
     RequestQueue requestQueue;
-    String select;
+    String select, usuario;
     public static EditText regPhoneNo;
     EditText pas, nom, pr, em, ed, mes, dui, dir;
     RadioGroup rg;
     int errorEdad, meses, number;
-    Button maps;
-    String usuario;
-    TextView tvLatitud, tvLongitud;
+    Button maps, botonRegistrar;
+    ImageButton botonCancelar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,15 +70,12 @@ public class RegistroUsuario extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
 
-
         } else {
             iniciarLocalizacion();
         }
 
-        final Button botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
-        botonRegistrar.setEnabled(false);
-        final Button botonCancelar = findViewById(R.id.btnCancelarRegistro);
-
+        botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
+        botonCancelar = findViewById(R.id.btnCancelarRegistro);
         errorPass = findViewById(R.id.errorPass);
         errorEdad2 = findViewById(R.id.errorEdad);
         errorNumber = findViewById(R.id.errorNumber);
@@ -106,8 +103,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 .isCancellable(false)
                 .OnPositiveClicked(() -> {
                     Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
-                    maps.setEnabled(false);
-                    botonRegistrar.setEnabled(true);
 
                 })
                 .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado",Toast.LENGTH_LONG).show())
@@ -368,8 +363,6 @@ public class RegistroUsuario extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), Login.class);
             startActivity(i);
         });
-
-
     }
 
     public void ejecutarServicio(String URL) {

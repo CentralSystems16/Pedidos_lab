@@ -27,7 +27,7 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="REPORTE DE ORDENES" />
+        android:text="ORDENES" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaReportes"

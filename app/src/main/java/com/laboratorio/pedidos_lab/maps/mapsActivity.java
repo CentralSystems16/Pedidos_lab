@@ -8,22 +8,20 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.laboratorio.pedidos_lab.back.RegistroUsuario;
 import com.laboratory.views.R;
 
-public class MainActivity extends AppCompatActivity {
+public class mapsActivity extends AppCompatActivity {
 
     TextView tvLatitud, tvLongitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map);
 
         //tvLatitud = findViewById(R.id.latitud);
         //tvLongitud = findViewById(R.id.longitud);

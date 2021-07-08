@@ -54,6 +54,9 @@ import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
+import com.laboratorio.pedidos_lab.pdf.MainActivity;
+import com.laboratorio.pedidos_lab.pdf.ResponsePOJO;
+import com.laboratorio.pedidos_lab.pdf.RetrofitClient;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import org.json.JSONArray;
@@ -83,6 +86,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
     public static String  url_pedido = "", envCorreo;
@@ -109,6 +116,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String horaString = ho.format(d);
     public static String fechaReport, gNombre;
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
+    private  String encodedPDF;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -409,8 +417,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
 
         Paragraph barcode = new Paragraph(codigo + Login.gIdPedido);
         barcode.setMarginLeft(420);
-        barcode.setMarginTop(-20);
-
+        barcode.setMarginTop(-40);
 
         document.add(image.setFixedPosition(400,700));
         document.add(image2.setFixedPosition(170,-10));
@@ -561,7 +568,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                 .build();
 
     }
-
 
     @Override
     public void onBackPressed(){

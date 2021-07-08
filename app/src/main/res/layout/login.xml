@@ -9,22 +9,12 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"/>
-
-    <com.airbnb.lottie.LottieAnimationView
+    <ImageButton
         android:id="@+id/about"
         android:clickable="true"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="about.json"
-        app:lottie_imageAssetsFolder="assets"
-        app:lottie_loop="true"
+        android:background="@drawable/acercade"
         android:focusable="true" />
 
     <ImageView
@@ -125,35 +115,16 @@
                 android:focusable="true" />
 
             <TextView
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:visibility="invisible"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:text="@string/o_si_lo_prefieres_inicia_con"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/signInButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"/>
-
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="150dp"
                 android:text="Central Systems ©"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 tools:ignore="HardcodedText" />
+
         </LinearLayout>
     </ScrollView>
-
-
 </LinearLayout>

@@ -4,28 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
-import com.laboratorio.pedidos_lab.conections.VerificarInternet;
-import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
-import com.laboratorio.pedidos_lab.controler.MiPersona;
-import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
-import java.io.FileNotFoundException;
-
 import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFromServerIntoTextView.gCount;
 
 public class VistaFinal extends AppCompatActivity implements View.OnClickListener {

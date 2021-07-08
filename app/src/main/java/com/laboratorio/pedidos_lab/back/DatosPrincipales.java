@@ -1,18 +1,14 @@
 package com.laboratorio.pedidos_lab.back;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,29 +20,23 @@ import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.Lugar;
-import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratorio.pedidos_lab.manage.ModificarUsuario;
 import com.laboratory.views.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-
 import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
 
 public class DatosPrincipales extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvUsuario;
     Button btnParaMi, btnParaOtra, misPedidos;
-    public static String nombre = Login.nombre;
-    public static String URL_USERS = "";
-
+    public static String nombre = Login.nombre, URL_USERS = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +87,9 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                     new ActualizarCliente.Actualizar(this).execute();
 
                 }
+            } else {
+                Toast.makeText(this, "Si entro al else", Toast.LENGTH_SHORT).show();
+                obtenerUsuarioPrincipal();
             }
 
             Intent i = new Intent(this, Lugar.class);
@@ -123,7 +116,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
 
     public void obtenerUsuarioPrincipal() {
 
-        URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_cliente=" + Login.gIdCliente;
+        URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_usuario=" + Login.gIdUsuario;
         Toast.makeText(this, URL_USERS, Toast.LENGTH_SHORT).show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -146,6 +139,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                                             jsonObject1.getInt("dui_usuario");
                                             jsonObject1.getInt("meses_usuario");
                                             jsonObject1.getString("email_usuario");
+                                            Login.gIdCliente = jsonObject1.getInt("id_cliente");
                         }
 
 

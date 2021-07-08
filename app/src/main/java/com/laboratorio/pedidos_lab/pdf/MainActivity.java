@@ -3,7 +3,6 @@ package com.laboratorio.pedidos_lab.pdf;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -12,20 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratory.views.R;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMultipart;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,44 +33,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*textView = findViewById(R.id.textView);
+        textView = findViewById(R.id.textView);
         btnSelect = findViewById(R.id.btnSelect);
-        btnUpload = findViewById(R.id.btnUpload); */
+        btnUpload = findViewById(R.id.btnUpload);
 
         btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                /*Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+                Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
                 chooseFile.setType("application/pdf");
                 chooseFile = Intent.createChooser(chooseFile, "Choose a file");
-                startActivityForResult(chooseFile, REQ_PDF); */
-                MimeBodyPart bodyPart2 = new MimeBodyPart();
-                String path = String.valueOf(new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/" + Login.gIdPedido + " Examen.pdf"))));
-                BodyPart bodyPart1 = new MimeBodyPart();
-                FileDataSource source = new FileDataSource(path);
-                try {
-                    bodyPart2.setDataHandler(new DataHandler(source));
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    bodyPart2.setFileName("NOMBRE_DOCUMENTO");
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-
-                Multipart multipart = new MimeMultipart();
-                try {
-                    multipart.addBodyPart(bodyPart1);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    multipart.addBodyPart(bodyPart2);
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                }
+                startActivityForResult(chooseFile, REQ_PDF);
 
             }
         });
@@ -122,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             Uri path = data.getData();
 
             try {
+
+
                 InputStream inputStream = MainActivity.this.getContentResolver().openInputStream(path);
                 byte[] pdfInBytes = new byte[inputStream.available()];
                 inputStream.read(pdfInBytes);

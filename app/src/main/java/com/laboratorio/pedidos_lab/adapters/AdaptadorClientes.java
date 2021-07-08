@@ -93,7 +93,6 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
             @Override
             public void onClick(View v) {
 
-
                 Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
 
                 Intent i = new Intent(cContext, Lugar.class);

@@ -61,7 +61,7 @@ public class ObtenerCategorias extends AppCompatActivity {
                     .setPositiveBtnBackground(R.color.rosado)
                     .setPositiveBtnText("Regresar")
                     .setNegativeBtnBackground(R.color.rojo)
-                    .setGifResource(R.drawable.regresar)
+                    .setGifResource(R.drawable.regresarflecha)
                     .isCancellable(false)
                     .OnPositiveClicked(() -> {
 

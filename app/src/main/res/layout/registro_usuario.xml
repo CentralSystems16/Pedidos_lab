@@ -23,16 +23,24 @@
         android:textColor="@color/black"
         android:text="longitud" />
 
-    <com.airbnb.lottie.LottieAnimationView
+    <ImageButton
+        android:id="@+id/btnCancelarRegistro"
+        android:layout_width="35dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/regresarflecha"
+        android:text="@string/btnCancelarRegistro"
+        app:backgroundTint="@color/black"
+        android:textStyle="bold" />
+
+    <ImageView
         android:id="@+id/about"
         android:clickable="true"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:lottie_autoPlay="true"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/user"
         android:layout_gravity="center"
-        app:lottie_fileName="profile.json"
-        app:lottie_imageAssetsFolder="assets"
-        app:lottie_loop="true"
         android:focusable="true" />
 
     <ScrollView
@@ -246,7 +254,7 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/caja_texto_circular"
-                android:hint="Dirección"
+                android:hint="Dirección (Opcional)"
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp"
@@ -263,10 +271,10 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/caja_texto_circular"
-                android:text="AGREGAR DIRECCIÓN DESDE MAPS"
+                android:text="AGREGAR DIRECCIÓN DESDE MAPS (OPCIONAL)"
                 android:textStyle="bold"
-                android:padding="5dp"
-                android:drawableEnd="@drawable/placeholder"
+                android:padding="10dp"
+                android:drawableEnd="@drawable/maps"
                 app:backgroundTint="@color/bg_fingerprint" />
 
             <EditText
@@ -295,20 +303,8 @@
                 android:background="@drawable/boton_circular"
                 android:text="@string/btnRegistrarme"
                 android:textStyle="bold"
+                android:layout_marginBottom="10dp"
                 app:backgroundTint="#4CAF50" />
-
-            <Button
-                android:id="@+id/btnCancelarRegistro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/boton_circular"
-                android:text="@string/btnCancelarRegistro"
-                app:backgroundTint="#607D8B"
-                android:textStyle="bold" />
-
 
         </LinearLayout>
 
