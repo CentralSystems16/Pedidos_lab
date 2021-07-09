@@ -21,10 +21,9 @@ import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
 public class ModificarUsuario extends AppCompatActivity {
 
-    EditText numero, nombre, email, edad, meses, dui, direccion;
+    EditText numero, nombre, email, edad, meses, dui, direccion, password;
     Button changePassword, completeEdit;
     TextView nacimiento;
-    RadioGroup sexo;
     int gEstadoUs;
 
     @Override
@@ -56,8 +55,8 @@ public class ModificarUsuario extends AppCompatActivity {
         direccion = findViewById(R.id.EditDireccion);
         direccion.setText(Login.direccion);
 
-        changePassword = findViewById(R.id.changePassword);
-        changePassword.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), changePass.class)));
+        password = findViewById(R.id.EditPass);
+        password.setText(Login.contra);
 
         completeEdit = findViewById(R.id.completeEdit);
         completeEdit.setOnClickListener(v -> {
@@ -71,6 +70,7 @@ public class ModificarUsuario extends AppCompatActivity {
                     + "&dui_usuario=" + dui.getText().toString()
                     + "&meses_usuario=" +  meses.getText().toString()
                     + "&direccion_cliente=" + direccion.getText().toString()
+                    + "&password_usuario=" + password.getText().toString()
                     + "&id_usuario=" + Login.gIdUsuario;
             ejecutarServicio(url);
             System.out.println("La URL es: " + url);

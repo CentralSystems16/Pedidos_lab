@@ -49,55 +49,12 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
 
         clientesViewHolder.tvNombre.setText(listaClientes.get(posicion).getNombre());
 
-        if (posicion == 0){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(233, 30,99)));
-        }
+        clientesViewHolder.seleccionar.setOnClickListener(v -> {
 
-        if (posicion == 1){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(0, 150,136)));
-        }
+            Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
 
-        if (posicion == 2){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(139, 195,74)));
-        }
-
-        if (posicion == 3){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(121, 85,72)));
-        }
-
-        if (posicion == 4){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(0, 0,0)));
-        }
-
-        if (posicion == 5){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(3, 169,244)));
-        }
-
-        if (posicion == 6){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(96, 125,139)));
-        }
-
-        if (posicion == 7){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 235,59)));
-        }
-
-        if (posicion == 8){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(233, 30,99)));
-        }
-
-        if (posicion == 9){
-            clientesViewHolder.itemView.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(187, 134,252)));
-        }
-
-        clientesViewHolder.seleccionar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
-
-                Intent i = new Intent(cContext, Lugar.class);
-                cContext.startActivity(i);
-            }
+            Intent i = new Intent(cContext, Lugar.class);
+            cContext.startActivity(i);
         });
     }
 

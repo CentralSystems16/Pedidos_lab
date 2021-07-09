@@ -41,7 +41,8 @@ import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFro
 
 public class ObtenerAllProductos extends AppCompatActivity {
 
-    LottieAnimationView botonContinuar, botonRegresar;
+    LottieAnimationView botonContinuar;
+    ImageButton botonRegresar;
     EditText etBuscador;
     RecyclerView rvLista = null;
     AdaptadorAllProductos adaptador = null;
@@ -50,6 +51,8 @@ public class ObtenerAllProductos extends AppCompatActivity {
     public static final String URL_PRODUCTOS = "http://pedidoslab.6te.net/consultas/ObtenerTodosProd.php";
     public static TextView tvCantidadAllProductos;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
+
+    private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

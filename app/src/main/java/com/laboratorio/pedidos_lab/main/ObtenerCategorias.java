@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,8 @@ public class ObtenerCategorias extends AppCompatActivity {
     AdaptadorCategorias adaptadorCat;
     List<Categorias> listaCategorias;
     Button etBuscador;
-    LottieAnimationView botonContinuar, botonRegresar;
+    LottieAnimationView botonContinuar;
+    ImageButton botonRegresar;
     public static final String URL_CATEGORIAS = "http://pedidoslab.6te.net/consultas/obtenerCategorias.php"+"?estado_categoria=1";
     public static int gIdCategoria;
     public static TextView tvCantProd3;

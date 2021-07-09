@@ -29,10 +29,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
-        android:background="@drawable/regresarflecha"
-        android:text="@string/btnCancelarRegistro"
-        app:backgroundTint="@color/black"
-        android:textStyle="bold" />
+        android:background="@drawable/regresarflecha"/>
 
     <ImageView
         android:id="@+id/about"

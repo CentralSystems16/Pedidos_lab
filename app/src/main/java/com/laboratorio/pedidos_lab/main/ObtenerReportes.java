@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +47,7 @@ public class ObtenerReportes extends AppCompatActivity {
         setContentView(R.layout.obtener_reportes);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        final LottieAnimationView regresa = findViewById(R.id.regresarDatos);
+        final ImageButton regresa = findViewById(R.id.regresarDatos);
         regresa.setOnClickListener(v -> {
             Intent i = new Intent(getApplicationContext(), DatosPrincipales.class);
             startActivity(i);

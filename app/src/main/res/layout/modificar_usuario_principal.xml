@@ -140,6 +140,22 @@
                 android:textSize="13sp" />
 
             <EditText
+                android:id="@+id/EditPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
                 android:id="@+id/EditDireccion"
                 android:layout_width="match_parent"
                 android:layout_marginEnd="60dp"
@@ -148,7 +164,7 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/caja_texto_circular"
-                android:hint="Dirección exacta"
+                android:hint="Dirección (Opcional)"
                 android:inputType="textMultiLine"
                 android:padding="12sp"
                 android:textColor="@color/black"
@@ -172,30 +188,40 @@
                 android:textSize="13sp" />
 
             <Button
-                android:id="@+id/completeEdit"
+                android:id="@+id/EditMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/caja_texto_circular"
-                android:text="COMPLETAR"
+                android:text="EDITAR DIRECCIÓN DESDE MAPS"
                 android:textStyle="bold"
-                app:backgroundTint="#348C37" />
+                app:backgroundTint="@color/bg_fingerprint" />
 
             <Button
-                android:id="@+id/changePassword"
+                android:id="@+id/completeEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="60dp"
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/caja_texto_circular"
-                android:text="CAMBIAR CONTRASEÑA"
+                android:text="MODIFICAR"
                 android:textStyle="bold"
-                android:padding="5dp"
-                android:drawableEnd="@drawable/padlock"
-                app:backgroundTint="@color/bg_fingerprint" />
+                app:backgroundTint="#348C37" />
+
+            <Button
+                android:id="@+id/closeSesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/caja_texto_circular"
+                android:text="CERRAR SESION"
+                android:textStyle="bold"
+                app:backgroundTint="@color/rojo" />
 
         </LinearLayout>
     </ScrollView>

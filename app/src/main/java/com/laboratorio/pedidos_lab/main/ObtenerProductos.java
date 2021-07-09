@@ -2,9 +2,11 @@ package com.laboratorio.pedidos_lab.main;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -24,6 +26,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorProductos;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
@@ -41,7 +45,8 @@ import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFro
 
 public class ObtenerProductos extends AppCompatActivity {
 
-    LottieAnimationView botonContinuar, botonRegresar;
+    LottieAnimationView botonContinuar;
+    ImageButton botonRegresar, microfono, btnScan;
     EditText etBuscador;
     RecyclerView rvLista = null;
     @SuppressLint("StaticFieldLeak")
@@ -56,11 +61,28 @@ public class ObtenerProductos extends AppCompatActivity {
     List<Productos> carroCompras = new ArrayList<>();
     public static TextView tvCantProductos;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
+    private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_productos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        microfono = findViewById(R.id.microfono);
+
+        btnScan = findViewById(R.id.btnScan);
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(ObtenerProductos.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+                integrator.setPrompt("Lector - CDP");
+                integrator.setCameraId(0);  // Use a specific camera of the device
+                integrator.setBeepEnabled(true);
+                integrator.setBarcodeImageEnabled(true);
+                integrator.initiateScan();
+            }
+        });
 
         tvCantProductos = findViewById(R.id.tvCantProductos);
         tvCantProductos.setText(String.valueOf(formatoDecimal.format(gCount)));
@@ -111,6 +133,54 @@ public class ObtenerProductos extends AppCompatActivity {
 
         obtenerProductos();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        //Reconocimiento de voz
+        switch (requestCode) {
+            case RECOGNIZE_SPEECH_ACTIVITY:
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> speech = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String strSpeech2Text = speech.get(0);
+                    etBuscador.setText(strSpeech2Text);
+                }
+                break;
+            default:
+                break;
+        }
+
+        //Codigo de barra y QR
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                etBuscador.setText(result.getContents());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    public void onClickImgBtnHablar(View v) {
+        Intent intentActionRecognizeSpeech = new Intent(
+                RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        // Configura el Lenguaje (Español-México)
+        intentActionRecognizeSpeech.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL, "es-MX");
+        try {
+            startActivityForResult(intentActionRecognizeSpeech,
+                    RECOGNIZE_SPEECH_ACTIVITY);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    "Tú dispositivo no soporta el reconocimiento por voz",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void obtenerProductos() {

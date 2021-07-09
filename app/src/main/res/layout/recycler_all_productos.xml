@@ -21,31 +21,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.airbnb.lottie.LottieAnimationView
+            <ImageButton
                 android:id="@+id/flecha3"
-                android:clickable="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:lottie_autoPlay="true"
-                app:lottie_fileName="arrow.json"
-                app:lottie_imageAssetsFolder="assets"
-                app:lottie_loop="true"
-                android:focusable="true" />
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/regresarflecha"/>
 
             <EditText
                 android:id="@+id/etBuscador2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="65dp"
                 android:textSize="15sp"
                 android:background="@drawable/caja_texto_circular"
                 android:drawableStart="?android:attr/actionModeWebSearchDrawable"
-                android:hint="Ingrese el nombre del exámen"
+                android:hint="Buscar exámen"
                 app:backgroundTint="#0097A7"
                 android:padding="10dp"
                 tools:ignore="NewApi" />
+
+            <ImageButton
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="220dp"
+                android:layout_width="45dp"
+                app:backgroundTint="#0097A7"
+                android:src="@drawable/microphone"
+                android:layout_height="45dp"/>
+
+            <ImageButton
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="260dp"
+                android:layout_width="45dp"
+                app:backgroundTint="#0097A7"
+                android:src="@drawable/barcodesearch"
+                android:layout_height="45dp"/>
 
             <FrameLayout
                 android:layout_width="50dp"

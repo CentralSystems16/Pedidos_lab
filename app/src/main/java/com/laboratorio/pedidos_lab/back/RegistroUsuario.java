@@ -94,7 +94,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
         maps = findViewById(R.id.DirectMaps);
         maps.setOnClickListener(v -> new FancyGifDialog.Builder(RegistroUsuario.this)
-                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi ubicación' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
+                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
                 .setNegativeBtnText("No estoy en mi domicilio")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Estoy en mi domicilio")
