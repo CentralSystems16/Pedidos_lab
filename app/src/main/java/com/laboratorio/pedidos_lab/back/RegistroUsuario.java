@@ -70,8 +70,6 @@ public class RegistroUsuario extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
 
-        } else {
-            iniciarLocalizacion();
         }
 
         botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
@@ -102,6 +100,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 .setGifResource(R.drawable.mapgif)
                 .isCancellable(false)
                 .OnPositiveClicked(() -> {
+                    iniciarLocalizacion();
                     Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
 
                 })
@@ -298,10 +297,6 @@ public class RegistroUsuario extends AppCompatActivity {
             }
 
             else if (me.equals("")){
-                Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (di.equals("")){
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             }
 

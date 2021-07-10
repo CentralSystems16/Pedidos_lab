@@ -4,19 +4,18 @@ import java.io.Serializable;
 
 public class Productos implements Serializable {
 
-    int idProducto;
-    String nombreProducto;
+    int idProducto, opciones;
+    String nombreProducto, imgProducto, barcode;
     Double precioProducto;
     boolean isSelect = false;
-    int opciones;
-    String imgProducto;
 
-    public Productos(int idProducto, String nombreProducto, Double precioProducto, int opciones, String imgProducto) {
+    public Productos(int idProducto, String nombreProducto, Double precioProducto, int opciones, String imgProducto, String barCode) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.precioProducto = precioProducto;
         this.opciones = opciones;
         this.imgProducto = imgProducto;
+        this.barcode = barCode;
 
     }
 
@@ -62,5 +61,9 @@ public class Productos implements Serializable {
 
     public String getImgProducto() {
         return imgProducto;
+    }
+
+    public String getBarCode() {
+        return barcode;
     }
 }

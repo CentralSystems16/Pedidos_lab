@@ -57,16 +57,33 @@ public class ObtenerProductos extends AppCompatActivity {
     public static int gIdProducto;
     public static double gPrecio, gDetMonto, gDetMontoIva;
     public static int gOpciones = 0;
-    public static String gNombreProd;
+    public static String gNombreProd, barcode;
     List<Productos> carroCompras = new ArrayList<>();
     public static TextView tvCantProductos;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
     private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
+    TextView txtBarcode;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_productos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        txtBarcode = findViewById(R.id.barcodetxt);
+        txtBarcode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filtrar2(s.toString());
+            }
+        });
 
         microfono = findViewById(R.id.microfono);
 
@@ -160,7 +177,7 @@ public class ObtenerProductos extends AppCompatActivity {
                 Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                etBuscador.setText(result.getContents());
+                txtBarcode.setText(result.getContents());
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -210,7 +227,8 @@ public class ObtenerProductos extends AppCompatActivity {
                                             jsonObject1.getString("nombre_producto"),
                                             jsonObject1.getDouble("precio_producto"),
                                             jsonObject1.getInt("opciones"),
-                                            jsonObject1.getString("img_producto")));
+                                            jsonObject1.getString("img_producto"),
+                                            jsonObject1.getString("barcode")));
                         }
 
                         adaptador = new AdaptadorProductos(this, listaProductos, carroCompras);
@@ -237,13 +255,28 @@ public class ObtenerProductos extends AppCompatActivity {
         ArrayList<Productos> filtrarLista = new ArrayList<>();
 
         for (Productos usuario : listaProductos) {
-            if (usuario.getNombreProducto().toLowerCase().contains(texto.toLowerCase())) {
+            if (usuario.getNombreProducto().toLowerCase().contains(texto.toLowerCase()) ) {
                 filtrarLista.add(usuario);
             }
+
         }
 
         adaptador.filtrar(filtrarLista);
     }
+
+    public void filtrar2(String texto) {
+        ArrayList<Productos> filtrarLista = new ArrayList<>();
+
+        for (Productos usuario : listaProductos) {
+            if (usuario.getBarCode().toLowerCase().contains(texto.toLowerCase()) ) {
+                filtrarLista.add(usuario);
+            }
+
+        }
+
+        adaptador.filtrar(filtrarLista);
+    }
+
 
     public void onBackPressed(){
 

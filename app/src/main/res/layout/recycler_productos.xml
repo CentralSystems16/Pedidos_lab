@@ -8,6 +8,13 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <EditText
+        android:id="@+id/barcodetxt"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -51,7 +58,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLista"
         android:layout_width="match_parent"
-        android:layout_height="610dp"
+        android:layout_height="600dp"
         android:layout_marginTop="10dp" />
 
     <androidx.appcompat.widget.Toolbar
@@ -62,13 +69,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/flecha2"
                 android:layout_width="35dp"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/regresarflecha" />
 
             <FrameLayout
@@ -113,5 +120,4 @@
             </FrameLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
 </LinearLayout>

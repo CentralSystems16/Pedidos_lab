@@ -60,6 +60,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         productosViewHolder.tvNombre.setText(listaProductos.get(i).getNombreProducto());
         productosViewHolder.tvPrecio.setText(Double.toString(listaProductos.get(i).getPrecioProducto()));
         Glide.with(context).load(user.getImgProducto()).into(productosViewHolder.imgItem);
+        productosViewHolder.barcode.setText(listaProductos.get(i).getBarCode());
 
         //TODO: Se le asigna un color al cardview cuando posteriormente sea seleccionado
         //productosViewHolder.view.setBackgroundTintList(ColorStateList.valueOf(user.isSelect() ? Color.GRAY : Color.rgb(0, 151, 167)));
@@ -85,6 +86,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
             ObtenerProductos.gPrecio = listaProductos.get(i).getPrecioProducto();
             ObtenerProductos.gDetMonto = ObtenerProductos.gPrecio / 1.13;
             ObtenerProductos.gDetMontoIva = ObtenerProductos.gDetMonto * 0.13;
+            ObtenerProductos.barcode = listaProductos.get(i).getBarCode();
 
             ObtenerProductos.gOpciones = listaProductos.get(i).getOpciones();
 
@@ -134,9 +136,10 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
 
     public static class ProductosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvNombre, tvPrecio;
+        TextView tvNombre, tvPrecio, barcode;
         public View view;
         ImageView imgItem;
+
 
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -146,11 +149,12 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             imgItem = itemView.findViewById(R.id.imgItemProd);
+            barcode = itemView.findViewById(R.id.barcode);
         }
     }
 
-    public void filtrar(ArrayList<Productos> filtroUsuarios) {
-        listaProductos = filtroUsuarios;
+    public void filtrar(ArrayList<Productos> filtroProductos) {
+        listaProductos = filtroProductos;
         notifyDataSetChanged();
     }
 }
