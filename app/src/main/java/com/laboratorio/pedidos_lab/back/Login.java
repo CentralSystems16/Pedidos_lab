@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     ImageView logoLabLogin;
     BiometricManager mBiometricManager;
     public static int gIdCliente, gIdUsuario, gIdPedido, gIdFacDetPedido, edad, dui, meses;
-    public static String nombre, email, sexo, nacimiento, direccion, latitud, longitud, usuario, contra;
+    public static String nombre, email, sexo, nacimiento, direccion, latitud, longitud, usuario, contra, pass, repeatContra;
     private FirebaseRemoteConfig remoteConfig;
 
     @Override
@@ -156,6 +156,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         gIdUsuario = jsonResponse.getInt("id_usuario");
                         nombre = jsonResponse.getString("nombre_usuario");
                         email = jsonResponse.getString("email_usuario");
+                        pass = jsonResponse.getString("password_usuarios");
+                        repeatContra = jsonResponse.getString("password_repeat_usuario");
                         sexo = jsonResponse.getString("sexo_usuario");
                         gIdCliente = jsonResponse.getInt("id_cliente");
                         nacimiento = jsonResponse.getString("nacimiento_usuario");
@@ -170,6 +172,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                         intent.putExtra("id_usuario", gIdUsuario);
                         intent.putExtra("nombre_usuario", nombre);
                         intent.putExtra("email_usuario",email);
+                        intent.putExtra("password_repeat_usuario",repeatContra);
                         intent.putExtra("sexo_usuario",sexo);
                         intent.putExtra("id_cliente",gIdCliente);
                         intent.putExtra("nacimiento_usuario",nacimiento);

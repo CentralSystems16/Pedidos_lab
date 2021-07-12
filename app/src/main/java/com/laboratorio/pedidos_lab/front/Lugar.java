@@ -150,4 +150,9 @@ public class Lugar extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
+
 }

@@ -20,12 +20,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -33,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,15 +67,6 @@ public class RegistroUsuario extends AppCompatActivity {
         tvLatitud = findViewById(R.id.latitud);
         tvLongitud = findViewById(R.id.longitud);
 
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-
-        }
-
         botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
         botonCancelar = findViewById(R.id.btnCancelarRegistro);
         errorPass = findViewById(R.id.errorPass);
@@ -92,19 +87,15 @@ public class RegistroUsuario extends AppCompatActivity {
 
         maps = findViewById(R.id.DirectMaps);
         maps.setOnClickListener(v -> new FancyGifDialog.Builder(RegistroUsuario.this)
-                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
+                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
                 .setNegativeBtnText("No estoy en mi domicilio")
                 .setPositiveBtnBackground(R.color.rosado)
                 .setPositiveBtnText("Estoy en mi domicilio")
                 .setNegativeBtnBackground(R.color.rojo)
                 .setGifResource(R.drawable.mapgif)
                 .isCancellable(false)
-                .OnPositiveClicked(() -> {
-                    iniciarLocalizacion();
-                    Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
-
-                })
-                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this,"Cancelado",Toast.LENGTH_LONG).show())
+                .OnPositiveClicked(this::iniciarLocalizacion)
+                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this, "Cancelado", Toast.LENGTH_LONG).show())
                 .build());
 
         regPhoneNo.addTextChangedListener(new TextWatcher() {
@@ -124,13 +115,12 @@ public class RegistroUsuario extends AppCompatActivity {
                 try {
                     number = Integer.parseInt(number1);
 
-                    if (regPhoneNo.length()<8 || regPhoneNo.length()>8){
+                    if (regPhoneNo.length() < 8 || regPhoneNo.length() > 8) {
                         errorNumber.setText("El numero no es correcto");
-                    } else if (regPhoneNo.length() == 8){
+                    } else if (regPhoneNo.length() == 8) {
                         errorNumber.setText("");
                     }
-                }catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     // handle the exception
                 }
             }
@@ -150,18 +140,15 @@ public class RegistroUsuario extends AppCompatActivity {
 
                 String edad = ed.getText().toString();
 
-                try
-                {
+                try {
                     errorEdad = Integer.parseInt(edad);
 
-                    if (errorEdad < 18){
+                    if (errorEdad < 18) {
                         errorEdad2.setText(R.string.edadError);
-                    } else if (errorEdad > 17){
+                    } else if (errorEdad > 17) {
                         errorEdad2.setText("");
                     }
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     // handle the exception
                 }
             }
@@ -183,18 +170,15 @@ public class RegistroUsuario extends AppCompatActivity {
 
                 String me = mes.getText().toString();
 
-                try
-                {
+                try {
                     meses = Integer.parseInt(me);
 
-                    if (meses < 1 || meses > 11){
+                    if (meses < 1 || meses > 11) {
                         errorEdad2.setText("El rango de meses debe estar entre 1 y 11");
-                    } else if (meses > 0 || meses < 11){
+                    } else if (meses > 0 || meses < 11) {
                         errorEdad2.setText("");
                     }
-                }
-                catch (NumberFormatException e)
-                {
+                } catch (NumberFormatException e) {
                     // handle the exception
                 }
 
@@ -259,9 +243,9 @@ public class RegistroUsuario extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
 
-                Log.d(TAG, "onDateSet: d/MMMM/yyyy: " + day + month  + year);
+                Log.d(TAG, "onDateSet: d/MMMM/yyyy: " + day + month + year);
 
-                String date  = day + "/" + month + "/" + year;
+                String date = day + "/" + month + "/" + year;
                 mDisplayDate.setText(date);
             }
         };
@@ -279,7 +263,7 @@ public class RegistroUsuario extends AppCompatActivity {
             String di = dir.getText().toString();
 
             int radiogroupSexo = rg.getCheckedRadioButtonId();
-            if (radiogroupSexo < 0){
+            if (radiogroupSexo < 0) {
 
             } else {
                 View rbM = rg.findViewById(radiogroupSexo);
@@ -288,63 +272,37 @@ public class RegistroUsuario extends AppCompatActivity {
                 select = r.getText().toString();
             }
 
-            if (nombre.equals("")){
+            if (nombre.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (id.equals("")){
+            } else if (id.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (me.equals("")){
+            } else if (me.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (usuario.equals("")){
+            } else if (usuario.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (password.equals("")){
+            } else if (password.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (passwordRepeat.equals("")){
+            } else if (passwordRepeat.equals("")) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (password.length() < 6){
+            } else if (password.length() < 6) {
                 Toast.makeText(this, "La contraseña debe contener al menos 6 carácteres", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (!password.equals(passwordRepeat)){
+            } else if (!password.equals(passwordRepeat)) {
                 Toast.makeText(this, "Las contraseñas no coiciden", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (edad.isEmpty()){
+            } else if (edad.isEmpty()) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (fechaNacimiento.isEmpty()){
+            } else if (fechaNacimiento.isEmpty()) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
 
-            }
-
-            else if (select.isEmpty()){
+            } else if (select.isEmpty()) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (errorEdad < 18){
+            } else if (errorEdad < 18) {
                 Toast.makeText(this, "Debe ser mayor de 18 años", Toast.LENGTH_SHORT).show();
-            }
-
-            else if (meses < 1 || meses > 11){
+            } else if (meses < 1 || meses > 11) {
                 Toast.makeText(this, "El rango de meses debe estar entre 1 y 11", Toast.LENGTH_SHORT).show();
 
-            } else if (regPhoneNo.length()<8 || regPhoneNo.length()>8){
+            } else if (regPhoneNo.length() < 8 || regPhoneNo.length() > 8) {
                 Toast.makeText(this, "Parece que el numero no es correcto.", Toast.LENGTH_SHORT).show();
-            }
-
-            else {
+            } else {
                 String phoneNo = regPhoneNo.getText().toString();
                 Intent i = new Intent(getApplicationContext(), VerificarNumero.class);
                 i.putExtra("phoneNo", phoneNo);
@@ -365,7 +323,7 @@ public class RegistroUsuario extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
 
         },
-                error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()){
+                error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()) {
             @Override
             protected Map<String, String> getParams() {
 
@@ -383,7 +341,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 String longitud = Localizacion.longitud1;
 
                 int radiogroupSexo = rg.getCheckedRadioButtonId();
-                if (radiogroupSexo < 0){
+                if (radiogroupSexo < 0) {
 
                 } else {
                     View rbM = rg.findViewById(radiogroupSexo);
@@ -427,8 +385,11 @@ public class RegistroUsuario extends AppCompatActivity {
         final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         if(!gpsEnabled) {
+            Toast.makeText(this, "Por favor, activa tu GPS y vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(settingsIntent);
+        } else {
+            Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
         }
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

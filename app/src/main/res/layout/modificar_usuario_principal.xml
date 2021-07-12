@@ -9,6 +9,22 @@
     android:background="@color/white"
     tools:context="com.laboratorio.pedidos_lab.manage.ModificarUsuario">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitudEdit"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="latitud" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitudEdit"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="longitud" />
+
 <TextView
     android:text="EDITAR INFORMACIÓN"
     android:textColor="@color/black"
@@ -150,6 +166,22 @@
                 android:autofillHints="EdadRegistro"
                 android:background="@drawable/caja_texto_circular"
                 android:hint="Contraseña"
+                android:inputType="textPassword"
+                android:padding="12sp"
+                android:textColor="@color/black"
+                android:textColorHint="#9F807E7E"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/EditRepeatPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="EdadRegistro"
+                android:background="@drawable/caja_texto_circular"
+                android:hint="Repetir contraseña"
                 android:inputType="textPassword"
                 android:padding="12sp"
                 android:textColor="@color/black"

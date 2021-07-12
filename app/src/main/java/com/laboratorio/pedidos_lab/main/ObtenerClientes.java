@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorClientes;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorReportes;
+import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.back.OtraPersona;
 import com.laboratorio.pedidos_lab.model.Clientes;
@@ -42,11 +44,21 @@ public class ObtenerClientes extends AppCompatActivity {
     String URL_CLIENTES = "";
     public static String nombreCliente;
     public static int idCliente;
+    ImageButton flecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_obtener_clientes);
+
+        flecha = findViewById(R.id.flecha232);
+        flecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), DatosPrincipales.class);
+                startActivity(i);
+            }
+        });
 
         agregar = findViewById(R.id.agregarCliente);
         agregar.setOnClickListener(new View.OnClickListener() {

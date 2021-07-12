@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitudCli"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="latitud" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitudCli"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="longitud" />
 
    <ScrollView
         android:layout_width="match_parent"
@@ -26,43 +42,33 @@
         android:gravity="center"
         android:textStyle="bold" />
 
-        <TextView
-            android:layout_marginTop="50dp"
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:id="@+id/tvNombreCompleto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nombreCompleto"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:src="@drawable/user" />
 
         <EditText
             android:layout_gravity="center"
+            android:gravity="center"
             android:id="@+id/etNombreCompleto"
             style="@android:style/Widget.Holo.Light.AutoCompleteTextView"
-            android:layout_width="275dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/caja_texto_circular"
-            android:inputType="textPersonName|textCapWords"
-            android:padding="5sp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:id="@+id/tvEdad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edad"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="20dp"
+            android:hint="Nombre completo"
+            android:textColorHint="#9F807E7E"
+            android:background="@drawable/caja_texto_circular"
+            android:inputType="textPersonName|textCapWords"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:padding="12sp"
+            android:textSize="13sp"
+            android:textColor="@color/black"/>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -76,7 +82,7 @@
             android:gravity="center"
             android:inputType="number"
             android:padding="5sp"
-            android:layout_marginStart="75dp"
+            android:layout_marginStart="50dp"
             android:hint="Años"
             android:textColor="@color/black"
             android:textColorHint="#9F807E7E"
@@ -92,26 +98,17 @@
             android:gravity="center"
             android:inputType="number"
             android:padding="5sp"
+            android:layout_marginStart="25dp"
             android:hint="Meses"
             android:textColor="@color/black"
             android:textColorHint="#9F807E7E"
             android:textSize="13sp" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/tvSexo"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:text="@string/sexo"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <RadioGroup
             android:layout_gravity="center"
             android:id="@+id/rgSexoClientes"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,78 +136,106 @@
 
         <TextView
             android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Fecha de nacimiento:"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_gravity="center"
             android:id="@+id/tvDateCliente"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:textAlignment="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
             android:layout_height="wrap_content"
             android:background="@drawable/caja_texto_circular"
             android:clickable="true"
             android:inputType="date"
             android:maxLines="1"
             android:padding="12sp"
+            android:layout_marginTop="20dp"
+            android:hint="Fecha de nacimiento"
             android:textColor="@color/black"
             android:textColorHint="#9F807E7E"
             android:textSize="13sp" />
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:id="@+id/tvEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/EmailCliente"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <EditText
             android:layout_gravity="center"
             android:id="@+id/etEmail"
             style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-            android:layout_width="255dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Email (Opcional)"
+            android:textColorHint="#9F807E7E"
             android:background="@drawable/caja_texto_circular"
             android:inputType="textEmailAddress"
-            android:padding="5sp"
+            android:padding="12sp"
+            android:gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:layout_gravity="center"
+            android:id="@+id/etDireccion"
+            style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dirección (Opcional)"
+            android:textColorHint="#9F807E7E"
+            android:background="@drawable/caja_texto_circular"
+            android:inputType="textEmailAddress"
+            android:padding="12sp"
+            android:gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:textSize="13sp"
             android:textColor="@color/black" />
 
         <Button
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:id="@+id/botonContinuar"
-            android:layout_width="255dp"
+            android:id="@+id/DirectMapsCliente"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/boton_circular"
-            android:padding="5sp"
-            android:text="@string/btnContinuarSegundo"
-            android:gravity="center"
-            app:backgroundTint="#4CAF50" />
-
-        <Button
-            android:layout_gravity="center"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="55dp"
             android:layout_marginTop="10dp"
-            android:id="@+id/botonRegres"
-            android:layout_width="255dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/boton_circular"
-            android:padding="5sp"
-            android:text="REGRESAR"
-            android:gravity="center"
-            app:backgroundTint="#607D8B" />
+            android:background="@drawable/caja_texto_circular"
+            android:text="AGREGAR DIRECCIÓN DESDE MAPS (OPCIONAL)"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:drawableEnd="@drawable/maps"
+            app:backgroundTint="@color/bg_fingerprint" />
 
     </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#4CAF50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/botonRegres"
+                android:layout_width="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="40dp"
+                android:background="@drawable/regresarflecha"
+                android:text="REGRESAR"/>
+
+            <Button
+                android:id="@+id/botonContinuar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:layout_marginStart="100dp"
+                android:text="@string/btnContinuarSegundo"
+                android:gravity="center"
+                app:backgroundTint="#4A9F4E" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+</RelativeLayout>
