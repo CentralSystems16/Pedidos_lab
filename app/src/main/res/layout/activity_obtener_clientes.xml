@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    tools:context="com.laboratorio.pedidos_lab.main.ObtenerClientes">
+    android:background="@color/white">
 
     <TextView
         android:text="Registro de otras personas"
@@ -22,18 +19,36 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaClientes"
         android:layout_width="match_parent"
-        android:layout_height="600dp"/>
+        android:layout_marginTop="60dp"
+        android:layout_height="615dp"/>
 
-    <Button
-        android:id="@+id/agregarCliente"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/caja_texto_circular"
-        app:backgroundTint="#4CAF50"
-        android:layout_marginStart="20sp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_gravity="bottom"
-        android:text="Agregar nueva" />
+        android:layout_alignParentBottom="true"
+        android:background="#4CAF50">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/flecha2"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/regresarflecha" />
+
+            <Button
+                android:id="@+id/agregarCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4A9F4E"
+                android:layout_marginStart="120dp"
+                android:drawableEnd="@drawable/adduser"
+                android:drawablePadding="5dp"
+                android:text="Agregar" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+</RelativeLayout>

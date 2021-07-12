@@ -34,16 +34,17 @@ import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFro
 
 public class ObtenerCategorias extends AppCompatActivity {
 
+    public static final String URL_CATEGORIAS = "http://pedidoslab.6te.net/consultas/obtenerCategorias.php"+"?estado_categoria=1";
+    public static int gIdCategoria;
+    public static TextView tvCantProd3;
     public static final int MY_DEFAULT_TIMEOUT = 15000;
+
     RecyclerView rvListaCategorias;
     AdaptadorCategorias adaptadorCat;
     List<Categorias> listaCategorias;
     Button etBuscador;
     LottieAnimationView botonContinuar;
     ImageButton botonRegresar;
-    public static final String URL_CATEGORIAS = "http://pedidoslab.6te.net/consultas/obtenerCategorias.php"+"?estado_categoria=1";
-    public static int gIdCategoria;
-    public static TextView tvCantProd3;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +59,12 @@ public class ObtenerCategorias extends AppCompatActivity {
         botonRegresar.setOnClickListener(v -> {
 
             new FancyGifDialog.Builder(this)
-                    .setTitle("Solo regresa si la orden la quieres realizar para otra persona, de lo contrario se borrara la que hayas hecho anteriormente")
+                    .setTitle("Solo regresa si la orden la quieres realizar para otra persona, si ya has agregado productos a tu carrito, puede que se eliminen y debas comenzar de nuevo")
                     .setNegativeBtnText("Cancelar")
                     .setPositiveBtnBackground(R.color.rosado)
                     .setPositiveBtnText("Regresar")
                     .setNegativeBtnBackground(R.color.rojo)
-                    .setGifResource(R.drawable.regresarflecha)
+                    .setGifResource(R.drawable.returnpedido)
                     .isCancellable(false)
                     .OnPositiveClicked(() -> {
 
@@ -73,7 +74,6 @@ public class ObtenerCategorias extends AppCompatActivity {
                     })
                     .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
                     .build();
-
 
         });
 
@@ -156,5 +156,4 @@ public class ObtenerCategorias extends AppCompatActivity {
     public void onBackPressed(){
 
     }
-
 }

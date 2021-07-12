@@ -10,10 +10,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.back.RegistroUsuario;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratory.views.R;
+import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,7 +46,23 @@ public class AgregarDireccion extends AppCompatActivity {
         maps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                new FancyGifDialog.Builder(AgregarDireccion.this)
+                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
+                        .setNegativeBtnText("No estoy en mi domicilio")
+                        .setPositiveBtnBackground(R.color.rosado)
+                        .setPositiveBtnText("Estoy en mi domicilio")
+                        .setNegativeBtnBackground(R.color.rojo)
+                        .setGifResource(R.drawable.mapgif)
+                        .isCancellable(false)
+                        .OnPositiveClicked(() -> {
+                            RegistroUsuario registroUsuario = new RegistroUsuario();
+                            registroUsuario.iniciarLocalizacion();
+                            new ActualizarDireccionMaps(getApplicationContext()).execute();
+                            Toast.makeText(AgregarDireccion.this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
+
+                        })
+                        .OnNegativeClicked(() -> Toast.makeText(AgregarDireccion.this,"Cancelado",Toast.LENGTH_LONG).show())
+                        .build();
 
             }
         });
@@ -55,8 +74,12 @@ public class AgregarDireccion extends AppCompatActivity {
         continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ActualizarDireccion(getApplicationContext()).execute();
-                startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
+                if (direccion.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Por favor, agrega tu dirección para continuar.", Toast.LENGTH_SHORT).show();
+                } else {
+                    new ActualizarDireccion(getApplicationContext()).execute();
+                    startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
+                }
             }
         });
     }
@@ -90,6 +113,71 @@ public class AgregarDireccion extends AppCompatActivity {
                 String idCliente = String.valueOf(Login.gIdCliente);
 
                 String data = URLEncoder.encode("direccion_cliente", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8")
+                        + "&" + URLEncoder.encode("id_cliente", "UTF-8") + "=" + URLEncoder.encode(idCliente, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                resultado = stringBuilder.toString();
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+            } catch (MalformedURLException e) {
+                Log.d("MiAPP", "Se ha utilizado una URL con formato incorrecto");
+                resultado = "Se ha producido un ERROR";
+            } catch (IOException e) {
+                Log.d("MiAPP", "Error inesperado!, posibles problemas de conexion de red");
+                resultado = "Se ha producido un ERROR, comprueba tu conexion a Internet";
+            }
+
+            return resultado;
+        }
+    }
+
+    public class ActualizarDireccionMaps extends AsyncTask<String, Void, String> {
+
+        String direct = direccion.getText().toString();
+        private final WeakReference<Context> context;
+
+        public ActualizarDireccionMaps (Context context) {
+            this.context = new WeakReference<>(context);
+        }
+
+        protected String doInBackground (String...params){
+            String latitud = null, longitud = null;
+            String actualizar_url = "http://pedidoslab.6te.net/consultas/insertarDireccionMaps.php"
+                    + "?latitud=" + latitud
+                    + "?longitud=" + longitud
+                    + "&id_cliente=" + Login.gIdCliente;
+
+            String resultado;
+
+            try {
+
+                URL url = new URL(actualizar_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+
+                String latitud1 = (latitud);
+                String longitud1 = (longitud);
+                String idCliente = String.valueOf(Login.gIdCliente);
+
+                String data = URLEncoder.encode("latitud", "UTF-8") + "=" + URLEncoder.encode(latitud1, "UTF-8")
+                        + "&" + URLEncoder.encode("longitud", "UTF-8") + "=" + URLEncoder.encode(longitud1, "UTF-8")
                         + "&" + URLEncoder.encode("id_cliente", "UTF-8") + "=" + URLEncoder.encode(idCliente, "UTF-8");
 
                 bufferedWriter.write(data);

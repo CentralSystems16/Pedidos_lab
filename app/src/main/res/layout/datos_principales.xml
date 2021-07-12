@@ -30,14 +30,15 @@
             android:layout_height="30dp"
             android:background="@drawable/usuario"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="45dp"
             android:contentDescription="@string/todo" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mi perfil"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="37dp"
             android:textColor="@color/black" />
 
     </LinearLayout>

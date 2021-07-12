@@ -7,15 +7,43 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <EditText
+        android:id="@+id/etBuscador2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="15sp"
+        android:background="@drawable/caja_texto_circular"
+        android:drawableStart="?android:attr/actionModeWebSearchDrawable"
+        android:hint="Buscar exámen"
+        app:backgroundTint="#0097A7"
+        android:padding="10dp"
+        tools:ignore="NewApi" />
+
+    <ImageButton
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="250dp"
+        android:layout_width="45dp"
+        app:backgroundTint="#0097A7"
+        android:src="@drawable/microphone"
+        android:layout_height="45dp"/>
+
+    <ImageButton
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="290dp"
+        android:layout_width="45dp"
+        app:backgroundTint="#0097A7"
+        android:src="@drawable/barcodesearch"
+        android:layout_height="45dp"/>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
+        android:background="#4CAF50"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rvLista"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="NotSibling">
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -28,37 +56,6 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/regresarflecha"/>
 
-            <EditText
-                android:id="@+id/etBuscador2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="65dp"
-                android:textSize="15sp"
-                android:background="@drawable/caja_texto_circular"
-                android:drawableStart="?android:attr/actionModeWebSearchDrawable"
-                android:hint="Buscar exámen"
-                app:backgroundTint="#0097A7"
-                android:padding="10dp"
-                tools:ignore="NewApi" />
-
-            <ImageButton
-                android:layout_marginTop="3dp"
-                android:layout_marginStart="220dp"
-                android:layout_width="45dp"
-                app:backgroundTint="#0097A7"
-                android:src="@drawable/microphone"
-                android:layout_height="45dp"/>
-
-            <ImageButton
-                android:layout_marginTop="3dp"
-                android:layout_marginStart="260dp"
-                android:layout_width="45dp"
-                app:backgroundTint="#0097A7"
-                android:src="@drawable/barcodesearch"
-                android:layout_height="45dp"/>
-
             <FrameLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -69,10 +66,10 @@
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/carrito_compra2"
                     android:clickable="true"
-                    android:layout_marginTop="-20dp"
-                    android:layout_marginStart="-20dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     app:lottie_autoPlay="true"
                     app:lottie_fileName="otrocarro.json"
                     app:lottie_imageAssetsFolder="assets"
@@ -85,17 +82,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|top"
                     android:background="@drawable/caja_texto_circular"
-                    app:backgroundTint="@color/rojo"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:paddingTop="4dp"
+                    android:paddingTop="5dp"
                     android:paddingRight="5dp"
                     android:paddingBottom="4dp"
+                    android:layout_marginTop="5dp"
                     android:text="0"
                     android:textColor="@android:color/white"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    tools:ignore="RtlHardcoded,SmallSp" />
+                    app:backgroundTint="@color/rojo"
+                    tools:ignore="RtlHardcoded" />
+
             </FrameLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -103,7 +102,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLista2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="625dp"
         android:layout_marginTop="50dp" />
 
 </RelativeLayout>

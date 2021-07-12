@@ -7,13 +7,46 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <Button
+        android:id="@+id/etBuscadorCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/caja_texto_circular"
+        android:drawableStart="?android:attr/actionModeWebSearchDrawable"
+        android:hint="Buscar exámen desde aquí."
+        app:backgroundTint="#0097A7"
+        android:gravity="start"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        tools:targetApi="lollipop"
+        android:importantForAutofill="no" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:text="SELECCIONE LA CATEGORÍA"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        tools:ignore="HardcodedText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="575dp"
+        android:layout_marginTop="100dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#4CAF50">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -65,39 +98,5 @@
             </FrameLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-
-    <Button
-        android:id="@+id/etBuscadorCategorias"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/caja_texto_circular"
-        android:drawableStart="?android:attr/actionModeWebSearchDrawable"
-        android:hint="Ingrese el nombre del exámen"
-        app:backgroundTint="#0097A7"
-        android:gravity="start"
-        android:textColor="@color/white"
-        android:padding="10dp"
-        tools:targetApi="lollipop"
-        android:importantForAutofill="no" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SELECCIONE LA CATEGORÍA"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="75dp"
-        tools:ignore="HardcodedText" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListaCategorias"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp" />
 
 </RelativeLayout>

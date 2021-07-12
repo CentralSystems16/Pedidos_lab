@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@color/white">
 
@@ -58,13 +57,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLista"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_marginTop="10dp" />
+        android:layout_height="625dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="#4CAF50">
 
         <RelativeLayout
@@ -115,9 +116,9 @@
                     android:textSize="10sp"
                     android:textStyle="bold"
                     app:backgroundTint="@color/rojo"
-                    tools:ignore="RtlHardcoded,SmallSp" />
+                    tools:ignore="RtlHardcoded" />
 
             </FrameLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
+</RelativeLayout>

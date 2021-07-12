@@ -12,8 +12,8 @@
     <ImageButton
         android:id="@+id/about"
         android:clickable="true"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/info"
         android:focusable="true" />
 

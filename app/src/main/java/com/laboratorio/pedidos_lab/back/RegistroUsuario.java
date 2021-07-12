@@ -418,7 +418,7 @@ public class RegistroUsuario extends AppCompatActivity {
     }
 
 
-    private void iniciarLocalizacion() {
+    public void iniciarLocalizacion() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         Localizacion localizacion = new Localizacion();

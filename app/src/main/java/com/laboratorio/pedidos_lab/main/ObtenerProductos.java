@@ -97,6 +97,7 @@ public class ObtenerProductos extends AppCompatActivity {
                 integrator.setCameraId(0);  // Use a specific camera of the device
                 integrator.setBeepEnabled(true);
                 integrator.setBarcodeImageEnabled(true);
+                integrator.setOrientationLocked(false);
                 integrator.initiateScan();
             }
         });
@@ -176,7 +177,7 @@ public class ObtenerProductos extends AppCompatActivity {
             if(result.getContents() == null) {
                 Toast.makeText(this, "Lector cancelado", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 txtBarcode.setText(result.getContents());
             }
         } else {
@@ -228,7 +229,7 @@ public class ObtenerProductos extends AppCompatActivity {
                                             jsonObject1.getDouble("precio_producto"),
                                             jsonObject1.getInt("opciones"),
                                             jsonObject1.getString("img_producto"),
-                                            jsonObject1.getString("barcode")));
+                                            jsonObject1.getString("referencia")));
                         }
 
                         adaptador = new AdaptadorProductos(this, listaProductos, carroCompras);

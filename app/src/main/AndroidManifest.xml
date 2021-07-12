@@ -81,7 +81,7 @@
         <activity android:name="com.laboratorio.pedidos_lab.front.VistaFinal" />
         <activity android:name="com.laboratorio.pedidos_lab.front.NoHayInternet" />
         <activity android:name="com.laboratorio.pedidos_lab.front.EnviandoTicket" />
-        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerProductos" />
+        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerProductos" android:screenOrientation="fullSensor" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerOpciones" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerCategorias" />
         <activity android:name="com.laboratorio.pedidos_lab.pdf.MainActivity"/>

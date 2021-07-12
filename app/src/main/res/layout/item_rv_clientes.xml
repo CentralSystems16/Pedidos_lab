@@ -30,8 +30,8 @@
 
        <ImageView
             android:id="@+id/imgItem"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="left"
             android:src="@drawable/man"
             android:scaleType="centerCrop"
@@ -39,7 +39,8 @@
 
             <TextView
                 android:text="Nombre: "
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
 
             <TextView
                 android:id="@+id/nombreClienteConsulta"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"

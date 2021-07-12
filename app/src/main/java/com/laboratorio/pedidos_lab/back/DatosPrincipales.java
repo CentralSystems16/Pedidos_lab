@@ -96,15 +96,11 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
             startActivity(i);
         }
 
-        System.out.println("Id de cliente: " + Login.gIdCliente);
-        Toast.makeText(this, "Id de cliente: " + Login.gIdCliente, Toast.LENGTH_SHORT).show();
-
         if (btnParaOtra.isPressed()) {
 
                 Login.gIdPedido = 0;
                 Intent in = new Intent(this, ObtenerClientes.class);
                 startActivity(in);
-
 
         }
 
@@ -117,7 +113,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
     public void obtenerUsuarioPrincipal() {
 
         URL_USERS = "http://pedidoslab.6te.net/consultas/obtenerLoginUsuarios.php" + "?id_usuario=" + Login.gIdUsuario;
-        Toast.makeText(this, URL_USERS, Toast.LENGTH_SHORT).show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -141,7 +136,6 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                                             jsonObject1.getString("email_usuario");
                                             Login.gIdCliente = jsonObject1.getInt("id_cliente");
                         }
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
