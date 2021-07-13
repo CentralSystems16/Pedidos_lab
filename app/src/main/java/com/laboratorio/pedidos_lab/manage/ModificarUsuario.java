@@ -2,7 +2,6 @@ package com.laboratorio.pedidos_lab.manage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -19,23 +18,17 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
-import com.laboratorio.pedidos_lab.back.RegistroUsuario;
-import com.laboratorio.pedidos_lab.front.AgregarDireccion;
-import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratorio.pedidos_lab.maps.LocalizacionEdit;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
 import java.util.Calendar;
 
 public class ModificarUsuario extends AppCompatActivity {
@@ -148,42 +141,72 @@ public class ModificarUsuario extends AppCompatActivity {
         repeatPassword.setText(Login.repeatContra);
 
         editMap = findViewById(R.id.EditMap);
-        editMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new FancyGifDialog.Builder(ModificarUsuario.this)
-                        .setTitle("Recuerda estar en tu domicilio antes de actualizar tu ubicación\n\n Al seleccionar 'Estoy en mi domicilio' aceptas los términos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
-                        .setNegativeBtnText("No estoy en mi domicilio")
-                        .setPositiveBtnBackground(R.color.rosado)
-                        .setPositiveBtnText("Estoy en mi domicilio")
-                        .setNegativeBtnBackground(R.color.rojo)
-                        .setGifResource(R.drawable.mapgif)
-                        .isCancellable(false)
-                        .OnPositiveClicked(() -> iniciarLocalizacion())
-                        .OnNegativeClicked(() -> Toast.makeText(ModificarUsuario.this,"Cancelado",Toast.LENGTH_LONG))
-                        .build();
-            }
-        });
+        editMap.setOnClickListener(v -> new FancyGifDialog.Builder(ModificarUsuario.this)
+                .setTitle("Recuerda estar en tu domicilio antes de actualizar tu ubicación\n\n Al seleccionar 'Estoy en mi domicilio' aceptas los términos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
+                .setNegativeBtnText("No estoy en mi domicilio")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Estoy en mi domicilio")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.mapgif)
+                .isCancellable(false)
+                .OnPositiveClicked(this::iniciarLocalizacion)
+                .OnNegativeClicked(() -> Toast.makeText(ModificarUsuario.this,"Cancelado",Toast.LENGTH_LONG))
+                .build());
 
         completeEdit = findViewById(R.id.completeEdit);
         completeEdit.setOnClickListener(v -> {
-            String url = "http://pedidoslab.6te.net/consultas/ModificarUsuario.php"
-                    + "?login_usuario=" + numero.getText().toString()
-                    + "&nombre_usuario=" + nombre.getText().toString()
-                    + "&email_usuario=" + email.getText().toString()
-                    + "&nacimiento_usuario=" + mDisplayDate.getText().toString()
-                    + "&edad_usuario=" + edad.getText().toString()
-                    + "&dui_usuario=" + dui.getText().toString()
-                    + "&meses_usuario=" +  meses.getText().toString()
-                    + "&direccion_cliente=" + direccion.getText().toString()
-                    + "&password_usuarios=" + password.getText().toString()
-                    + "&password_repeat_usuario=" + repeatPassword.getText().toString()
-                    + "&latitud=" + tvLatitud.getText().toString()
-                    + "&longitud=" + tvLongitud.getText().toString()
-                    + "&id_usuario=" + Login.gIdUsuario;
-            ejecutarServicio(url);
-            System.out.println(url);
 
+            String number = numero.getText().toString();
+            String name = nombre.getText().toString();
+            String date = mDisplayDate.getText().toString();
+            String age = edad.getText().toString();
+            String month = meses.getText().toString();
+            String id = dui.getText().toString();
+            String pass = password.getText().toString();
+            String passRepeat = repeatPassword.getText().toString();
+
+            if (number.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (name.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (date.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (age.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (month.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (id.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (pass.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            }
+            else if (passRepeat.equals("")){
+                Toast.makeText(this, "Parece que hay campos vacíos!", Toast.LENGTH_SHORT).show();
+            } else {
+
+                String url = "http://pedidoslab.6te.net/consultas/ModificarUsuario.php"
+                        + "?login_usuario=" + numero.getText().toString()
+                        + "&nombre_usuario=" + nombre.getText().toString()
+                        + "&email_usuario=" + email.getText().toString()
+                        + "&nacimiento_usuario=" + mDisplayDate.getText().toString()
+                        + "&edad_usuario=" + edad.getText().toString()
+                        + "&dui_usuario=" + dui.getText().toString()
+                        + "&meses_usuario=" + meses.getText().toString()
+                        + "&direccion_usuario=" + direccion.getText().toString()
+                        + "&password_usuarios=" + password.getText().toString()
+                        + "&password_repeat_usuario=" + repeatPassword.getText().toString()
+                        + "&latitud=" + tvLatitud.getText().toString()
+                        + "&longitud=" + tvLongitud.getText().toString()
+                        + "&id_usuario=" + Login.gIdUsuario;
+                ejecutarServicio(url);
+                startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
+            }
         });
     }
 

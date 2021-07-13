@@ -40,7 +40,7 @@ public class Lugar extends AppCompatActivity {
 
         miDomicilio.setOnClickListener(v -> {
 
-                    if (Login.direccion.equals("") || Login.latitud.equals("") || Login.longitud.equals("")) {
+                    if (Login.direccion.equals("") && Login.latitud.equals("") && Login.longitud.equals("")) {
                     startActivity(new Intent(getApplicationContext(), AgregarDireccion.class));
                     obtenerDomicilio();
                     ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
@@ -54,9 +54,7 @@ public class Lugar extends AppCompatActivity {
         });
 
         laboratorio.setOnClickListener(v -> {
-
-
-
+            obtenerLaboratorio();
             ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
             startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
         });

@@ -113,18 +113,22 @@
                 android:text="@string/tvOlvidarPass"
                 android:textColor="@color/black"
                 android:focusable="true" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:gravity="center"
-                android:layout_marginTop="150dp"
-                android:text="Central Systems ©"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                tools:ignore="HardcodedText" />
-
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:text="Central Systems ©"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
 </LinearLayout>

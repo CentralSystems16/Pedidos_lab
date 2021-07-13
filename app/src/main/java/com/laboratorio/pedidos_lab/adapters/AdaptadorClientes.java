@@ -3,8 +3,6 @@ package com.laboratorio.pedidos_lab.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
 import com.laboratorio.pedidos_lab.front.Lugar;
-import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
+import com.laboratorio.pedidos_lab.manage.ModificarCliente;
 import com.laboratorio.pedidos_lab.model.Clientes;
 import com.laboratory.views.R;
 import java.util.List;
@@ -48,13 +46,24 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
     public void onBindViewHolder(@NonNull ClientesViewHolder clientesViewHolder, int posicion) {
 
         clientesViewHolder.tvNombre.setText(listaClientes.get(posicion).getNombre());
+        ObtenerClientes.nacimientoCliente = listaClientes.get(posicion).getNacimiento();
+        ObtenerClientes.direccionCliente = listaClientes.get(posicion).getDireccion();
+        ObtenerClientes.edadCliente = listaClientes.get(posicion).getEdad();
+        ObtenerClientes.mesesCliente = listaClientes.get(posicion).getMeses();
+        ObtenerClientes.emailCliente = listaClientes.get(posicion).getEmail();
 
         clientesViewHolder.seleccionar.setOnClickListener(v -> {
 
             Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
+            cContext.startActivity(new Intent(cContext, Lugar.class));
 
-            Intent i = new Intent(cContext, Lugar.class);
-            cContext.startActivity(i);
+        });
+
+        clientesViewHolder.editar.setOnClickListener(v -> {
+
+            Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
+            cContext.startActivity(new Intent(cContext, ModificarCliente.class));
+
         });
     }
 

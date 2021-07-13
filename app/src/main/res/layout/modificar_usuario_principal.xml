@@ -133,7 +133,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
-
             </LinearLayout>
             <TextView
                 android:id="@+id/errorEdadEdit"
@@ -204,6 +203,18 @@
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
 
+            <Button
+                android:id="@+id/EditMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/caja_texto_circular"
+                android:text="EDITAR DIRECCIÓN DESDE MAPS"
+                android:textStyle="bold"
+                app:backgroundTint="@color/bg_fingerprint" />
+
             <EditText
                 android:id="@+id/EditEmail"
                 android:layout_width="match_parent"
@@ -219,18 +230,6 @@
                 android:textColor="@color/black"
                 android:textColorHint="#9F807E7E"
                 android:textSize="13sp" />
-
-            <Button
-                android:id="@+id/EditMap"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginStart="55dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/caja_texto_circular"
-                android:text="EDITAR DIRECCIÓN DESDE MAPS"
-                android:textStyle="bold"
-                app:backgroundTint="@color/bg_fingerprint" />
 
         </LinearLayout>
     </ScrollView>

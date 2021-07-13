@@ -69,6 +69,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
         botonRegistrar = findViewById(R.id.btnRegistrarUsuario);
         botonCancelar = findViewById(R.id.btnCancelarRegistro);
+
         errorPass = findViewById(R.id.errorPass);
         errorEdad2 = findViewById(R.id.errorEdad);
         errorNumber = findViewById(R.id.errorNumber);
@@ -260,7 +261,6 @@ public class RegistroUsuario extends AppCompatActivity {
             String passwordRepeat = pr.getText().toString();
             String id = dui.getText().toString();
             String me = mes.getText().toString();
-            String di = dir.getText().toString();
 
             int radiogroupSexo = rg.getCheckedRadioButtonId();
             if (radiogroupSexo < 0) {
@@ -292,7 +292,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             } else if (fechaNacimiento.isEmpty()) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-
             } else if (select.isEmpty()) {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             } else if (errorEdad < 18) {

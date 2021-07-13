@@ -57,7 +57,7 @@ public class AgregarDireccion extends AppCompatActivity {
                         .OnPositiveClicked(() -> {
                             RegistroUsuario registroUsuario = new RegistroUsuario();
                             registroUsuario.iniciarLocalizacion();
-                            new ActualizarDireccionMaps(getApplicationContext()).execute();
+                            //new ActualizarDireccionMaps(getApplicationContext()).execute();
                             Toast.makeText(AgregarDireccion.this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
 
                         })
@@ -78,6 +78,8 @@ public class AgregarDireccion extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Por favor, agrega tu dirección para continuar.", Toast.LENGTH_SHORT).show();
                 } else {
                     new ActualizarDireccion(getApplicationContext()).execute();
+                    new ActualizarDireccion2(getApplicationContext()).execute();
+                    Toast.makeText(AgregarDireccion.this, "Gracias, se ha agregado su dirección.", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
                 }
             }
@@ -145,7 +147,68 @@ public class AgregarDireccion extends AppCompatActivity {
         }
     }
 
-    public class ActualizarDireccionMaps extends AsyncTask<String, Void, String> {
+    public class ActualizarDireccion2 extends AsyncTask<String, Void, String> {
+
+        String direct = direccion.getText().toString();
+        private final WeakReference<Context> context;
+
+        public ActualizarDireccion2 (Context context) {
+            this.context = new WeakReference<>(context);
+        }
+
+        protected String doInBackground (String...params){
+            String actualizar_url = "http://pedidoslab.6te.net/consultas/insertarDireccion2.php"
+                    + "?direccion_usuario=" + direct
+                    + "&id_usuario=" + Login.gIdUsuario;
+
+            String resultado;
+
+            try {
+
+                URL url = new URL(actualizar_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setDoOutput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
+
+                String direccion = (direct);
+                String idUsuario = String.valueOf(Login.gIdUsuario);
+
+                String data = URLEncoder.encode("direccion_usuario", "UTF-8") + "=" + URLEncoder.encode(direccion, "UTF-8")
+                        + "&" + URLEncoder.encode("id_usuario", "UTF-8") + "=" + URLEncoder.encode(idUsuario, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+
+                resultado = stringBuilder.toString();
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+            } catch (MalformedURLException e) {
+                Log.d("MiAPP", "Se ha utilizado una URL con formato incorrecto");
+                resultado = "Se ha producido un ERROR";
+            } catch (IOException e) {
+                Log.d("MiAPP", "Error inesperado!, posibles problemas de conexion de red");
+                resultado = "Se ha producido un ERROR, comprueba tu conexion a Internet";
+            }
+
+            return resultado;
+        }
+    }
+
+    /*public class ActualizarDireccionMaps extends AsyncTask<String, Void, String> {
 
         String direct = direccion.getText().toString();
         private final WeakReference<Context> context;
@@ -208,5 +271,5 @@ public class AgregarDireccion extends AppCompatActivity {
 
             return resultado;
         }
-    }
+    }*/
 }

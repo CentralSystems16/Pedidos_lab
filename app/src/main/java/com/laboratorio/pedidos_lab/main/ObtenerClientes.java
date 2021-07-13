@@ -42,8 +42,8 @@ public class ObtenerClientes extends AppCompatActivity {
     Button agregar;
     public static int gIdClienteConsulta;
     String URL_CLIENTES = "";
-    public static String nombreCliente;
-    public static int idCliente;
+    public static String nombreCliente, nacimientoCliente, direccionCliente, emailCliente;
+    public static int idCliente, edadCliente, mesesCliente;
     ImageButton flecha;
 
     @Override
@@ -85,7 +85,7 @@ public class ObtenerClientes extends AppCompatActivity {
         progressDialog.show();
         progressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
 
-        URL_CLIENTES = "http://pedidoslab.6te.net/consultas/obtenerClientes.php"+ "?id_usuario=" + Login.gIdUsuario;
+        URL_CLIENTES = "http://pedidoslab.6te.net/consultas/obtenerClientes.php" + "?id_usuario=" + Login.gIdUsuario;
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -104,7 +104,12 @@ public class ObtenerClientes extends AppCompatActivity {
                                     new Clientes(
 
                                          nombreCliente = jsonObject1.getString("nombre_cliente"),
-                                            jsonObject1.getInt("id_cliente")));
+                                         nacimientoCliente = jsonObject1.getString("nacimiento_cliente"),
+                                         direccionCliente = jsonObject1.getString("direccion_cliente"),
+                                         emailCliente = jsonObject1.getString("email_cliente"),
+                                         edadCliente = jsonObject1.getInt("edad_cliente"),
+                                         mesesCliente = jsonObject1.getInt("meses_cliente"),
+                                         idCliente = jsonObject1.getInt("id_cliente")));
 
                         }
 

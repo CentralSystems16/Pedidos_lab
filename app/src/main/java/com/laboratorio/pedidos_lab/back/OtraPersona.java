@@ -170,10 +170,6 @@ public class OtraPersona extends AppCompatActivity {
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             }
 
-            else if (direccion.isEmpty()){
-                Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
-            }
-
             else if (fechaNacimiento.isEmpty()){
                 Toast.makeText(this, "Campos vacíos!", Toast.LENGTH_SHORT).show();
             } else if (select.isEmpty()){

@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitudEditCliente"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="latitud" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitudEditCliente"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:text="longitud" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:text="Modificar datos del cliente"
+                android:text="ACTUALIZAR INFORMACIÓN"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:gravity="center"
@@ -100,45 +115,6 @@
                     android:textColorHint="#9F807E7E"
                     android:textSize="13sp" />
             </LinearLayout>
-            <TextView
-                android:id="@+id/tvSexo"
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:text="@string/sexo"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:layout_gravity="center"
-                android:id="@+id/rgSeMod"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rbMasMod"
-                    android:layout_width="126dp"
-                    android:layout_height="wrap_content"
-                    app:buttonTint="@color/black"
-                    android:text="@string/rbMasculinoCliente"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <RadioButton
-                    android:id="@+id/rbFemMod"
-                    android:layout_width="126dp"
-                    android:layout_height="wrap_content"
-                    app:buttonTint="@color/black"
-                    android:text="@string/rbFemeninoCliente"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RadioGroup>
 
             <TextView
                 android:layout_gravity="center"
@@ -168,6 +144,40 @@
 
             <TextView
                 android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Nueva dirección:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_gravity="center"
+                android:id="@+id/etDirMod"
+                style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
+                android:layout_width="255dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/caja_texto_circular"
+                android:inputType="textEmailAddress"
+                android:padding="5sp"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/EditMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/caja_texto_circular"
+                android:text="EDITAR DIRECCIÓN DESDE MAPS"
+                android:textStyle="bold"
+                app:backgroundTint="@color/bg_fingerprint" />
+
+            <TextView
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
@@ -188,31 +198,38 @@
                 android:inputType="textEmailAddress"
                 android:padding="5sp"
                 android:textColor="@color/black" />
-
-            <Button
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:id="@+id/btnContMod"
-                android:layout_width="255dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/boton_circular"
-                android:padding="5sp"
-                android:text="COMPLETAR MODIFICACIÓN"
-                android:gravity="center"
-                app:backgroundTint="#4CAF50" />
-
-            <Button
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:id="@+id/btnRegMod"
-                android:layout_width="255dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/boton_circular"
-                android:padding="5sp"
-                android:text="REGRESAR"
-                android:gravity="center"
-                app:backgroundTint="#607D8B" />
-
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#4CAF50">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnContMod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textStyle="bold"
+                android:drawableEnd="@drawable/refresh"
+                android:drawablePadding="5dp"
+                android:layout_marginStart="100dp"
+                android:text="ACTUALIZAR"
+                app:backgroundTint="#348C37" />
+
+            <ImageButton
+                android:layout_width="35dp"
+                android:id="@+id/btnRegMod"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/regresarflecha" />
+
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+</RelativeLayout>

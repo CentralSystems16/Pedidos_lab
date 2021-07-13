@@ -42,7 +42,6 @@
         tools:ignore="AllowBackup"
         tools:targetApi="n">
 
-        <activity android:name="com.laboratorio.pedidos_lab.manage.changePass" />
         <activity android:name="com.laboratorio.pedidos_lab.manage.ModificarUsuario" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -64,7 +63,6 @@
 
         <activity android:name="com.laboratorio.pedidos_lab.front.AgregarDireccion" />
         <activity android:name="com.laboratorio.pedidos_lab.front.Lugar" />
-        <activity android:name="com.laboratorio.pedidos_lab.maps.mapsActivity" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerReportes" />
         <activity android:name="com.laboratorio.pedidos_lab.back.VerificarNumero" />
@@ -86,6 +84,7 @@
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerCategorias" />
         <activity android:name="com.laboratorio.pedidos_lab.pdf.MainActivity"/>
         <activity android:name="com.laboratorio.pedidos_lab.front.SplashPrincipal"/>
+        <activity android:name="com.laboratorio.pedidos_lab.manage.ModificarCliente" />
 
         <activity android:name="com.laboratorio.pedidos_lab.conections.VerificarInternet" >
     <intent-filter>

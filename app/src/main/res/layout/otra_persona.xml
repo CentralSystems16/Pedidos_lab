@@ -223,7 +223,8 @@
                 android:layout_marginTop="5dp"
                 android:layout_height="40dp"
                 android:background="@drawable/regresarflecha"
-                android:text="REGRESAR"/>
+                android:text="REGRESAR"
+                android:contentDescription="TODO" />
 
             <Button
                 android:id="@+id/botonContinuar"
