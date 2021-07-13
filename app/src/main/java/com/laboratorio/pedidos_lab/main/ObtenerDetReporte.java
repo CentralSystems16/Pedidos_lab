@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,7 +24,7 @@ import java.io.File;
 public class ObtenerDetReporte extends AppCompatActivity {
 
     private static final int READ_STORAGE_PERMISSION_REQUEST_CODE = 1000;
-    LottieAnimationView flechaReturn;
+    ImageView flechaReturn;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override

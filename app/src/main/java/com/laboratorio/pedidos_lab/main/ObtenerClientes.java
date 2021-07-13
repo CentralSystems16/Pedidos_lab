@@ -107,9 +107,9 @@ public class ObtenerClientes extends AppCompatActivity {
                                          nacimientoCliente = jsonObject1.getString("nacimiento_cliente"),
                                          direccionCliente = jsonObject1.getString("direccion_cliente"),
                                          emailCliente = jsonObject1.getString("email_cliente"),
+                                         idCliente = jsonObject1.getInt("id_cliente"),
                                          edadCliente = jsonObject1.getInt("edad_cliente"),
-                                         mesesCliente = jsonObject1.getInt("meses_cliente"),
-                                         idCliente = jsonObject1.getInt("id_cliente")));
+                                         mesesCliente = jsonObject1.getInt("meses_cliente")));
 
                         }
 

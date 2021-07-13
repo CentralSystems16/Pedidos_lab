@@ -48,6 +48,7 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
         clientesViewHolder.tvNombre.setText(listaClientes.get(posicion).getNombre());
         ObtenerClientes.nacimientoCliente = listaClientes.get(posicion).getNacimiento();
         ObtenerClientes.direccionCliente = listaClientes.get(posicion).getDireccion();
+        Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
         ObtenerClientes.edadCliente = listaClientes.get(posicion).getEdad();
         ObtenerClientes.mesesCliente = listaClientes.get(posicion).getMeses();
         ObtenerClientes.emailCliente = listaClientes.get(posicion).getEmail();
@@ -56,6 +57,7 @@ public class AdaptadorClientes extends RecyclerView.Adapter<AdaptadorClientes.Cl
 
             Login.gIdCliente = listaClientes.get(posicion).getIdCliente();
             cContext.startActivity(new Intent(cContext, Lugar.class));
+            System.out.println("id del cliente"+Login.gIdCliente);
 
         });
 
