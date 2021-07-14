@@ -19,18 +19,20 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.laboratorio.pedidos_lab.back.Login;
+import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class SplashPrincipal extends AppCompatActivity {
 
-    //String URL = "http://pedidoslab.atspace.cc/obtenerEmpresa.php";
-    String URL = "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php";
-    public static String gNombreEmpresa, gLogoEmpresa, gCorreoEmpresa, gFacebookEmpresa;
+    public static String gNombreEmpresa, gLogoEmpresa, gCorreoEmpresa, gFacebookEmpresa, gAnimacionEmpresa;
     TextView tvEmpresa;
     ImageView imgEmpresa;
+    GifImageView animacionEmpresa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class SplashPrincipal extends AppCompatActivity {
         tvEmpresa = findViewById(R.id.tvLab);
         imgEmpresa = findViewById(R.id.imgSplash);
 
+        animacionEmpresa = findViewById(R.id.animacionEmpresa);
+
         tvEmpresa.setAnimation(animacion2);
         imgEmpresa.setAnimation(animacion1);
 
@@ -66,6 +70,10 @@ public class SplashPrincipal extends AppCompatActivity {
     }
 
     public void DatosEmpresa(){
+
+        String URL = "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php" + "?id_negocio=" + ObtenerNegocios.idNegocio;
+        System.out.println(URL);
+
         RequestQueue requestQueue = Volley.newRequestQueue(SplashPrincipal.this);
 
         StringRequest request = new StringRequest(Request.Method.POST, URL,
@@ -88,6 +96,9 @@ public class SplashPrincipal extends AppCompatActivity {
                             Glide.with(this).load(gLogoEmpresa).into(imgEmpresa);
 
                             gFacebookEmpresa = jsonObject1.getString("facebook_empresa");
+
+                            gAnimacionEmpresa = jsonObject1.getString("animacion_empresa");
+                            Glide.with(this).load(gAnimacionEmpresa).into(animacionEmpresa);
 
                         }
 

@@ -71,9 +71,7 @@ public class ObtenerClientes extends AppCompatActivity {
 
         clientes = new ArrayList<>();
         rvLista = findViewById(R.id.rvListaClientes);
-
         rvLista.setLayoutManager(new LinearLayoutManager(this));
-
         obtenerClientes();
 
     }

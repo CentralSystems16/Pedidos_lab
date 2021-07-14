@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.laboratorio.pedidos_lab.front.NoHayInternet;
-import com.laboratorio.pedidos_lab.front.SplashPrincipal;
+import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 
 public class VerificarInternet extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class VerificarInternet extends AppCompatActivity {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-            Intent i = new Intent(this, SplashPrincipal.class);
+            Intent i = new Intent(this, ObtenerNegocios.class);
             startActivity(i);
         } else {
             Intent i2 = new Intent(this, NoHayInternet.class);

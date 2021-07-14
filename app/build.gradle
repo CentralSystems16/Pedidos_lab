@@ -118,6 +118,9 @@ dependencies {
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
     implementation 'com.google.zxing:core:3.4.0'
 
+    //Gif en android
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
+
     //Nose
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     implementation 'com.googlecode.json-simple:json-simple:1.1'

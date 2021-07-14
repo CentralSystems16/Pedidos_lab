@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
@@ -54,9 +57,10 @@ public class ObtenerReportes extends AppCompatActivity {
         });
 
         reportes = new ArrayList<>();
-        rvLista = findViewById(R.id.rvListaReportes);
 
+        rvLista = findViewById(R.id.rvListaReportes);
         rvLista.setLayoutManager(new LinearLayoutManager(this));
+        //rvLista.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         obtenerReportes();
 
@@ -105,7 +109,7 @@ public class ObtenerReportes extends AppCompatActivity {
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_DEFAULT_TIMEOUT,
+                MY_DEFAULT_TIMEOUT * 2,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
