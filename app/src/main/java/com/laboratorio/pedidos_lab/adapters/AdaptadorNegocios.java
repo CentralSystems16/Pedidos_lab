@@ -1,8 +1,10 @@
 package com.laboratorio.pedidos_lab.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -28,6 +30,7 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
 
     Context cContext;
    public static List<Negocios> listaNegocios;
+   ObtenerNegocios obtenerNegocios;
 
     public AdaptadorNegocios(Context cContext, List<Negocios> listaNegocios) {
 
@@ -97,12 +100,23 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
         negociosViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Obtener el id del negocio
                 ObtenerNegocios.idNegocio = listaNegocios.get(posicion).getIdNegocio();
+
+                //Intencion al splash dependiendo del id del negocio
                 cContext.startActivity(new Intent(cContext, SplashPrincipal.class));
-                System.out.println("El id de negocio es: " + ObtenerNegocios.idNegocio);
+
+                //Guardar el id de negocio con sharedPreferences
+                SharedPreferences sp = cContext.getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putInt("your_int_key", ObtenerNegocios.idNegocio);
+                editor.apply();
+
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

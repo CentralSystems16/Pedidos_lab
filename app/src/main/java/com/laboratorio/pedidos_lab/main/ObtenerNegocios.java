@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -44,8 +48,8 @@ public class ObtenerNegocios extends AppCompatActivity {
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
-            ObtenerNegocios();
-        } else {
+            obtenerNegocios();
+        } else{
             startActivity(new Intent(ObtenerNegocios.this, SplashPrincipal.class));
         }
 
@@ -56,10 +60,11 @@ public class ObtenerNegocios extends AppCompatActivity {
         rvLista = findViewById(R.id.rvListaNegocios);
         rvLista.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+        obtenerNegocios();
 
     }
 
-    public void ObtenerNegocios() {
+    public void obtenerNegocios() {
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Por favor espera...");

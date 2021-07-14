@@ -86,8 +86,7 @@
                 android:text="@string/btnIngresar"
                 android:layout_marginEnd="32dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                app:backgroundTint="#4CAF50" />
+                android:textStyle="bold"/>
 
             <Button
                 android:id="@+id/btnRegistrar"

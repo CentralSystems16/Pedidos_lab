@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -141,6 +143,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         });
 
         btnEntrar = findViewById(R.id.btnEntrar);
+        btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed, SplashPrincipal.gGreen, SplashPrincipal.gBlue)));
         btnEntrar.setOnClickListener(v -> {
             final ProgressDialog loading = ProgressDialog.show(this, "Procesando...", "Espere por favor");
             usuario = user.getText().toString();

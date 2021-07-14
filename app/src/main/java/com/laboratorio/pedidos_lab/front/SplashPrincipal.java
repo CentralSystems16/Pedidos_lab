@@ -1,6 +1,9 @@
 package com.laboratorio.pedidos_lab.front;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,9 +33,12 @@ import pl.droidsonroids.gif.GifImageView;
 public class SplashPrincipal extends AppCompatActivity {
 
     public static String gNombreEmpresa, gLogoEmpresa, gCorreoEmpresa, gFacebookEmpresa, gAnimacionEmpresa;
+    public static int gRed, gGreen, gBlue;
     TextView tvEmpresa;
     ImageView imgEmpresa;
     GifImageView animacionEmpresa;
+    SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+    int myIntValue = sp.getInt("your_int_key", -1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +47,6 @@ public class SplashPrincipal extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash_principal);
-
-
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             finish();
@@ -65,13 +69,14 @@ public class SplashPrincipal extends AppCompatActivity {
             finish();
         },7000); //TODO: Tiempo en que permanecera activo el splash.
 
+
         DatosEmpresa();
 
     }
 
     public void DatosEmpresa(){
 
-        String URL = "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php" + "?id_negocio=" + ObtenerNegocios.idNegocio;
+        String URL = "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php" + "?id_negocio=" + myIntValue;
         System.out.println(URL);
 
         RequestQueue requestQueue = Volley.newRequestQueue(SplashPrincipal.this);
@@ -99,6 +104,10 @@ public class SplashPrincipal extends AppCompatActivity {
 
                             gAnimacionEmpresa = jsonObject1.getString("animacion_empresa");
                             Glide.with(this).load(gAnimacionEmpresa).into(animacionEmpresa);
+
+                            gRed = jsonObject1.getInt("red");
+                            gGreen = jsonObject1.getInt("green");
+                            gBlue = jsonObject1.getInt("blue");
 
                         }
 
