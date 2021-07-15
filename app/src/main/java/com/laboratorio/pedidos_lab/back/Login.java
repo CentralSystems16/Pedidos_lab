@@ -35,6 +35,7 @@ import com.laboratorio.pedidos_lab.biometric.BiometricCallback;
 import com.laboratorio.pedidos_lab.biometric.BiometricManager;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.front.acercaDe;
+import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
@@ -143,7 +144,11 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         });
 
         btnEntrar = findViewById(R.id.btnEntrar);
-        btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed, SplashPrincipal.gGreen, SplashPrincipal.gBlue)));
+        if (ObtenerNegocios.idNegocio == 1) {
+            btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed, SplashPrincipal.gGreen, SplashPrincipal.gBlue)));
+        } else if (ObtenerNegocios.idNegocio == 2){
+            btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed1, SplashPrincipal.gGreen1, SplashPrincipal.gBlue1)));
+        }
         btnEntrar.setOnClickListener(v -> {
             final ProgressDialog loading = ProgressDialog.show(this, "Procesando...", "Espere por favor");
             usuario = user.getText().toString();

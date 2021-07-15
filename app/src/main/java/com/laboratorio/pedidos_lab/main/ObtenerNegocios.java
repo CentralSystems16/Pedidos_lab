@@ -62,6 +62,12 @@ public class ObtenerNegocios extends AppCompatActivity {
 
         obtenerNegocios();
 
+        //Guardar el id de negocio con sharedPreferences
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("your_int_key", idNegocio);
+        editor.apply();
+
     }
 
     public void obtenerNegocios() {
@@ -70,8 +76,7 @@ public class ObtenerNegocios extends AppCompatActivity {
         progressDialog.setMessage("Por favor espera...");
         progressDialog.show();
         progressDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
-
-        URL_NEGOCIOS = "http://pedidoslab.6te.net/consultas/obtenerNegocios.php";
+        URL_NEGOCIOS = "http://pedidoslab.6te.net/consultas3/obtenerNegocios.php";
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 

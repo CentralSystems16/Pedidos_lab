@@ -107,11 +107,7 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
                 //Intencion al splash dependiendo del id del negocio
                 cContext.startActivity(new Intent(cContext, SplashPrincipal.class));
 
-                //Guardar el id de negocio con sharedPreferences
-                SharedPreferences sp = cContext.getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("your_int_key", ObtenerNegocios.idNegocio);
-                editor.apply();
+                System.out.println("El id de negocio es: " + ObtenerNegocios.idNegocio);
 
             }
         });
