@@ -8,23 +8,57 @@
     android:orientation="vertical"
     android:background="#CDC9C9">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/etBuscador"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/boton_borde"
+            android:gravity="center"
+            android:hint="Buscar exámen"
+            android:iconifiedByDefault="true"
+            android:padding="10dp"
+            android:textSize="14sp"
+            app:backgroundTint="#7D9E34"
+            tools:ignore="NewApi" />
+
+        <ImageButton
+            android:id="@+id/flecha2"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="wrap_content"
+            app:backgroundTint="#7D9E34"
+            android:src="@drawable/leftarrow"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/microfono"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="250dp"
+            android:onClick="onClickImgBtnHablar"
+            android:src="@drawable/microphone"
+            app:backgroundTint="#7D9E34" />
+
+        <ImageButton
+            android:id="@+id/btnScan"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="290dp"
+            android:layout_width="wrap_content"
+            app:backgroundTint="#7D9E34"
+            android:src="@drawable/barcodesearch"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
     <LinearLayout
-        android:background="#4CAF50"
+        android:background="#7D9E34"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/rOfTicket"
-            android:layout_marginTop="20dp"
-            android:clickable="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:lottie_autoPlay="true"
-            app:lottie_fileName="arrow.json"
-            app:lottie_imageAssetsFolder="assets"
-            app:lottie_loop="true"
-            android:focusable="true" />
 
         <TextView
             android:layout_marginTop="30dp"
@@ -43,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#4CAF50" >
+        android:background="#7D9E34" >
 
         <TextView
             android:layout_marginTop="10dp"
@@ -68,7 +102,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:background="#4CAF50"
+        android:background="#7D9E34"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
@@ -241,17 +275,53 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/aceptarEnviar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/boton_circular"
-                app:backgroundTint="#4CAF50"
-                android:text="Aceptar y enviar"/>
-
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#7D9E34">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/rOfTicket"
+                android:layout_width="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="40dp"
+                android:background="@drawable/regresarflecha"
+                android:text="REGRESAR"
+                android:contentDescription="TODO" />
+
+            <Button
+                android:id="@+id/aceptarEnviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:layout_marginStart="100dp"
+                android:text="@string/btnContinuarSegundo"
+                android:gravity="center"
+                app:backgroundTint="#88AF31" />
+
+            <ImageButton
+                android:id="@+id/closeSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:text="CERRAR SESION"
+                android:layout_marginTop="4dp"
+                android:backgroundTint="#7D9E34"
+                android:src="@drawable/paginadeinicio" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
 </LinearLayout>

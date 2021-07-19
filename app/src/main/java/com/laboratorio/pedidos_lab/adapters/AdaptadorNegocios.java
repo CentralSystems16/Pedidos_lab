@@ -1,10 +1,8 @@
 package com.laboratorio.pedidos_lab.adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -13,24 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.laboratorio.pedidos_lab.conections.ConectionRequest;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratorio.pedidos_lab.model.Negocios;
 import com.laboratory.views.R;
-
 import java.util.List;
 
 public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.NegociosViewHolder> {
 
     Context cContext;
    public static List<Negocios> listaNegocios;
-   ObtenerNegocios obtenerNegocios;
+    String base = "215714db2";
+    Response.Listener<String> responseListener;
 
     public AdaptadorNegocios(Context cContext, List<Negocios> listaNegocios) {
 
@@ -104,15 +104,18 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
                 //Obtener el id del negocio
                 ObtenerNegocios.idNegocio = listaNegocios.get(posicion).getIdNegocio();
 
-                //Intencion al splash dependiendo del id del negocio
-                cContext.startActivity(new Intent(cContext, SplashPrincipal.class));
+                ConectionRequest conectionRequest = new ConectionRequest(base, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(cContext);
+                queue.add(conectionRequest);
 
                 System.out.println("El id de negocio es: " + ObtenerNegocios.idNegocio);
+
+                //Intencion al splash dependiendo del id del negocio y la conexion
+                cContext.startActivity(new Intent(cContext, SplashPrincipal.class));
 
             }
         });
     }
-
 
     @Override
     public int getItemCount() {

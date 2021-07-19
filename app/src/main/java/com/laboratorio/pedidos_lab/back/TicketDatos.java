@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
@@ -50,6 +51,7 @@ import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.front.Lugar;
+import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Correos;
@@ -108,7 +110,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     javax.mail.Session session;
     int edad, meses;
     String sexo, password, correo, nacimiento, direccion;
-    LottieAnimationView rOfTicket;
+    ImageButton rOfTicket;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
@@ -409,9 +411,9 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         linea.setFontColor(new DeviceRgb(76,175,80));
         linea.setMarginTop(400);
 
-        Paragraph direcion = new Paragraph("Dirección: Carretera internacional frente a ex caseta municipal (72,34 km) 2201 Metapán, El Salvador");
+        Paragraph direcion = new Paragraph("Direccióm");
 
-        Paragraph telefono = new Paragraph("Teléfono: 2402-4817");
+        Paragraph telefono = new Paragraph("Teléfono");
 
         Paragraph sitio = new Paragraph("Facebook: Laboratorio clínico LCB");
 

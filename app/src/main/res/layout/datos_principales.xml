@@ -91,7 +91,7 @@
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/boton_circular"
                 android:text="@string/btnParaMi"
-                app:backgroundTint="#4CAF50" />
+                app:backgroundTint="#7D9E34" />
 
             <Button
                 android:id="@+id/btnParaOtraPersona"

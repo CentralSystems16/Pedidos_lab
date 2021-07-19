@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -21,6 +21,7 @@ import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.Lugar;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
+import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratorio.pedidos_lab.manage.ModificarUsuario;
 import com.laboratory.views.R;
@@ -70,27 +71,32 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
+
         if (btnParaMi.isPressed()) {
+
             Login.gIdPedido = 0;
+
             ContadorProductos.GetDataFromServerIntoTextView.gCount = 0.0;
-            if(Login.gIdCliente == 0){
-                try {
-                    // Se agrega el método "get()" para obtener el resultado de la ejecución e impedir el proceso
-                    // de la ejecución hasta obtener un resultado.
-                    new MiPersona.InsertarClienteMiPersona(this).execute().get();
 
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
+            if (Login.gIdCliente == 0) {
+
+                    try {
+                        // Se agrega el método "get()" para obtener el resultado de la ejecución e impedir el proceso
+                        // de la ejecución hasta obtener un resultado.
+                        new MiPersona.InsertarClienteMiPersona(this).execute().get();
+
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (MiPersona.exito) {
+                        new ActualizarCliente.Actualizar(this).execute();
+
+                    }
+                 else {
+                    obtenerUsuarioPrincipal();
                 }
-
-                if (MiPersona.exito) {
-                    new ActualizarCliente.Actualizar(this).execute();
-
-                }
-            } else {
-                Toast.makeText(this, "Si entro al else", Toast.LENGTH_SHORT).show();
-                obtenerUsuarioPrincipal();
-            }
+        }
 
             Intent i = new Intent(this, Lugar.class);
             startActivity(i);

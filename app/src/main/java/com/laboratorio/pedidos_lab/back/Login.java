@@ -83,7 +83,6 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
                 if (Integer.parseInt(new_version_code_)>getVersionCode()){
                     showDialog();
                 }
-
             }
         });
 
@@ -144,11 +143,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         });
 
         btnEntrar = findViewById(R.id.btnEntrar);
-        if (ObtenerNegocios.idNegocio == 1) {
-            btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed, SplashPrincipal.gGreen, SplashPrincipal.gBlue)));
-        } else if (ObtenerNegocios.idNegocio == 2){
-            btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRed1, SplashPrincipal.gGreen1, SplashPrincipal.gBlue1)));
-        }
+        btnEntrar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(SplashPrincipal.gRedEmpresa, SplashPrincipal.gGreenEmpresa, SplashPrincipal.gBlueEmpresa)));
+
         btnEntrar.setOnClickListener(v -> {
             final ProgressDialog loading = ProgressDialog.show(this, "Procesando...", "Espere por favor");
             usuario = user.getText().toString();
@@ -206,9 +202,10 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
             };
 
-            loginRequest loginRequest = new loginRequest(usuario, contra, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(Login.this);
-            queue.add(loginRequest);
+                loginRequest loginRequest = new loginRequest(usuario, contra, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(Login.this);
+                queue.add(loginRequest);
+
 
         });
 

@@ -322,8 +322,4 @@ public class VerificarNumero extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 }

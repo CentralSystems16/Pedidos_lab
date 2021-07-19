@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:tools="http://schemas.android.com/tools"
-    android:backgroundTint="#0097A7"
+    android:backgroundTint="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -12,11 +12,15 @@
     tools:ignore="UnusedAttribute">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/boton_borde_verde" >
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
-
 
         <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:gravity="center"
             android:textSize="13sp" />
 
@@ -60,6 +65,7 @@
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:layout_marginStart="20dp"
                     android:text="$"
                     android:textSize="13sp"
@@ -67,11 +73,12 @@
         <TextView
             android:id="@+id/tvPrecio"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

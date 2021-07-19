@@ -3,14 +3,12 @@ package com.laboratorio.pedidos_lab.main;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -19,16 +17,24 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorNegocios;
-import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.model.Negocios;
 import com.laboratory.views.R;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-
 import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
 
 public class ObtenerNegocios extends AppCompatActivity {
@@ -38,13 +44,16 @@ public class ObtenerNegocios extends AppCompatActivity {
     AdaptadorNegocios adaptador;
     String URL_NEGOCIOS = "";
     public static int idNegocio;
+    public static String baseDatos;
+    TextView tv;
+    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.obtener_negocios);
 
-        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        /*boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
@@ -54,19 +63,13 @@ public class ObtenerNegocios extends AppCompatActivity {
         }
 
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).apply();
+                .putBoolean("isFirstRun", false).apply();*/
 
         negocios = new ArrayList<>();
         rvLista = findViewById(R.id.rvListaNegocios);
         rvLista.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         obtenerNegocios();
-
-        //Guardar el id de negocio con sharedPreferences
-        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("your_int_key", idNegocio);
-        editor.apply();
 
     }
 
@@ -96,7 +99,8 @@ public class ObtenerNegocios extends AppCompatActivity {
 
                                             jsonObject1.getString("nombre_negocio"),
                                             jsonObject1.getString("img_negocio"),
-                                            idNegocio = jsonObject1.getInt("id_negocio")));
+                                            idNegocio = jsonObject1.getInt("id_negocio"),
+                                            baseDatos = jsonObject1.getString("base_datos")));
 
                         }
 

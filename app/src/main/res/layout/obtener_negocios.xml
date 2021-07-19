@@ -10,6 +10,7 @@
 
     <TextView
         android:text="SELECCIONA"
+        android:id="@+id/consulta"
         android:layout_width="match_parent"
         android:textColor="@color/black"
         android:textStyle="bold"

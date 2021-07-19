@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
+import com.laboratorio.pedidos_lab.pdf.MainActivity;
 import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,12 +35,12 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class SplashPrincipal extends AppCompatActivity {
 
-    public static String gNombreEmpresa, gLogoEmpresa, gCorreoEmpresa, gFacebookEmpresa, gAnimacionEmpresa;
-    public static int gRed, gGreen, gBlue, gRed1, gGreen1, gBlue1;
+    public static String gNombreEmpresa, gLogoEmpresa, gCorreoEmpresa, gFacebookEmpresa, gAnimacionEmpresa, gTelefonoEmpresa, gDireccionEmpresa;
+    public static int gRedEmpresa, gGreenEmpresa, gBlueEmpresa;
     TextView tvEmpresa;
     ImageView imgEmpresa;
     GifImageView animacionEmpresa;
-    int myIntValue;
+    int idNegocioShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,24 +70,18 @@ public class SplashPrincipal extends AppCompatActivity {
             Intent i = new Intent(SplashPrincipal.this, Login.class);
             startActivity(i);
             finish();
-        },7000); //TODO: Tiempo en que permanecera activo el splash.
+        },5000); //TODO: Tiempo en que permanecera activo el splash.
 
+        SharedPreferences sharedPref = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        idNegocioShared = sharedPref.getInt("idNegocio", 0);
 
         DatosEmpresa();
 
     }
 
-
-
     public void DatosEmpresa(){
 
-        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-        myIntValue = sp.getInt("your_int_key", 0);
-        System.out.println("id de negocio en splash " + ObtenerNegocios.idNegocio);
-
-        if (ObtenerNegocios.idNegocio == 1){
             String URL = "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php";
-            System.out.println(URL);
 
             RequestQueue requestQueue = Volley.newRequestQueue(SplashPrincipal.this);
 
@@ -114,57 +109,11 @@ public class SplashPrincipal extends AppCompatActivity {
                                 gAnimacionEmpresa = jsonObject1.getString("animacion_empresa");
                                 Glide.with(this).load(gAnimacionEmpresa).into(animacionEmpresa);
 
-                                gRed = jsonObject1.getInt("red");
-                                gGreen = jsonObject1.getInt("green");
-                                gBlue = jsonObject1.getInt("blue");
+                                gRedEmpresa = jsonObject1.getInt("red");
+                                gGreenEmpresa = jsonObject1.getInt("green");
+                                gBlueEmpresa = jsonObject1.getInt("blue");
 
-                                tvEmpresa.setTextColor(Color.rgb(gRed, gGreen, gBlue));
-
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {};
-            requestQueue.add(request);
-        }
-        else if (ObtenerNegocios.idNegocio == 2){
-
-            System.out.println("id de negocio en splash " + ObtenerNegocios.idNegocio);
-
-            SharedPreferences spp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
-            myIntValue = spp.getInt("your_int_key", 0);
-
-            System.out.println("Entro a cocacola");
-            String URL = "http://pedidoslab.6te.net/consultas2/obtenerEmpresa.php";
-            System.out.println(URL);
-
-            RequestQueue requestQueue = Volley.newRequestQueue(SplashPrincipal.this);
-
-            StringRequest request = new StringRequest(Request.Method.POST, URL,
-
-                    response -> {
-
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            JSONArray jsonArray = jsonObject.getJSONArray("Empresa");
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
-                                gNombreEmpresa = jsonObject1.getString("nombre_empresa");
-                                tvEmpresa.setText(gNombreEmpresa);
-
-                                gLogoEmpresa = jsonObject1.getString("logo_empresa");
-                                Glide.with(this).load(gLogoEmpresa).into(imgEmpresa);
-
-                                gRed1 = jsonObject1.getInt("red");
-                                gGreen1 = jsonObject1.getInt("green");
-                                gBlue1 = jsonObject1.getInt("blue");
-
-                                tvEmpresa.setTextColor(Color.rgb(gRed1, gGreen1, gBlue));
-
+                                tvEmpresa.setTextColor(Color.rgb(gRedEmpresa, gGreenEmpresa, gBlueEmpresa));
 
                             }
 
@@ -175,5 +124,4 @@ public class SplashPrincipal extends AppCompatActivity {
                     , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {};
             requestQueue.add(request);
         }
-    }
 }

@@ -125,7 +125,7 @@ public class AdaptadorProductos extends RecyclerView.Adapter<AdaptadorProductos.
         params.gravity = Gravity.TOP;
         params.height = 120;
         view.setLayoutParams(params);
-        snack.setBackgroundTint(Color.rgb(52,140,55));
+        snack.setBackgroundTint(Color.rgb(125,158,52));
         snack.show();
     }
 

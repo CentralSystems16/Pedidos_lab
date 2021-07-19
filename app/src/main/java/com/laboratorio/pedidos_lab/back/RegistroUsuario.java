@@ -33,6 +33,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
@@ -306,7 +307,14 @@ public class RegistroUsuario extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), VerificarNumero.class);
                 i.putExtra("phoneNo", phoneNo);
                 startActivity(i);
-                ejecutarServicio("http://pedidoslab.6te.net/consultas/registro.php");
+                if (ObtenerNegocios.idNegocio == 1) {
+                    System.out.println("Entro al registro 1");
+                    ejecutarServicio("http://pedidoslab.6te.net/consultas/registro.php");
+                }
+                else if (ObtenerNegocios.idNegocio == 2){
+                    System.out.println("Entro al registro 2");
+                    ejecutarServicio2("http://pedidoslab.6te.net/consultas2/registro.php");
+                }
             }
 
         });
@@ -318,6 +326,63 @@ public class RegistroUsuario extends AppCompatActivity {
     }
 
     public void ejecutarServicio(String URL) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
+
+        },
+                error -> Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show()) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                String usuario = regPhoneNo.getText().toString();
+                String password = pas.getText().toString();
+                String nombre = nom.getText().toString();
+                String fechaNacimiento = mDisplayDate.getText().toString();
+                String passwordRepeat = pr.getText().toString();
+                String email = em.getText().toString();
+                String edad = ed.getText().toString();
+                String id = dui.getText().toString();
+                String me = mes.getText().toString();
+                String di = dir.getText().toString();
+                String latitud = Localizacion.latitud1;
+                String longitud = Localizacion.longitud1;
+
+                int radiogroupSexo = rg.getCheckedRadioButtonId();
+                if (radiogroupSexo < 0) {
+
+                } else {
+                    View rbM = rg.findViewById(radiogroupSexo);
+                    int idx = rg.indexOfChild(rbM);
+                    RadioButton r = (RadioButton) rg.getChildAt(idx);
+                    select = r.getText().toString();
+                }
+
+                Map<String, String> parametros = new HashMap<>();
+
+                parametros.put("login_usuario", usuario);
+                parametros.put("nombre_usuario", nombre);
+                parametros.put("password_usuarios", password);
+                parametros.put("password_repeat_usuario", passwordRepeat);
+                parametros.put("email_usuario", email);
+                parametros.put("edad_usuario", edad);
+                parametros.put("nacimiento_usuario", fechaNacimiento);
+                parametros.put("dui_usuario", id);
+                parametros.put("meses_usuario", me);
+                parametros.put("sexo_usuario", select);
+                parametros.put("direccion_usuario", di);
+                parametros.put("latitud", latitud);
+                parametros.put("longitud", longitud);
+
+                return parametros;
+            }
+        };
+
+        requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
+    public void ejecutarServicio2(String URL) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, response -> {
 

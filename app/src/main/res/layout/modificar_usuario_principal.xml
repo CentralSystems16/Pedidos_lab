@@ -239,7 +239,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#4CAF50">
+        android:background="#7D9E34">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -261,7 +261,7 @@
             android:drawablePadding="5dp"
             android:drawableEnd="@drawable/refresh"
             android:textStyle="bold"
-            app:backgroundTint="#348C37" />
+            app:backgroundTint="#87B12B" />
 
         <ImageButton
             android:id="@+id/closeSesion"
@@ -270,7 +270,7 @@
             android:layout_marginStart="300dp"
             android:text="CERRAR SESION"
             android:layout_marginTop="4dp"
-            android:backgroundTint="#4CAF50"
+            android:backgroundTint="#7D9E34"
             android:src="@drawable/logout" />
 
         </RelativeLayout>
