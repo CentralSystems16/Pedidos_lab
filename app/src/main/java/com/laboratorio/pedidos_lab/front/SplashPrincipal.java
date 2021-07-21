@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -25,6 +27,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import pl.droidsonroids.gif.GifImageView;
+
+import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
 
 public class SplashPrincipal extends AppCompatActivity {
 
@@ -115,6 +119,12 @@ public class SplashPrincipal extends AppCompatActivity {
                         }
                     }
                     , error -> Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show()) {};
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                MY_DEFAULT_TIMEOUT * 2,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
             requestQueue.add(request);
         }
 }

@@ -25,14 +25,17 @@
             android:layout_marginEnd="10dp"
             app:backgroundTint="#7D9E34"
             tools:ignore="NewApi" />
+
         <TextView
+            android:id="@+id/vaciarRecycler"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VACIAR"
             android:clickable="true"
             android:textColor="@color/rojo"
+            android:textStyle="bold"
             android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -135,16 +138,25 @@
 
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProductos"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                <pl.droidsonroids.gif.GifImageView
+                    android:id="@+id/carritoVacio"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/carritovacio"
+                    android:layout_gravity="center"/>
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:background="@color/white"
@@ -310,7 +322,7 @@
                 app:backgroundTint="#88AF31" />
 
             <ImageButton
-                android:id="@+id/closeSesion"
+                android:id="@+id/home2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"

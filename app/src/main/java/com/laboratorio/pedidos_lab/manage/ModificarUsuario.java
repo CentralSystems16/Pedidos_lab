@@ -188,6 +188,8 @@ public class ModificarUsuario extends AppCompatActivity {
                         + "&longitud=" + tvLongitud.getText().toString()
                         + "&id_usuario=" + Login.gIdUsuario;
                 ejecutarServicio(url);
+                System.out.println("Latitud actualizada: " + tvLatitud);
+                System.out.println("Longitud actualizada: " + tvLongitud);
                 startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
             }
         });
@@ -215,7 +217,7 @@ public class ModificarUsuario extends AppCompatActivity {
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(settingsIntent);
         } else {
-            Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Gracias, tu ubicación anterior se ha actualizado a tu ubicación actual.", Toast.LENGTH_SHORT).show();
         }
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)

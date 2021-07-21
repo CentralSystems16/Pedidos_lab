@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -79,12 +82,14 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
     public static String  url_pedido = "", envCorreo;
     public static String  url_det_pedido = "";
     public static final String  url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php"+"?id_prefactura="+ Login.gIdPedido;
-    TextView fechaReporte, totalItem, horaReporte;
+    TextView fechaReporte, totalItem, horaReporte, vaciarRecycler;
     public static TextView subTotalReporte, totalFinal, nombreTicket;
     public static Double gTotal = 0.00;
     RecyclerView rvProductos;
@@ -97,7 +102,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     javax.mail.Session session;
     int edad, meses;
     String sexo, password, correo, nacimiento, direccion;
-    ImageButton rOfTicket;
+    ImageButton rOfTicket, home;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
@@ -105,11 +110,50 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String horaString = ho.format(d);
     public static String fechaReport, gNombre;
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
+    GifImageView carritoVacio;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ticked_datos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        carritoVacio = findViewById(R.id.carritoVacio);
+        carritoVacio.setVisibility(View.GONE);
+
+        vaciarRecycler = findViewById(R.id.vaciarRecycler);
+        vaciarRecycler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new FancyGifDialog.Builder(TicketDatos.this)
+                        .setTitle("¿Está seguro de vaciar la carretilla?")
+                        .setNegativeBtnText("Cancelar")
+                        .setPositiveBtnBackground(R.color.rosado)
+                        .setPositiveBtnText("Vaciar")
+                        .setNegativeBtnBackground(R.color.rojo)
+                        .setGifResource(R.drawable.emptycart)
+                        .isCancellable(false)
+                        .OnPositiveClicked(() -> {
+                            listaProdReport.clear();
+                            adaptador.notifyDataSetChanged();
+                            if (listaProdReport.isEmpty()){
+                                carritoVacio.setVisibility(View.VISIBLE);
+                                btnConfirmarEnviar.setEnabled(false);
+                                vaciarRecycler.setEnabled(false);
+                            }
+                        })
+                        .OnNegativeClicked(() -> Toast.makeText(TicketDatos.this,"Cancelado",Toast.LENGTH_SHORT))
+                        .build();
+            }
+        });
+
+        home = findViewById(R.id.home2);
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                home.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+                startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
+            }
+        });
 
         rOfTicket = findViewById(R.id.rOfTicket);
         rOfTicket.setOnClickListener(v -> {
@@ -397,9 +441,9 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         linea.setFontColor(new DeviceRgb(76,175,80));
         linea.setMarginTop(400);
 
-        Paragraph direcion = new Paragraph("Direccióm");
+        Paragraph direcion = new Paragraph("Dirección: Carretera internacional frente a ex caseta municipal 2201 Metapán, El Salvador");
 
-        Paragraph telefono = new Paragraph("Teléfono");
+        Paragraph telefono = new Paragraph("Teléfono: 2402-4817");
 
         Paragraph sitio = new Paragraph("Facebook: Laboratorio clínico LCB");
 
@@ -552,7 +596,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                     finish();
 
                 })
-                .OnNegativeClicked(() -> Toast.makeText(TicketDatos.this,"Cancelado",Toast.LENGTH_SHORT).show())
+                .OnNegativeClicked(() -> Toast.makeText(TicketDatos.this,"Cancelado",Toast.LENGTH_SHORT))
                 .build();
 
     }

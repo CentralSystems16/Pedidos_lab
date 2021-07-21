@@ -52,8 +52,6 @@ public class ObtenerAllProductos extends AppCompatActivity {
     public static TextView tvCantidadAllProductos;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
 
-    private static final int RECOGNIZE_SPEECH_ACTIVITY = 1;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_all_productos);

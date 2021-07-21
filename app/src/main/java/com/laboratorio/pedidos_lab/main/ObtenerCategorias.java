@@ -3,7 +3,10 @@ package com.laboratorio.pedidos_lab.main;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -42,8 +45,7 @@ public class ObtenerCategorias extends AppCompatActivity {
     AdaptadorCategorias adaptadorCat;
     List<Categorias> listaCategorias;
     Button etBuscador;
-    ImageButton botonContinuar;
-    ImageButton botonRegresar;
+    ImageButton botonContinuar, botonRegresar, categorias;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,32 +53,45 @@ public class ObtenerCategorias extends AppCompatActivity {
         setContentView(R.layout.recycler_categoria);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        categorias = findViewById(R.id.categorias2);
+        categorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ObtenerCategorias.this, "Estas aqui!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         tvCantProd3 = findViewById(R.id.tvCantProductos3);
         tvCantProd3.setText(String.valueOf(formatoDecimal.format(gCount)));
 
         botonRegresar = findViewById(R.id.flecha);
-        botonRegresar.setOnClickListener(v -> new FancyGifDialog.Builder(this)
-                .setTitle("Solo regresa si la orden la quieres realizar para otra persona, si ya has agregado productos a tu carrito, puede que se eliminen y debas comenzar de nuevo")
-                .setNegativeBtnText("Cancelar")
-                .setPositiveBtnBackground(R.color.rosado)
-                .setPositiveBtnText("Regresar")
-                .setNegativeBtnBackground(R.color.rojo)
-                .setGifResource(R.drawable.returnpedido)
-                .isCancellable(false)
-                .OnPositiveClicked(() -> {
+        botonRegresar.setOnClickListener(v -> {
+            botonRegresar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+            startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
+            /*new FancyGifDialog.Builder(this)
+                    .setTitle("Solo regresa si la orden la quieres realizar para otra persona, si ya has agregado productos a tu carrito, puede que se eliminen y debas comenzar de nuevo")
+                    .setNegativeBtnText("Cancelar")
+                    .setPositiveBtnBackground(R.color.rosado)
+                    .setPositiveBtnText("Regresar")
+                    .setNegativeBtnBackground(R.color.rojo)
+                    .setGifResource(R.drawable.returnpedido)
+                    .isCancellable(false)
+                    .OnPositiveClicked(() -> {
 
-                    Intent i = new Intent(this, DatosPrincipales.class);
-                    startActivity(i);
+                         Intent i = new Intent(this, DatosPrincipales.class);
+                        startActivity(i);
 
-                })
-                .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
-                .build());
+                    })
+                    .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
+                    .build();*/
+        });
 
         botonContinuar = findViewById(R.id.carrito_compra3);
         botonContinuar.setOnClickListener(v -> {
             if (gCount == 0){
                 Toast.makeText(this, "Porfavor, agrege como mínimo un producto para continuar", Toast.LENGTH_SHORT).show();
             } else {
+                botonContinuar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);
             }

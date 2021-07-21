@@ -10,6 +10,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Editable;
@@ -26,10 +28,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.Task;
 import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratory.views.R;
@@ -84,17 +93,31 @@ public class RegistroUsuario extends AppCompatActivity {
         mDisplayDate = findViewById(R.id.tvDate);
 
         maps = findViewById(R.id.DirectMaps);
-        maps.setOnClickListener(v -> new FancyGifDialog.Builder(RegistroUsuario.this)
-                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
-                .setNegativeBtnText("No estoy en mi domicilio")
-                .setPositiveBtnBackground(R.color.rosado)
-                .setPositiveBtnText("Estoy en mi domicilio")
-                .setNegativeBtnBackground(R.color.rojo)
-                .setGifResource(R.drawable.mapgif)
-                .isCancellable(false)
-                .OnPositiveClicked(this::iniciarLocalizacion)
-                .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this, "Cancelado", Toast.LENGTH_LONG).show())
-                .build());
+        maps.setOnClickListener(v -> {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+                } else {
+                    ActivityCompat.requestPermissions(
+                            this, new String[] { android.Manifest.permission.ACCESS_COARSE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION }, 1222);
+                    Toast.makeText(this, "Para continuar debe dar acceso a su ubicación.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            new FancyGifDialog.Builder(RegistroUsuario.this)
+                    .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
+                    .setNegativeBtnText("No estoy en mi domicilio")
+                    .setPositiveBtnBackground(R.color.rosado)
+                    .setPositiveBtnText("Estoy en mi domicilio")
+                    .setNegativeBtnBackground(R.color.rojo)
+                    .setGifResource(R.drawable.mapgif)
+                    .isCancellable(false)
+                    .OnPositiveClicked(this::iniciarLocalizacion)
+                    .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this, "Cancelado", Toast.LENGTH_LONG).show())
+                    .build();
+        });
 
         regPhoneNo.addTextChangedListener(new TextWatcher() {
             @Override
@@ -435,7 +458,6 @@ public class RegistroUsuario extends AppCompatActivity {
 
     }
 
-
     public void iniciarLocalizacion() {
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -445,9 +467,11 @@ public class RegistroUsuario extends AppCompatActivity {
         final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         if(!gpsEnabled) {
+
             Toast.makeText(this, "Por favor, activa tu GPS y vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
             Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
             startActivity(settingsIntent);
+
         } else {
             Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
         }
@@ -473,7 +497,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 return;
             }
         }
-
     }
 
     @Override

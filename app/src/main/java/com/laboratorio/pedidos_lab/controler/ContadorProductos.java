@@ -3,6 +3,8 @@ package com.laboratorio.pedidos_lab.controler;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerProductos;
@@ -76,6 +78,7 @@ public class ContadorProductos {
                 gCount = (responseJSON.getJSONArray("voto").getJSONObject(0).getDouble("count"));
                 ObtenerProductos.tvCantProductos.setText(String.valueOf(formatoDecimal.format(gCount)));
                 ObtenerCategorias.tvCantProd3.setText(String.valueOf(formatoDecimal.format(gCount)));
+                DatosPrincipales.tvCantProductos4.setText(String.valueOf(formatoDecimal.format(gCount)));
 
             } catch (JSONException e) {
 

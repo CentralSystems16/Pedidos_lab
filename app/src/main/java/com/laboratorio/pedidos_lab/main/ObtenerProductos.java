@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
@@ -25,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorProductos;
+import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
 import com.laboratorio.pedidos_lab.model.Productos;
 import com.laboratory.views.R;
@@ -38,8 +41,7 @@ import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFro
 
 public class ObtenerProductos extends AppCompatActivity {
 
-    ImageButton botonContinuar;
-    ImageButton botonRegresar, microfono, btnScan;
+    ImageButton botonRegresar, microfono, btnScan, botonContinuar, categorias, home;
     EditText etBuscador;
     RecyclerView rvLista = null;
     public static AdaptadorProductos adaptador = null;
@@ -60,6 +62,24 @@ public class ObtenerProductos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_productos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+         home = findViewById(R.id.inicio);
+         home.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 home.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+                 startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
+             }
+         });
+
+        categorias = findViewById(R.id.categorias3);
+        categorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categorias.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+                startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
+            }
+        });
 
         txtBarcode = findViewById(R.id.barcodetxt);
         txtBarcode.addTextChangedListener(new TextWatcher() {
@@ -96,6 +116,7 @@ public class ObtenerProductos extends AppCompatActivity {
 
         botonRegresar = findViewById(R.id.flecha2);
         botonRegresar.setOnClickListener(v -> {
+            botonRegresar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
             Intent i = new Intent(this, ObtenerCategorias.class);
             startActivity(i);
         });
@@ -108,6 +129,7 @@ public class ObtenerProductos extends AppCompatActivity {
             if (gCount == 0){
                 Toast.makeText(this, "Porfavor, agrege como mínimo un producto para continuar", Toast.LENGTH_SHORT).show();
             } else {
+                botonContinuar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);
             }

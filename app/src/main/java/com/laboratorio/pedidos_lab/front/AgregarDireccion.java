@@ -1,20 +1,29 @@
 package com.laboratorio.pedidos_lab.front;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.back.RegistroUsuario;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
+import com.laboratorio.pedidos_lab.maps.Localizacion;
+import com.laboratorio.pedidos_lab.maps.LocalizacionEdit;
+import com.laboratorio.pedidos_lab.maps.LocalizacionEditFinal;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 
@@ -36,16 +45,22 @@ public class AgregarDireccion extends AppCompatActivity {
 
     EditText direccion;
     Button maps;
+    TextView latitud, longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.agregar_direccion);
 
+        latitud = findViewById(R.id.latitudEdit2);
+        longitud = findViewById(R.id.longitudEdit2);
+
         maps = findViewById(R.id.maps);
         maps.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
                 new FancyGifDialog.Builder(AgregarDireccion.this)
                         .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activo tu GPS.")
                         .setNegativeBtnText("No estoy en mi domicilio")
@@ -55,10 +70,9 @@ public class AgregarDireccion extends AppCompatActivity {
                         .setGifResource(R.drawable.mapgif)
                         .isCancellable(false)
                         .OnPositiveClicked(() -> {
-                            RegistroUsuario registroUsuario = new RegistroUsuario();
-                            registroUsuario.iniciarLocalizacion();
-                            //new ActualizarDireccionMaps(getApplicationContext()).execute();
-                            Toast.makeText(AgregarDireccion.this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
+                            iniciarLocalizacion();
+                            new ActualizarDireccionMaps(getApplicationContext()).execute();
+                            startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
 
                         })
                         .OnNegativeClicked(() -> Toast.makeText(AgregarDireccion.this,"Cancelado",Toast.LENGTH_LONG).show())
@@ -74,7 +88,7 @@ public class AgregarDireccion extends AppCompatActivity {
         continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (direccion.getText().toString().equals("")){
+                if (direccion.equals("") || Login.latitud.equals("0") || Login.longitud.equals("0")) {
                     Toast.makeText(getApplicationContext(), "Por favor, agrega tu dirección para continuar.", Toast.LENGTH_SHORT).show();
                 } else {
                     new ActualizarDireccion(getApplicationContext()).execute();
@@ -84,6 +98,47 @@ public class AgregarDireccion extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void iniciarLocalizacion() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        LocalizacionEditFinal localizacion = new LocalizacionEditFinal();
+        localizacion.setMainActivity(this, latitud, longitud);
+
+        final boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if(!gpsEnabled) {
+
+            Toast.makeText(this, "Por favor, activa tu GPS y vuelve a intentarlo.", Toast.LENGTH_SHORT).show();
+            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivity(settingsIntent);
+
+        } else {
+            Toast.makeText(this, "Gracias, se ha obtenido tu ubicación actual.", Toast.LENGTH_SHORT).show();
+        }
+
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
+
+        }
+
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, localizacion);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, localizacion);
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1000) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                iniciarLocalizacion();
+                return;
+            }
+        }
     }
 
     public class ActualizarDireccion extends AsyncTask<String, Void, String> {
@@ -208,9 +263,10 @@ public class AgregarDireccion extends AppCompatActivity {
         }
     }
 
-    /*public class ActualizarDireccionMaps extends AsyncTask<String, Void, String> {
+    public class ActualizarDireccionMaps extends AsyncTask<String, Void, String> {
 
-        String direct = direccion.getText().toString();
+        String latitudDef = LocalizacionEditFinal.latitud1;
+        String longitudDef = LocalizacionEditFinal.longitud1;
         private final WeakReference<Context> context;
 
         public ActualizarDireccionMaps (Context context) {
@@ -218,11 +274,11 @@ public class AgregarDireccion extends AppCompatActivity {
         }
 
         protected String doInBackground (String...params){
-            String latitud = null, longitud = null;
             String actualizar_url = "http://pedidoslab.6te.net/consultas/insertarDireccionMaps.php"
-                    + "?latitud=" + latitud
-                    + "?longitud=" + longitud
+                    + "?latitud=" + latitudDef
+                    + "&longitud=" + longitudDef
                     + "&id_cliente=" + Login.gIdCliente;
+            System.out.println(actualizar_url);
 
             String resultado;
 
@@ -235,8 +291,8 @@ public class AgregarDireccion extends AppCompatActivity {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
 
-                String latitud1 = (latitud);
-                String longitud1 = (longitud);
+                String latitud1 = latitudDef;
+                String longitud1 = longitudDef;
                 String idCliente = String.valueOf(Login.gIdCliente);
 
                 String data = URLEncoder.encode("latitud", "UTF-8") + "=" + URLEncoder.encode(latitud1, "UTF-8")
@@ -271,5 +327,5 @@ public class AgregarDireccion extends AppCompatActivity {
 
             return resultado;
         }
-    }*/
+    }
 }

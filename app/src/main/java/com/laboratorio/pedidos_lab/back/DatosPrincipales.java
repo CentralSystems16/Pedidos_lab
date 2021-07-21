@@ -2,11 +2,15 @@ package com.laboratorio.pedidos_lab.back;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -19,6 +23,7 @@ import com.laboratorio.pedidos_lab.controler.ActualizarCliente;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.Lugar;
+import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.main.ObtenerReportes;
 import com.laboratorio.pedidos_lab.manage.ModificarUsuario;
@@ -26,9 +31,13 @@ import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFromServerIntoTextView.gCount;
 import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
 
 public class DatosPrincipales extends AppCompatActivity implements View.OnClickListener {
@@ -36,6 +45,9 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
     TextView tvUsuario;
     Button btnParaMi, btnParaOtra, misPedidos;
     public static String nombre = Login.nombre, URL_USERS = "";
+    ImageButton home, categorias, carrito;
+    public static TextView tvCantProductos4;
+    DecimalFormat formatoDecimal = new DecimalFormat("#");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +65,50 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         btnParaOtra.setOnClickListener(this);
         misPedidos.setOnClickListener(this);
 
+        tvCantProductos4 = findViewById(R.id.tvCantProductos4);
+        tvCantProductos4.setText(String.valueOf(formatoDecimal.format(gCount)));
+
+        if (Login.gIdPedido != 0){
+            btnParaMi.setEnabled(false);
+            btnParaOtra.setEnabled(false);
+        }
+
+        home = findViewById(R.id.home);
+        home.setOnClickListener(v -> Toast.makeText(this, "Estas aquí!", Toast.LENGTH_SHORT).show());
+
+        categorias = findViewById(R.id.categorias);
+        categorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Login.gIdPedido == 0){
+                    Toast.makeText(DatosPrincipales.this, "Parece que aún no has iniciado un pedido!", Toast.LENGTH_SHORT).show();
+                } else {
+                    categorias.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+                    startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
+                }
+            }
+        });
+
+        carrito = findViewById(R.id.carrito);
+        carrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Login.gIdPedido == 0){
+                    Toast.makeText(DatosPrincipales.this, "Parece que aún no has iniciado un pedido!", Toast.LENGTH_SHORT).show();
+                } else {
+                    carrito.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+                    startActivity(new Intent(getApplicationContext(), TicketDatos.class));
+                }
+            }
+        });
+
+
+
         ImageButton editUser = findViewById(R.id.editPerfUs);
-        editUser.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ModificarUsuario.class)));
+        editUser.setOnClickListener(v -> {
+            editUser.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
+            startActivity(new Intent(getApplicationContext(), ModificarUsuario.class));
+        });
 
         ImageSlider imageSlider = findViewById(R.id.slider);
 
@@ -151,7 +205,7 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
         );
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                MY_DEFAULT_TIMEOUT,
+                MY_DEFAULT_TIMEOUT * 2,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 

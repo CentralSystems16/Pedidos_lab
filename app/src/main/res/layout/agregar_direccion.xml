@@ -9,6 +9,20 @@
     android:background="@color/white"
     tools:context="com.laboratorio.pedidos_lab.front.AgregarDireccion">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/latitudEdit2"
+
+        android:textColor="@color/black"
+        android:text="latitud" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/longitudEdit2"
+        android:textColor="@color/black"
+        android:text="longitud" />
 
     <TextView
         android:layout_width="match_parent"

@@ -272,9 +272,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="300dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="40dp"
+                android:layout_toEndOf="@+id/completeEdit"
                 android:backgroundTint="#7D9E34"
                 android:src="@drawable/logout"
                 android:text="CERRAR SESION" />

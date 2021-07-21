@@ -14,33 +14,33 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:textSize="15sp"
-        android:background="@drawable/caja_texto_circular"
+        android:background="@drawable/boton_borde"
         android:drawableStart="?android:attr/actionModeWebSearchDrawable"
         android:hint="Buscar exámen"
-        app:backgroundTint="#0097A7"
         android:padding="10dp"
+        android:textSize="15sp"
+        app:backgroundTint="#7D9E34"
         tools:ignore="NewApi" />
 
     <ImageButton
+        android:id="@+id/microfonoAll"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="3dp"
-        android:layout_marginStart="250dp"
-        android:layout_width="45dp"
-        app:backgroundTint="#0097A7"
-        android:src="@drawable/microphone"
-        android:layout_height="45dp"/>
+        android:layout_toStartOf="@+id/barcodeAll"
+        android:background="@drawable/microfono" />
 
     <ImageButton
+        android:id="@+id/barcodeAll"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/etBuscador2"
         android:layout_marginTop="3dp"
-        android:layout_marginStart="290dp"
-        android:layout_width="45dp"
-        app:backgroundTint="#0097A7"
-        android:src="@drawable/barcodesearch"
-        android:layout_height="45dp"/>
+        android:background="@drawable/barcode"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:background="#4CAF50"
+        android:background="#7D9E34"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
@@ -53,33 +53,29 @@
                 android:id="@+id/flecha3"
                 android:layout_width="35dp"
                 android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/regresarflecha"/>
+                android:background="@drawable/regresarflecha" />
 
-            <FrameLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="15dp">
-
-                <com.airbnb.lottie.LottieAnimationView
+                <ImageButton
                     android:id="@+id/carrito_compra2"
                     android:clickable="true"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="otrocarro.json"
-                    app:lottie_imageAssetsFolder="assets"
-                    app:lottie_loop="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/comprasdef"
                     android:focusable="true" />
 
                 <TextView
                     android:id="@+id/tvCantProductos2"
                     android:layout_width="wrap_content"
+                    android:layout_marginEnd="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_gravity="right|top"
                     android:background="@drawable/caja_texto_circular"
                     android:gravity="center"
@@ -94,8 +90,6 @@
                     android:textStyle="bold"
                     app:backgroundTint="@color/rojo"
                     tools:ignore="RtlHardcoded" />
-
-            </FrameLayout>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
