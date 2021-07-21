@@ -26,40 +26,37 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/boton_borde"
-            android:gravity="center"
-            android:hint="Buscar exámen"
-            android:iconifiedByDefault="true"
-            android:padding="10dp"
+            android:hint="Buscar Buscar exámen"
             android:textSize="14sp"
+            android:padding="2dp"
             app:backgroundTint="#7D9E34"
             tools:ignore="NewApi" />
 
         <ImageButton
             android:id="@+id/flecha2"
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
-            app:backgroundTint="#7D9E34"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etBuscador"
+            android:layout_marginTop="3dp"
             android:src="@drawable/leftarrow"
-            android:layout_height="wrap_content"/>
+            app:backgroundTint="#7D9E34" />
 
-    <ImageButton
-        android:id="@+id/microfono"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="250dp"
-        android:onClick="onClickImgBtnHablar"
-        android:src="@drawable/microphone"
-        app:backgroundTint="#7D9E34" />
+        <ImageButton
+            android:id="@+id/microfono"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_toStartOf="@+id/btnScan"
+            android:onClick="onClickImgBtnHablar"
+            android:background="@drawable/microfono"/>
 
-    <ImageButton
-        android:id="@+id/btnScan"
-        android:layout_marginTop="3dp"
-        android:layout_marginStart="290dp"
-        android:layout_width="wrap_content"
-        app:backgroundTint="#7D9E34"
-        android:src="@drawable/barcodesearch"
-        android:layout_height="wrap_content"/>
+        <ImageButton
+            android:id="@+id/btnScan"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignEnd="@+id/etBuscador"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/barcode"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -80,23 +77,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-         <!--   <ImageButton
-                android:id="@+id/flecha2"
-                android:layout_width="35dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/regresarflecha" /> -->
-
-            <ImageButton
-                android:id="@+id/closeSesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="CERRAR SESION"
-                android:layout_marginTop="4dp"
-                android:backgroundTint="#7D9E34"
-                android:src="@drawable/paginadeinicio" />
-
             <FrameLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -104,18 +84,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="25dp">
 
-                <com.airbnb.lottie.LottieAnimationView
+                <ImageButton
                     android:id="@+id/carrito_compra"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="otrocarro.json"
-                    app:lottie_imageAssetsFolder="assets"
-                    app:lottie_loop="true" />
+                    android:background="@drawable/comprasdef" />
 
                 <TextView
                     android:id="@+id/tvCantProductos"
@@ -137,6 +113,23 @@
                     tools:ignore="RtlHardcoded" />
 
             </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/categorias3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="CERRAR SESION"
+                android:layout_marginEnd="150dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/list" />
+
+            <ImageButton
+                android:id="@+id/inicio"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toStartOf="@+id/categorias3"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/home" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </RelativeLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#CDC9C9">
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,60 +18,53 @@
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/boton_borde"
-            android:gravity="center"
-            android:hint="Buscar exámen"
+            android:hint="Buscar Buscar exámen"
             android:iconifiedByDefault="true"
-            android:padding="10dp"
             android:textSize="14sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:backgroundTint="#7D9E34"
             tools:ignore="NewApi" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VACIAR"
+            android:clickable="true"
+            android:textColor="@color/rojo"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="true" />
 
         <ImageButton
             android:id="@+id/flecha2"
-            android:layout_marginTop="3dp"
-            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
-            app:backgroundTint="#7D9E34"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="10dp"
             android:src="@drawable/leftarrow"
-            android:layout_height="wrap_content"/>
+            app:backgroundTint="#7D9E34" />
 
         <ImageButton
             android:id="@+id/microfono"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="250dp"
+            android:layout_toStartOf="@+id/btnScan"
             android:onClick="onClickImgBtnHablar"
-            android:src="@drawable/microphone"
-            app:backgroundTint="#7D9E34" />
+            android:background="@drawable/microfono" />
 
         <ImageButton
             android:id="@+id/btnScan"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignEnd="@+id/etBuscador"
             android:layout_marginTop="3dp"
-            android:layout_marginStart="290dp"
-            android:layout_width="wrap_content"
-            app:backgroundTint="#7D9E34"
-            android:src="@drawable/barcodesearch"
-            android:layout_height="wrap_content"/>
+            android:background="@drawable/barcode"/>
     </RelativeLayout>
-
-    <LinearLayout
-        android:background="#7D9E34"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="El detalle de su orden es el siguiente:"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            tools:ignore="HardcodedText" />
-
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -281,6 +274,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -288,40 +282,43 @@
         android:layout_alignParentBottom="true"
         android:background="#7D9E34">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/rOfTicket"
                 android:layout_width="40dp"
-                android:layout_marginTop="5dp"
                 android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/regresarflecha"
-                android:text="REGRESAR"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+                android:text="REGRESAR" />
 
             <Button
                 android:id="@+id/aceptarEnviar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5sp"
-                android:layout_marginStart="100dp"
-                android:text="@string/btnContinuarSegundo"
+                android:layout_marginStart="75dp"
+                android:layout_toEndOf="@+id/rOfTicket"
+                android:background="@drawable/caja_texto_circular"
                 android:gravity="center"
+                android:padding="5sp"
+                android:text="@string/btnContinuarSegundo"
                 app:backgroundTint="#88AF31" />
 
             <ImageButton
                 android:id="@+id/closeSesion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
                 android:text="CERRAR SESION"
-                android:layout_marginTop="4dp"
-                android:backgroundTint="#7D9E34"
-                android:src="@drawable/paginadeinicio" />
+              android:background="@drawable/home"/>
 
-        </LinearLayout>
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     </RelativeLayout>
 </LinearLayout>

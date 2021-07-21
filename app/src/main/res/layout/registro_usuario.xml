@@ -34,9 +34,9 @@
     <ImageView
         android:id="@+id/about"
         android:clickable="true"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/user"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@drawable/registroadd"
         android:layout_gravity="center"
         android:focusable="true" />
 

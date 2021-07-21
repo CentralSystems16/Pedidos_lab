@@ -1,6 +1,5 @@
 package com.laboratorio.pedidos_lab.main;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -11,16 +10,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,26 +26,22 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorProductos;
 import com.laboratorio.pedidos_lab.back.TicketDatos;
-import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.model.Productos;
 import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFromServerIntoTextView.gCount;
 
 public class ObtenerProductos extends AppCompatActivity {
 
-    LottieAnimationView botonContinuar;
+    ImageButton botonContinuar;
     ImageButton botonRegresar, microfono, btnScan;
     EditText etBuscador;
     RecyclerView rvLista = null;
-    @SuppressLint("StaticFieldLeak")
     public static AdaptadorProductos adaptador = null;
     public static List<Productos> listaProductos;
     RequestQueue requestQueue11;
@@ -88,18 +80,15 @@ public class ObtenerProductos extends AppCompatActivity {
         microfono = findViewById(R.id.microfono);
 
         btnScan = findViewById(R.id.btnScan);
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(ObtenerProductos.this);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
-                integrator.setPrompt("Lector - CDP");
-                integrator.setCameraId(0);  // Use a specific camera of the device
-                integrator.setBeepEnabled(true);
-                integrator.setBarcodeImageEnabled(true);
-                integrator.setOrientationLocked(false);
-                integrator.initiateScan();
-            }
+        btnScan.setOnClickListener(v -> {
+            IntentIntegrator integrator = new IntentIntegrator(ObtenerProductos.this);
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.ONE_D_CODE_TYPES);
+            integrator.setPrompt("Lector - CDP");
+            integrator.setCameraId(0);  // Use a specific camera of the device
+            integrator.setBeepEnabled(true);
+            integrator.setBarcodeImageEnabled(true);
+            integrator.setOrientationLocked(false);
+            integrator.initiateScan();
         });
 
         tvCantProductos = findViewById(R.id.tvCantProductos);

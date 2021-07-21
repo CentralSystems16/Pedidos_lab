@@ -20,15 +20,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -37,7 +34,6 @@ import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

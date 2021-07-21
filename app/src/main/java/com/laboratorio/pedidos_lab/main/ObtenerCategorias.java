@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -43,7 +42,7 @@ public class ObtenerCategorias extends AppCompatActivity {
     AdaptadorCategorias adaptadorCat;
     List<Categorias> listaCategorias;
     Button etBuscador;
-    LottieAnimationView botonContinuar;
+    ImageButton botonContinuar;
     ImageButton botonRegresar;
     DecimalFormat formatoDecimal = new DecimalFormat("#");
 
@@ -56,26 +55,22 @@ public class ObtenerCategorias extends AppCompatActivity {
         tvCantProd3.setText(String.valueOf(formatoDecimal.format(gCount)));
 
         botonRegresar = findViewById(R.id.flecha);
-        botonRegresar.setOnClickListener(v -> {
+        botonRegresar.setOnClickListener(v -> new FancyGifDialog.Builder(this)
+                .setTitle("Solo regresa si la orden la quieres realizar para otra persona, si ya has agregado productos a tu carrito, puede que se eliminen y debas comenzar de nuevo")
+                .setNegativeBtnText("Cancelar")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Regresar")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.returnpedido)
+                .isCancellable(false)
+                .OnPositiveClicked(() -> {
 
-            new FancyGifDialog.Builder(this)
-                    .setTitle("Solo regresa si la orden la quieres realizar para otra persona, si ya has agregado productos a tu carrito, puede que se eliminen y debas comenzar de nuevo")
-                    .setNegativeBtnText("Cancelar")
-                    .setPositiveBtnBackground(R.color.rosado)
-                    .setPositiveBtnText("Regresar")
-                    .setNegativeBtnBackground(R.color.rojo)
-                    .setGifResource(R.drawable.returnpedido)
-                    .isCancellable(false)
-                    .OnPositiveClicked(() -> {
+                    Intent i = new Intent(this, DatosPrincipales.class);
+                    startActivity(i);
 
-                        Intent i = new Intent(this, DatosPrincipales.class);
-                        startActivity(i);
-
-                    })
-                    .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
-                    .build();
-
-        });
+                })
+                .OnNegativeClicked(() -> Toast.makeText(this,"",Toast.LENGTH_SHORT))
+                .build());
 
         botonContinuar = findViewById(R.id.carrito_compra3);
         botonContinuar.setOnClickListener(v -> {

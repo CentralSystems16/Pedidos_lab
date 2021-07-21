@@ -245,33 +245,39 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/flecha19"
-            android:layout_width="35dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/regresarflecha" />
+            <ImageButton
+                android:id="@+id/flecha19"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/regresarflecha" />
 
-        <Button
-            android:id="@+id/completeEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:text="ACTUALIZAR"
-            android:drawablePadding="5dp"
-            android:drawableEnd="@drawable/refresh"
-            android:textStyle="bold"
-            app:backgroundTint="#87B12B" />
+            <Button
+                android:id="@+id/completeEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_toEndOf="@+id/flecha19"
+                android:drawableEnd="@drawable/refresh"
+                android:drawablePadding="5dp"
+                android:text="ACTUALIZAR"
+                android:background="@drawable/caja_texto_circular"
+                android:textStyle="bold"
+                android:padding="5dp"
+                app:backgroundTint="#87B12B" />
 
-        <ImageButton
-            android:id="@+id/closeSesion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:text="CERRAR SESION"
-            android:layout_marginTop="4dp"
-            android:backgroundTint="#7D9E34"
-            android:src="@drawable/logout" />
+            <ImageButton
+                android:id="@+id/closeSesion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="300dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="40dp"
+                android:backgroundTint="#7D9E34"
+                android:src="@drawable/logout"
+                android:text="CERRAR SESION" />
 
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

@@ -57,13 +57,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/flecha"
-                android:layout_width="35dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/regresarflecha"/>
-
             <FrameLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -71,16 +64,12 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="15dp">
 
-                <com.airbnb.lottie.LottieAnimationView
+                <ImageButton
                     android:id="@+id/carrito_compra3"
                     android:clickable="true"
-                    android:layout_marginTop="5dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="otrocarro.json"
-                    app:lottie_imageAssetsFolder="assets"
-                    app:lottie_loop="true"
+                    android:background="@drawable/comprasdef"
                     android:focusable="true" />
 
                 <TextView
@@ -101,6 +90,23 @@
                     android:textStyle="bold"
                     tools:ignore="HardcodedText,RtlHardcoded,SmallSp" />
             </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/categorias2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="150dp"
+                android:background="@drawable/list" />
+
+            <ImageButton
+                android:id="@+id/flecha"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="100dp"
+                android:layout_toStartOf="@+id/categorias2"
+                android:background="@drawable/home" />
+
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 

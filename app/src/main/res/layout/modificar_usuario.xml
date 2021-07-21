@@ -205,7 +205,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#4CAF50">
+        android:background="#7D9E34">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -215,19 +215,22 @@
                 android:id="@+id/btnContMod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5sp"
-                android:textStyle="bold"
+                android:layout_marginStart="75dp"
+                android:layout_toEndOf="@+id/btnRegMod"
                 android:drawableEnd="@drawable/refresh"
+                android:background="@drawable/caja_texto_circular"
                 android:drawablePadding="5dp"
-                android:layout_marginStart="100dp"
+                android:padding="5sp"
                 android:text="ACTUALIZAR"
-                app:backgroundTint="#348C37" />
+                android:textStyle="bold"
+                app:backgroundTint="#88AF31" />
 
             <ImageButton
-                android:layout_width="35dp"
                 android:id="@+id/btnRegMod"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/regresarflecha" />
 
         </RelativeLayout>

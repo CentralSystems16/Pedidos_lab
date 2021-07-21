@@ -4,9 +4,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="5dp"
+    app:cardCornerRadius="10dp"
     android:layout_margin="3dp"
+    android:background="@drawable/boton_borde_verde"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:background="@drawable/boton_borde_verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvProducto"
@@ -110,24 +116,26 @@
 
     <ImageView
         android:id="@+id/imgProducto"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:src="@drawable/medicamentos"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/btnEliminar"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="30dp"
-        android:clickable="true"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="delete.json"
-        app:lottie_imageAssetsFolder="assets"
-        app:lottie_loop="true"
-        android:focusable="true" />
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/btnEliminar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="350dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="delete.json"
+            app:lottie_imageAssetsFolder="assets"
+            app:lottie_loop="true" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

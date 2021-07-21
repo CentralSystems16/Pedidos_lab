@@ -2,7 +2,6 @@ package com.laboratorio.pedidos_lab.back;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -25,20 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.front.Lugar;
-import com.laboratorio.pedidos_lab.front.SegundoRegistro;
-import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.main.ObtenerClientes;
-import com.laboratorio.pedidos_lab.maps.Localizacion;
 import com.laboratorio.pedidos_lab.maps.LocalizacionCliente;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -70,22 +60,17 @@ public class OtraPersona extends AppCompatActivity {
         //TODO: Bloquear orientación de pantalla.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         maps = findViewById(R.id.DirectMapsCliente);
-        maps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new FancyGifDialog.Builder(OtraPersona.this)
-                        .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
-                        .setNegativeBtnText("No estoy en mi domicilio")
-                        .setPositiveBtnBackground(R.color.rosado)
-                        .setPositiveBtnText("Estoy en mi domicilio")
-                        .setNegativeBtnBackground(R.color.rojo)
-                        .setGifResource(R.drawable.mapgif)
-                        .isCancellable(false)
-                        .OnPositiveClicked(() -> iniciarLocalizacion())
-                        .OnNegativeClicked(() -> Toast.makeText(OtraPersona.this, "Cancelado", Toast.LENGTH_LONG).show())
-                        .build();
-            }
-        });
+        maps.setOnClickListener(v -> new FancyGifDialog.Builder(OtraPersona.this)
+                .setTitle("Esta función obtiene su ubicación exacta, por lo tanto se recomienda estar en su domicilio para mejor efectividad de obtención de datos\n\nAl seleccionar 'Estoy en mi domicilio' aceptas los terminos de política y privacidad'\n\nAsegurate de tener activa tu ubicación.")
+                .setNegativeBtnText("No estoy en mi domicilio")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Estoy en mi domicilio")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.mapgif)
+                .isCancellable(false)
+                .OnPositiveClicked(this::iniciarLocalizacion)
+                .OnNegativeClicked(() -> Toast.makeText(OtraPersona.this, "Cancelado", Toast.LENGTH_LONG).show())
+                .build());
 
         tvLatitud = findViewById(R.id.latitudCli);
         tvLongitud = findViewById(R.id.longitudCli);
@@ -302,7 +287,6 @@ public class OtraPersona extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     public void onBackPressed(){

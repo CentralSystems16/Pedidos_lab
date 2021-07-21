@@ -1,11 +1,9 @@
 package com.laboratorio.pedidos_lab.front;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,22 +13,17 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.laboratorio.pedidos_lab.back.Login;
-import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
-import com.laboratorio.pedidos_lab.pdf.MainActivity;
 import com.laboratory.views.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import pl.droidsonroids.gif.GifImageView;
 
 public class SplashPrincipal extends AppCompatActivity {

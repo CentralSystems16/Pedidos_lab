@@ -13,7 +13,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -75,36 +74,20 @@ public class ModificarUsuario extends AppCompatActivity {
         };
 
         logout = findViewById(R.id.closeSesion);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                new FancyGifDialog.Builder(ModificarUsuario.this)
-                        .setTitle("¿Esta seguro que quiere cerrar la sesión?")
-                        .setNegativeBtnText("Cancelar")
-                        .setPositiveBtnBackground(R.color.rosado)
-                        .setPositiveBtnText("Si, cerrar sesión.")
-                        .setNegativeBtnBackground(R.color.rojo)
-                        .setGifResource(R.drawable.closession)
-                        .isCancellable(false)
-                        .OnPositiveClicked(() -> {
-
-                            startActivity(new Intent(getApplicationContext(), Login.class));
-
-                        })
-                        .OnNegativeClicked(() -> Toast.makeText(ModificarUsuario.this,"Cancelado",Toast.LENGTH_LONG))
-                        .build();
-
-            }
-        });
+        logout.setOnClickListener(v -> new FancyGifDialog.Builder(ModificarUsuario.this)
+                .setTitle("¿Esta seguro que quiere cerrar la sesión?")
+                .setNegativeBtnText("Cancelar")
+                .setPositiveBtnBackground(R.color.rosado)
+                .setPositiveBtnText("Si, cerrar sesión.")
+                .setNegativeBtnBackground(R.color.rojo)
+                .setGifResource(R.drawable.closession)
+                .isCancellable(false)
+                .OnPositiveClicked(() -> startActivity(new Intent(getApplicationContext(), Login.class)))
+                .OnNegativeClicked(() -> Toast.makeText(ModificarUsuario.this,"Cancelado",Toast.LENGTH_LONG))
+                .build());
 
         flecha = findViewById(R.id.flecha19);
-        flecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DatosPrincipales.class));
-            }
-        });
+        flecha.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), DatosPrincipales.class)));
 
         tvLatitud = findViewById(R.id.longitudEdit);
         tvLatitud.setText(Login.latitud);

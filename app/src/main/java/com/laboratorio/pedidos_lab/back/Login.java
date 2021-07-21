@@ -17,7 +17,6 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -35,11 +34,8 @@ import com.laboratorio.pedidos_lab.biometric.BiometricCallback;
 import com.laboratorio.pedidos_lab.biometric.BiometricManager;
 import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.front.acercaDe;
-import com.laboratorio.pedidos_lab.main.ObtenerNegocios;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
-import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.Serializable;
@@ -50,7 +46,8 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
 
     Button btnEntrar, btnRegistrar;
     EditText user, password;
-    CheckBox mostrarPass;
+    ImageButton mostrarPass;
+    private boolean esVisible;
     TextView recuperarPass;
     ImageButton about;
     ImageView logoLabLogin;
@@ -73,6 +70,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setFetchTimeoutInSeconds(10)
                 .build();
+
         remoteConfig.setConfigSettingsAsync(configSettings);
         remoteConfig.setDefaultsAsync(defaultsRate);
 
@@ -87,11 +85,20 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         });
 
         mostrarPass = findViewById(R.id.mostrarPass);
-        mostrarPass.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
-                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            } else {
+        mostrarPass.setOnClickListener(v -> {
+            if(!esVisible) {
                 password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                esVisible = true;
+                //Resources resources = getResources();
+                //mostrarPass.setImageDrawable(resources.getDrawable(R.drawable.invisible));
+
+            }
+            else {
+                password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                esVisible = false;
+                //Resources resources = getResources();
+                //mostrarPass.setImageDrawable(resources.getDrawable(R.drawable.eye));
+
             }
         });
 
@@ -112,28 +119,28 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
         password = findViewById(R.id.pass);
         recuperarPass = findViewById(R.id.recuperarPass);
         recuperarPass.setOnClickListener(v -> new FancyGifDialog.Builder(this)
-                .setTitle("Por el momento esta función esta temporalmente desabilitada, pero puede enviar un correo a Central Systems para recuperar su contraseña, gracias.")
-                .setNegativeBtnText("Cancelar")
+                .setTitle("Por el momento esta función esta temporalmente desabilitada, pero puede enviar un correo a Central Systems para recuperar su contraseña.\n\nRecibira un correo en un máximo de 12 horas.")
+                .setNegativeBtnText("Confirmar")
                 .setPositiveBtnBackground(R.color.rosado)
-                .setPositiveBtnText("Confirmar")
+                .setPositiveBtnText("Cancelar")
                 .setNegativeBtnBackground(R.color.rojo)
                 .setGifResource(R.drawable.gif7)
                 .isCancellable(false)
                 .OnPositiveClicked(() -> {
-
+                })
+                .OnNegativeClicked(() -> {
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     emailIntent.setType("text/plain");
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{SplashPrincipal.gCorreoEmpresa});
                     emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Asunto: Recuperar mi contraseña");
                     emailIntent.putExtra(Intent.EXTRA_TEXT, "Solicito la recuperación de mi contraseña");
                     emailIntent.putExtra(Intent.EXTRA_TEXT, "Nombre según registro:\nCorreo de contacto:");
-                    //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment"));
+                    //emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("content://path/to/email/attachment")); <-- Adjuntar archivos
                     startActivity(emailIntent);
-
                 })
-                .OnNegativeClicked(() -> Toast.makeText(this,"Cancelado",Toast.LENGTH_SHORT))
                 .build());
 
+        //Obtiene el numero de telefono y la contraseña cada vez que se inicie la aplicación
         recuperarDatos();
 
         btnRegistrar = findViewById(R.id.btnRegistrar);
@@ -213,6 +220,7 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
             finish();
         }
 
+        //Autenticacion biométrica (Pendiente).
           /*  mBiometricManager = new BiometricManager.BiometricBuilder(Login.this)
                     .setTitle(getString(R.string.biometric_title))
                     .setSubtitle(getString(R.string.biometric_subtitle))

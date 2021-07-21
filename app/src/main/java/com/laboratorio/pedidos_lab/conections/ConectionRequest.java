@@ -10,7 +10,7 @@ public class ConectionRequest extends StringRequest {
     private Map<String, String> mParams;
 
     public ConectionRequest(String base, Response.Listener<String> listener) {
-        super(Method.POST, "http://pedidoslab.6te.net/consultas/obtenerEmpresa.php", listener, null);
+        super(Method.POST, "http://pedidoslab.6te.net/consultas/conn.php", listener, null);
         mParams = new HashMap<String, String>();
         mParams.put("base", base);
 

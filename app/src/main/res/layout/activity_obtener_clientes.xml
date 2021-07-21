@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#4CAF50">
+        android:background="#7D9E34">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,20 +35,25 @@
 
             <ImageButton
                 android:id="@+id/flecha232"
-                android:layout_width="35dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+               android:layout_marginTop="5dp"
                 android:background="@drawable/regresarflecha" />
 
             <Button
                 android:id="@+id/agregarCliente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#4A9F4E"
-                android:layout_marginStart="120dp"
+                android:layout_marginStart="75dp"
+                android:layout_toEndOf="@+id/flecha232"
+                android:background="@drawable/caja_texto_circular"
+                android:padding="5sp"
                 android:drawableEnd="@drawable/adduser"
                 android:drawablePadding="5dp"
-                android:text="Agregar" />
+                android:text="Agregar"
+                app:backgroundTint="#88AF31" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 </RelativeLayout>

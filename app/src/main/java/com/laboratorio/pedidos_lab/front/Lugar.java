@@ -1,25 +1,20 @@
 package com.laboratorio.pedidos_lab.front;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.laboratorio.pedidos_lab.adapters.AdaptadorReportes;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
-import com.laboratorio.pedidos_lab.model.Reportes;
 import com.laboratory.views.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +45,6 @@ public class Lugar extends AppCompatActivity {
                         obtenerDomicilio();
                         startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class));
                     }
-
         });
 
         laboratorio.setOnClickListener(v -> {
@@ -152,5 +146,4 @@ public class Lugar extends AppCompatActivity {
     public void onBackPressed(){
 
     }
-
 }

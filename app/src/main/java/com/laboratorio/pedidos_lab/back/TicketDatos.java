@@ -1,7 +1,6 @@
 package com.laboratorio.pedidos_lab.back;
 
 import android.Manifest;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -13,7 +12,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,7 +23,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.multidex.MultiDex;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -48,17 +45,11 @@ import com.laboratorio.pedidos_lab.adapters.AdaptadorCorreos;
 import com.laboratorio.pedidos_lab.adapters.adapProdReport;
 import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
-import com.laboratorio.pedidos_lab.controler.MiPersona;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.front.Lugar;
-import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
-import com.laboratorio.pedidos_lab.main.ObtenerClientes;
 import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
-import com.laboratorio.pedidos_lab.pdf.MainActivity;
-import com.laboratorio.pedidos_lab.pdf.ResponsePOJO;
-import com.laboratorio.pedidos_lab.pdf.RetrofitClient;
 import com.laboratory.views.R;
 import com.shashank.sony.fancygifdialoglib.FancyGifDialog;
 import org.json.JSONArray;
@@ -88,10 +79,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
     public static String  url_pedido = "", envCorreo;
@@ -118,7 +105,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     String horaString = ho.format(d);
     public static String fechaReport, gNombre;
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
-    private  String encodedPDF;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

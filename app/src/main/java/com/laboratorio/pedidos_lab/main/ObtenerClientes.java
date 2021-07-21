@@ -1,35 +1,28 @@
 package com.laboratorio.pedidos_lab.main;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorClientes;
-import com.laboratorio.pedidos_lab.adapters.AdaptadorReportes;
 import com.laboratorio.pedidos_lab.back.DatosPrincipales;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratorio.pedidos_lab.back.OtraPersona;
 import com.laboratorio.pedidos_lab.model.Clientes;
-import com.laboratorio.pedidos_lab.model.Reportes;
 import com.laboratory.views.R;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 import static com.laboratorio.pedidos_lab.main.ObtenerCategorias.MY_DEFAULT_TIMEOUT;
@@ -52,21 +45,15 @@ public class ObtenerClientes extends AppCompatActivity {
         setContentView(R.layout.activity_obtener_clientes);
 
         flecha = findViewById(R.id.flecha232);
-        flecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), DatosPrincipales.class);
-                startActivity(i);
-            }
+        flecha.setOnClickListener(v -> {
+            Intent i = new Intent(getApplicationContext(), DatosPrincipales.class);
+            startActivity(i);
         });
 
         agregar = findViewById(R.id.agregarCliente);
-        agregar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), OtraPersona.class);
-                startActivity(i);
-            }
+        agregar.setOnClickListener(v -> {
+            Intent i = new Intent(getApplicationContext(), OtraPersona.class);
+            startActivity(i);
         });
 
         clientes = new ArrayList<>();

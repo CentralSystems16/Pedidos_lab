@@ -41,8 +41,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup"
         tools:targetApi="n">
-        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerNegocios"></activity>
-        <activity android:name="com.laboratorio.pedidos_lab.manage.ModificarUsuario" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,6 +58,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerNegocios" />
+        <activity android:name="com.laboratorio.pedidos_lab.manage.ModificarUsuario" />
         <activity android:name="com.laboratorio.pedidos_lab.front.AgregarDireccion" />
         <activity android:name="com.laboratorio.pedidos_lab.front.Lugar" />
         <activity android:name="com.laboratorio.pedidos_lab.main.ObtenerClientes" />
