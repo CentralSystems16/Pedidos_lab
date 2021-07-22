@@ -340,20 +340,22 @@ public class Login extends AppCompatActivity implements BiometricCallback, Seria
     public void onBackPressed(){
         new FancyGifDialog.Builder(this)
                 .setTitle("¿Cerrar aplicación?")
-                .setNegativeBtnText("Cancelar")
+                .setNegativeBtnText("Cerrar")
                 .setPositiveBtnBackground(R.color.rosado)
-                .setPositiveBtnText("Cerrar")
+                .setPositiveBtnText("Cancelar")
                 .setNegativeBtnBackground(R.color.rojo)
                 .setGifResource(R.drawable.gif8)
                 .isCancellable(false)
                 .OnPositiveClicked(() -> {
 
+
+
+                })
+                .OnNegativeClicked(() ->{
                     finishAffinity();
                     finishActivity(0);
                     System.exit(0);
-
                 })
-                .OnNegativeClicked(() -> Toast.makeText(this,"Cancelado",Toast.LENGTH_SHORT))
                 .build();
 
 

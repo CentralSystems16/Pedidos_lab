@@ -262,10 +262,9 @@
                 android:drawableEnd="@drawable/refresh"
                 android:drawablePadding="5dp"
                 android:text="ACTUALIZAR"
-                android:background="@drawable/caja_texto_circular"
                 android:textStyle="bold"
                 android:padding="5dp"
-                app:backgroundTint="#87B12B" />
+                app:backgroundTint="#7D9E34" />
 
             <ImageButton
                 android:id="@+id/closeSesion"

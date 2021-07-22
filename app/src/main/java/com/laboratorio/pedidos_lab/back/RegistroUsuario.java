@@ -146,7 +146,6 @@ public class RegistroUsuario extends AppCompatActivity {
                 }
             }
         });
-
         ed.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -249,7 +248,7 @@ public class RegistroUsuario extends AppCompatActivity {
 
             DatePickerDialog dialog = new DatePickerDialog(
                     RegistroUsuario.this,
-                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth,
                     mDateSetListener,
                     year, month, day);
             dialog.getDatePicker().setMaxDate(cal.getTimeInMillis());
@@ -326,16 +325,8 @@ public class RegistroUsuario extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), VerificarNumero.class);
                 i.putExtra("phoneNo", phoneNo);
                 startActivity(i);
-                if (ObtenerNegocios.idNegocio == 1) {
-                    System.out.println("Entro al registro 1");
                     ejecutarServicio("http://pedidoslab.6te.net/consultas/registro.php");
                 }
-                else if (ObtenerNegocios.idNegocio == 2){
-                    System.out.println("Entro al registro 2");
-                    ejecutarServicio2("http://pedidoslab.6te.net/consultas2/registro.php");
-                }
-            }
-
         });
 
         botonCancelar.setOnClickListener(v -> {

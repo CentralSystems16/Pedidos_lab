@@ -3,6 +3,7 @@ package com.laboratorio.pedidos_lab.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
@@ -123,42 +126,18 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
                 //Obtener el id del negocio
                 ObtenerNegocios.idNegocio = listaNegocios.get(posicion).getIdNegocio();
 
-                String root = "localhost";
-                String usuario = "215714";
-                String password = "Nicole_07";
-                String base = "215714db3";
-
-                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-                StrictMode.setThreadPolicy(policy);
-
-                try {
-
-                    URL url = new URL("http://pedidoslab.6te.net/consultas/conn.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setReadTimeout(10000);
-                    conn.setConnectTimeout(15000);
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-
-                    List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("root", root));
-                    params.add(new BasicNameValuePair("usuario", usuario));
-                    params.add(new BasicNameValuePair("password", password));
-                    params.add(new BasicNameValuePair("base", base));
-
-                    OutputStream os = conn.getOutputStream();
-                    BufferedWriter writer = new BufferedWriter(
-                            new OutputStreamWriter(os, "UTF-8"));
-                    writer.write(getQuery(params));
-                    writer.flush();
-                    writer.close();
-                    os.close();
-
-                    conn.connect();
-                }catch (IOException e){
-
+                /*if (ObtenerNegocios.idNegocio == 1){
+                    cambiarBase();
                 }
+                else if (ObtenerNegocios.idNegocio == 2){
+                    cambiarBase2();
+                }*/
+
+                /*SharedPreferences sharedPref = cContext.getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("idNegocio", ObtenerNegocios.idNegocio);
+                editor.apply();*/
+
                 System.out.println("El id de negocio es: " + ObtenerNegocios.idNegocio);
 
                 //Intencion al splash dependiendo del id del negocio y la conexion
@@ -166,6 +145,91 @@ public class AdaptadorNegocios extends RecyclerView.Adapter<AdaptadorNegocios.Ne
 
             }
         });
+    }
+
+    public void getDatabase(){
+
+        String root = " My host";
+        String user  = "My user";
+        String password = "My pass";
+        String database = "My database";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try {
+
+            URL url = new URL("My url");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("root", root));
+            //params.add(new BasicNameValuePair("user", usuario));
+            params.add(new BasicNameValuePair("password", password));
+            //params.add(new BasicNameValuePair("databse", base));
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+            conn.connect();
+
+        }catch (IOException e){
+
+        }
+    }
+
+    public void cambiarBase2(){
+        Toast.makeText(cContext, "Conexión establecida", Toast.LENGTH_SHORT).show();
+        System.out.println("Entro a cambiar base 2");
+        String root = "localhost";
+        String usuario = "215714";
+        String password = "Nicole_07";
+        String base = "215714db3";
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        try {
+            System.out.println("Entro al try-catch");
+            URL url = new URL("http://pedidoslab.6te.net/consultas/conn.php");
+            System.out.println("la url es:" + url);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+            System.out.println("paso del metodo POST");
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("root", root));
+            params.add(new BasicNameValuePair("usuario", usuario));
+            params.add(new BasicNameValuePair("password", password));
+            params.add(new BasicNameValuePair("base", base));
+            System.out.println("Parametros agregados");
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+            writer.write(getQuery(params));
+            writer.flush();
+            writer.close();
+            os.close();
+            System.out.println("Finalizo con éxito");
+
+            conn.connect();
+        }catch (IOException e){
+
+        }
     }
 
     private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException

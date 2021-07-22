@@ -119,26 +119,26 @@
         <RelativeLayout
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent" >
 
             <ImageButton
                 android:id="@+id/home"
-                android:layout_marginTop="5dp"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="40dp"
-                android:backgroundTint="#AEFF00"
                 android:layout_toStartOf="@+id/categorias"
-                android:background="@drawable/home" />
+                android:background="@drawable/home"
+                android:backgroundTint="#AEFF00" />
 
             <ImageButton
-                android:id="@+id/editPerfUs"
+                android:id="@+id/categorias"
                 android:layout_width="50dp"
-                android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/usuario" />
+                android:layout_height="50dp"
+                android:layout_toStartOf="@+id/carrito"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/list" />
 
             <ImageButton
                 android:id="@+id/carrito"
@@ -150,13 +150,13 @@
                 android:background="@drawable/comprasdef" />
 
             <ImageButton
-                android:id="@+id/categorias"
+                android:id="@+id/editPerfUs"
                 android:layout_width="50dp"
-                android:layout_marginTop="5dp"
                 android:layout_height="50dp"
-                android:layout_toStartOf="@+id/carrito"
-                android:layout_marginEnd="40dp"
-                android:background="@drawable/list" />
+                android:layout_marginTop="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="75dp"
+                android:background="@drawable/usuario" />
 
             <TextView
                 android:id="@+id/tvCantProductos4"

@@ -13,10 +13,12 @@
         android:layout_height="wrap_content" >
 
         <EditText
-            android:id="@+id/etBuscador"
+            android:id="@+id/etBuscadorTicket"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:clickable="true"
             android:layout_marginTop="5dp"
+            android:enabled="false"
             android:background="@drawable/boton_borde"
             android:hint="Buscar Buscar exámen"
             android:iconifiedByDefault="true"
@@ -24,7 +26,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:backgroundTint="#7D9E34"
-            tools:ignore="NewApi" />
+            tools:ignore="NewApi"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/vaciarRecycler"
@@ -42,7 +45,7 @@
             android:focusable="true" />
 
         <ImageButton
-            android:id="@+id/flecha2"
+            android:id="@+id/flecha222"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -64,7 +67,7 @@
             android:id="@+id/btnScan"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignEnd="@+id/etBuscador"
+            android:layout_alignEnd="@+id/etBuscadorTicket"
             android:layout_marginTop="3dp"
             android:background="@drawable/barcode"/>
     </RelativeLayout>

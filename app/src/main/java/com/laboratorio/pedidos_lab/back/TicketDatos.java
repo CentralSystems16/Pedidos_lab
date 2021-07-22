@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +50,7 @@ import com.laboratorio.pedidos_lab.controler.ActualizarPrefactura;
 import com.laboratorio.pedidos_lab.controler.ContadorProductos;
 import com.laboratorio.pedidos_lab.front.EnviandoTicket;
 import com.laboratorio.pedidos_lab.front.Lugar;
+import com.laboratorio.pedidos_lab.main.ObtenerAllProductos;
 import com.laboratorio.pedidos_lab.main.ObtenerCategorias;
 import com.laboratorio.pedidos_lab.model.Correos;
 import com.laboratorio.pedidos_lab.model.DetReporte;
@@ -81,8 +82,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-
 import pl.droidsonroids.gif.GifImageView;
+import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFromServerIntoTextView.gCount;
 
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
@@ -98,11 +99,12 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     List<Correos> listaCorreos;
     AdaptadorCorreos adaptadorCorreos;
     Button btnConfirmarEnviar;
+    EditText buscadorPedido;
     String NOMBRE_DOCUMENTO = "Examen.pdf";
     javax.mail.Session session;
     int edad, meses;
     String sexo, password, correo, nacimiento, direccion;
-    ImageButton rOfTicket, home;
+    ImageButton rOfTicket, home, flecha;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
@@ -117,8 +119,24 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.ticked_datos);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        buscadorPedido = findViewById(R.id.etBuscadorTicket);
+        buscadorPedido.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ObtenerAllProductos.class)));
+
+        flecha = findViewById(R.id.flecha222);
+
+        flecha.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), ObtenerCategorias.class)));
+
         carritoVacio = findViewById(R.id.carritoVacio);
         carritoVacio.setVisibility(View.GONE);
+
+        if (listaProdReport.isEmpty()){
+            Login.gIdPedido = 0;
+            gCount = 0.0;
+            gTotal = 0.0;
+            carritoVacio.setVisibility(View.VISIBLE);
+            btnConfirmarEnviar.setEnabled(false);
+            vaciarRecycler.setEnabled(false);
+        }
 
         vaciarRecycler = findViewById(R.id.vaciarRecycler);
         vaciarRecycler.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +154,8 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                             listaProdReport.clear();
                             adaptador.notifyDataSetChanged();
                             if (listaProdReport.isEmpty()){
+                                gCount = 0.0;
+                                gTotal = 0.0;
                                 carritoVacio.setVisibility(View.VISIBLE);
                                 btnConfirmarEnviar.setEnabled(false);
                                 vaciarRecycler.setEnabled(false);
@@ -213,7 +233,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     }
 
     public void generarPedido() {
-        url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php"+"?id_prefactura=" + Login.gIdPedido;
+        url_pedido = "http://pedidoslab.6te.net/consultas/obtenerPedido.php" + "?id_prefactura=" + Login.gIdPedido;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,url_pedido,
@@ -378,7 +398,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         bitmap3.compress(Bitmap.CompressFormat.PNG, 100, stream3);
         byte[] bitmapData3 = stream3.toByteArray();
 
-        ImageData  imageData3 = ImageDataFactory.create(bitmapData3);
+        ImageData imageData3 = ImageDataFactory.create(bitmapData3);
         Image image3 = new Image(imageData3);
         image3.setHeight(50);
         image3.setWidth(100);
@@ -398,6 +418,7 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         Paragraph nombre = new Paragraph( "Paciente: " + gNombre);
 
         Paragraph dui = new Paragraph( "Documento de identidad registrado: " + Login.dui);
+        System.out.println("El dui del usuario es: " + Login.dui);
 
         Paragraph genero = new Paragraph( "Género: " + sexo);
 
@@ -440,6 +461,8 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         linea.setBackgroundColor(new DeviceRgb(76,175,80));
         linea.setFontColor(new DeviceRgb(76,175,80));
         linea.setMarginTop(400);
+        linea.setPaddingTop(10);
+        linea.setPaddingBottom(10);
 
         Paragraph direcion = new Paragraph("Dirección: Carretera internacional frente a ex caseta municipal 2201 Metapán, El Salvador");
 
@@ -573,13 +596,16 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         new FancyGifDialog.Builder(this)
                 .setTitle("Hola " + gNombre + " ¿Está seguro de confirmar la orden?, aún puede modificar su pedido")
-                .setNegativeBtnText("Cancelar")
+                .setNegativeBtnText("Confirmar")
                 .setPositiveBtnBackground(R.color.rosado)
-                .setPositiveBtnText("Confirmar")
+                .setPositiveBtnText("Cancelar")
                 .setNegativeBtnBackground(R.color.rojo)
                 .setGifResource(R.drawable.gif16)
                 .isCancellable(false)
                 .OnPositiveClicked(() -> {
+
+                })
+                .OnNegativeClicked(() ->{
 
                     try {
                         createPDF();
@@ -596,7 +622,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
                     finish();
 
                 })
-                .OnNegativeClicked(() -> Toast.makeText(TicketDatos.this,"Cancelado",Toast.LENGTH_SHORT))
                 .build();
 
     }

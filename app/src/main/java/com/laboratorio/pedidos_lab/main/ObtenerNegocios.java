@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -17,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.laboratorio.pedidos_lab.adapters.AdaptadorNegocios;
+import com.laboratorio.pedidos_lab.front.SplashPrincipal;
 import com.laboratorio.pedidos_lab.model.Negocios;
 import com.laboratory.views.R;
 
@@ -45,15 +49,17 @@ public class ObtenerNegocios extends AppCompatActivity {
     String URL_NEGOCIOS = "";
     public static int idNegocio;
     public static String baseDatos;
-    TextView tv;
-    RequestQueue requestQueue;
+    int idNegocioShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.obtener_negocios);
 
-        /*boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+        /*SharedPreferences sharedPref = getSharedPreferences("preferencias", Context.MODE_PRIVATE);
+        idNegocioShared = sharedPref.getInt("idNegocio", 0);*/
+
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
         if (isFirstRun) {
@@ -63,7 +69,7 @@ public class ObtenerNegocios extends AppCompatActivity {
         }
 
         getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).apply();*/
+                .putBoolean("isFirstRun", false).apply();
 
         negocios = new ArrayList<>();
         rvLista = findViewById(R.id.rvListaNegocios);

@@ -129,6 +129,7 @@ public class ObtenerProductos extends AppCompatActivity {
             if (gCount == 0){
                 Toast.makeText(this, "Porfavor, agrege como mínimo un producto para continuar", Toast.LENGTH_SHORT).show();
             } else {
+                TicketDatos.gTotal = 0.0;
                 botonContinuar.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
                 Intent i = new Intent(this, TicketDatos.class);
                 startActivity(i);

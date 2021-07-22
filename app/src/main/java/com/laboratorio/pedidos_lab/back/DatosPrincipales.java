@@ -96,13 +96,12 @@ public class DatosPrincipales extends AppCompatActivity implements View.OnClickL
                 if (Login.gIdPedido == 0){
                     Toast.makeText(DatosPrincipales.this, "Parece que aún no has iniciado un pedido!", Toast.LENGTH_SHORT).show();
                 } else {
+                    TicketDatos.gTotal = 0.0;
                     carrito.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(244, 67,54)));
                     startActivity(new Intent(getApplicationContext(), TicketDatos.class));
                 }
             }
         });
-
-
 
         ImageButton editUser = findViewById(R.id.editPerfUs);
         editUser.setOnClickListener(v -> {
