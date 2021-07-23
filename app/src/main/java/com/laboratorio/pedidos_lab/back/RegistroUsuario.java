@@ -115,7 +115,7 @@ public class RegistroUsuario extends AppCompatActivity {
                     .setGifResource(R.drawable.mapgif)
                     .isCancellable(false)
                     .OnPositiveClicked(this::iniciarLocalizacion)
-                    .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this, "Cancelado", Toast.LENGTH_LONG).show())
+                    .OnNegativeClicked(() -> Toast.makeText(RegistroUsuario.this, "Cancelado", Toast.LENGTH_LONG))
                     .build();
         });
 
@@ -488,10 +488,5 @@ public class RegistroUsuario extends AppCompatActivity {
                 return;
             }
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 }

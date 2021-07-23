@@ -129,15 +129,6 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
         carritoVacio = findViewById(R.id.carritoVacio);
         carritoVacio.setVisibility(View.GONE);
 
-        if (listaProdReport.isEmpty()){
-            Login.gIdPedido = 0;
-            gCount = 0.0;
-            gTotal = 0.0;
-            carritoVacio.setVisibility(View.VISIBLE);
-            btnConfirmarEnviar.setEnabled(false);
-            vaciarRecycler.setEnabled(false);
-        }
-
         vaciarRecycler = findViewById(R.id.vaciarRecycler);
         vaciarRecycler.setOnClickListener(new View.OnClickListener() {
             @Override

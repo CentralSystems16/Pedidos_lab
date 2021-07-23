@@ -4,18 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import com.airbnb.lottie.LottieAnimationView;
 import com.github.barteksc.pdfviewer.PDFView;
 import com.laboratorio.pedidos_lab.back.Login;
 import com.laboratory.views.R;
@@ -86,10 +82,5 @@ public class ObtenerDetReporte extends AppCompatActivity {
         File path = new File(String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS + "/" + Login.gIdPedido + " Examen.pdf")));
         PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromFile(path).load();
-    }
-
-    @Override
-    public void onBackPressed() {
-
     }
 }

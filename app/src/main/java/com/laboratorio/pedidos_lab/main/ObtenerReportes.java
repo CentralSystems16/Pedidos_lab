@@ -115,9 +115,4 @@ public class ObtenerReportes extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
     }
-
-    @Override
-    public void onBackPressed(){
-
-    }
 }

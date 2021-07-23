@@ -75,7 +75,6 @@ public class ObtenerNegocios extends AppCompatActivity {
         rvLista = findViewById(R.id.rvListaNegocios);
         rvLista.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        obtenerNegocios();
 
     }
 
