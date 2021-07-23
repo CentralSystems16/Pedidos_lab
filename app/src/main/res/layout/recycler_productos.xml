@@ -22,6 +22,7 @@
             android:id="@+id/etBuscador"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:clickable="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
@@ -31,7 +32,8 @@
             android:gravity="center"
             android:padding="2dp"
             app:backgroundTint="#7D9E34"
-            tools:ignore="NewApi" />
+            tools:ignore="NewApi"
+            android:focusable="true" />
 
         <ImageButton
             android:id="@+id/flecha2"
@@ -117,17 +119,19 @@
                 android:id="@+id/categorias3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:text="CERRAR SESION"
-                android:layout_marginEnd="175dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/list" />
+                android:layout_marginStart="100dp"
+                android:layout_marginEnd="200dp"
+                android:layout_toEndOf="@+id/inicio"
+                android:background="@drawable/list"
+                android:text="CERRAR SESION" />
 
             <ImageButton
                 android:id="@+id/inicio"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="30dp"
+
                 android:background="@drawable/home" />
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>

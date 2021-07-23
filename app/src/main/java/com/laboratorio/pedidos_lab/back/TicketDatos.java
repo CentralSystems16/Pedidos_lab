@@ -87,9 +87,7 @@ import static com.laboratorio.pedidos_lab.controler.ContadorProductos.GetDataFro
 
 public class TicketDatos extends AppCompatActivity implements View.OnClickListener {
 
-    public static String  url_pedido = "", envCorreo;
-    public static String  url_det_pedido = "";
-    public static final String  url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php"+"?id_prefactura="+ Login.gIdPedido;
+    public static String  url_pedido = "", url_det_pedido = "", envCorreo, gNombre, url_det_pedido_report = "http://pedidoslab.6te.net/consultas/ObtenerDetPedidoReport.php" + "?id_prefactura=" + Login.gIdPedido;
     TextView fechaReporte, totalItem, horaReporte, vaciarRecycler;
     public static TextView subTotalReporte, totalFinal, nombreTicket;
     public static Double gTotal = 0.00;
@@ -98,19 +96,17 @@ public class TicketDatos extends AppCompatActivity implements View.OnClickListen
     List<DetReporte> listaProdReport;
     List<Correos> listaCorreos;
     AdaptadorCorreos adaptadorCorreos;
-    Button btnConfirmarEnviar;
+    Button btnConfirmarEnviar, etBuscadorTicket;
     EditText buscadorPedido;
-    String NOMBRE_DOCUMENTO = "Examen.pdf";
     javax.mail.Session session;
     int edad, meses;
-    String sexo, password, correo, nacimiento, direccion;
+    String sexo, password, correo, nacimiento, direccion, NOMBRE_DOCUMENTO = "Examen.pdf";
     ImageButton rOfTicket, home, flecha;
     Date d = new Date();
     SimpleDateFormat fecc = new SimpleDateFormat("d 'de' MMMM 'de' yyyy", Locale.getDefault());
     String fechacComplString = fecc.format(d);
     SimpleDateFormat ho = new SimpleDateFormat("h:mm a");
     String horaString = ho.format(d);
-    public static String fechaReport, gNombre;
     DecimalFormat formatoDecimal = new DecimalFormat("#.00");
     GifImageView carritoVacio;
 

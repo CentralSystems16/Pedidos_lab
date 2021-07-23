@@ -290,8 +290,4 @@ public class ObtenerProductos extends AppCompatActivity {
         adaptador.filtrar(filtrarLista);
     }
 
-
-    public void onBackPressed(){
-
-    }
 }
